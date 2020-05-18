@@ -25,7 +25,7 @@
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.css",
-              "src/styles.css"              
+              "src/styles.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.js",
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "teeStoreFrontEnd"
+    }
+  },
+  "defaultProject": "teeStoreFrontEnd",
+  "cli": {
+    "analytics": "f4e3f7db-61d1-4aaf-afb5-4f6fcff9c0fc"
+  }
 }
