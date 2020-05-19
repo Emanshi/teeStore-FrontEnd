@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  loggedIn: false,
+  loginApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/UserAPI/userLogin"
 };
 
 /*

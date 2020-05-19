@@ -3,6 +3,8 @@ import { UserLoginService } from './user-login.service';
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { User } from '../models/users';
+import { AuthenticatorService } from '../auth/authenticator.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-login',
@@ -12,9 +14,11 @@ import { User } from '../models/users';
 export class UserLoginComponent implements OnInit {
 loginForm:FormGroup;
 user:User;
+loggedInUser:User;
+loggedIn:boolean;
 errorMessage:string;
 
-  constructor(private fb:FormBuilder,private service:UserLoginService,private title:Title) { 
+  constructor(private fb:FormBuilder, private router:Router, private service:UserLoginService,private auth:AuthenticatorService,private title:Title) { 
     title.setTitle("Login")
   }
 
@@ -28,16 +32,26 @@ errorMessage:string;
   }
 
   login() {
+    this.user = new User();
     let regPhone:RegExp = /^[0-9]{10}$/;
     let regEmail:RegExp = /^[a-zA-z]+[A-Za-z0-9_.-]+[A-Za-z0-9]+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]+$/;
     let userCred=this.loginForm.value.userCred;
     if (regPhone.test(userCred)) {
-      this.user.contactNumber=userCred
+      this.user.contactNumber=userCred;
     } else if (regEmail.test(userCred)) {
       this.user.emailId=userCred
-    } else {}
+    }
     this.user.password=this.loginForm.value.password;
-    this.service.login(this.user);
+    this.service.login(this.user).subscribe(
+      (response)=>{ 
+        this.errorMessage=null;
+        this.loggedInUser=response;
+        this.auth.nextUser(this.loggedInUser); 
+        this.router.navigate(['/home']);
+      },
+      (error)=>this.errorMessage=error.error.message//.error.message
+    );
+    alert(this.errorMessage)
   }
 
   ValidateEmailPhone(control: AbstractControl): {[key: string]: any} | null  {

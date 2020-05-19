@@ -2,6 +2,8 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserLoginComponent } from './user-login/user-login.component';
@@ -12,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { ViewProductComponent } from './view-product/view-product.component';
 import { UserLoginService } from './user-login/user-login.service';
 import { UserRegisterService } from './user-register/user-register.service';
+import { AuthenticatorService } from './auth/authenticator.service';
 
 @NgModule({
   declarations: [
@@ -27,10 +30,11 @@ import { UserRegisterService } from './user-register/user-register.service';
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
-    
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [
+    AuthenticatorService,
     UserLoginService,
     UserRegisterService,
     Title
