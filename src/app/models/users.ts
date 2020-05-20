@@ -6,6 +6,6 @@ export class User {
     emailId:string;
     contactNumber:string;
     password:string;
-    dateOfBirth:Date;
+    dateOfBirth:string;
     addresses:Address[];
 }
