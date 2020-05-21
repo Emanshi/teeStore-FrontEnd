@@ -51,7 +51,6 @@ errorMessage:string;
       },
       (error)=>this.errorMessage=error.error.message//.error.message
     );
-    alert(this.errorMessage)
   }
 
   ValidateEmailPhone(control: AbstractControl): {[key: string]: any} | null  {

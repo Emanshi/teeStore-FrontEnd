@@ -40,9 +40,10 @@ export class ProfileComponent implements OnInit {
     this.getUser()
   }
 
-  getUser(){
+  getUser() {
     this.service.getUser(this.loggedInUser).subscribe(
-
+      (response)=>this.viewUser=response,
+      (error)=>this.errorMessage=error.error.message
     )
   }
 

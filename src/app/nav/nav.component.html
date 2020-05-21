@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item" *ngIf="loggedIn">
-                <a class="nav-link" [routerLink]="['/home']">Welcome {{userName}}</a>
+                <a class="nav-link" [routerLink]="['/profile']">Welcome {{userName}}</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['/hotdeals']" >Hot Deals<sup class="badge-padding"><span class="badge badge-danger">New</span></sup></a>
