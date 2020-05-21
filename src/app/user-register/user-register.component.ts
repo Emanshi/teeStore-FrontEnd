@@ -22,7 +22,7 @@ export class UserRegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registrationForm=this.fb.group({
       userName:['',Validators.required],
-      password:['',[Validators.required, Validators.pattern('^.*[A-Z]+.*[a-z]+.*[0-9]+.*[!@#$%^&*].*$'),Validators.minLength(7),Validators.maxLength(20)]],
+      password:['',[Validators.required,this.ValidatePassword,Validators.minLength(7),Validators.maxLength(20)]],
       emailId:['',[Validators.required,Validators.pattern('^[a-zA-z]+[A-Za-z0-9_.-]+[A-Za-z0-9]+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]+$'),Validators.maxLength(70)]],
       contactNumber:['',[Validators.required,Validators.pattern('^[6-9][0-9]{9}$')]],
       dateOfBirth:['',[Validators.required, this.ValidateDateOfBirth]]
@@ -33,6 +33,7 @@ export class UserRegisterComponent implements OnInit {
     this.registrationForm.value.dateOfBirth=this.registrationForm.value.dateOfBirth.toISOString().split("T")[0];
     this.service.register(this.registrationForm.value).subscribe(
       (response)=>{
+        this.user=response;
         this.errorMessage=null;
         this.router.navigate(['/login'])
       },
@@ -40,8 +41,24 @@ export class UserRegisterComponent implements OnInit {
     )
   }
 
-  ValidateDateOfBirth(control: AbstractControl): {[key: string]: any} | null  {
+  ValidatePassword(control: AbstractControl): {[key: string]: any} | null  {
+    let reg1:RegExp = /.*[A-Z]+.*/
+    let reg2:RegExp = /.*[a-z]+.*/
+    let reg3:RegExp = /.*[0-9]+.*/
+    let reg4:RegExp = /.*[!@#$%^&*].*/
+    if (reg1.test(control.value)) {
+      if (reg2.test(control.value)) {
+        if (reg3.test(control.value)) {
+          if (reg4.test(control.value)) {
+            return null;
+          }
+        }
+      }           
+    }
+    return { 'passInvalid': true };
+  }
 
+  ValidateDateOfBirth(control: AbstractControl): {[key: string]: any} | null  {
     let today = new Date();
     let dob = new Date(control.value);
     if (today.getFullYear() - dob.getFullYear() < 16) {
