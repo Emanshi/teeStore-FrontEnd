@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   loggedIn: false,
   loginApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/UserAPI/userLogin",
-  registerApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/UserAPI/userRegister"
+  registerApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/UserAPI/userRegister",
+  userApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/UserAPI/"
 };
 
 /*

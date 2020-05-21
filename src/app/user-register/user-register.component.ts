@@ -30,7 +30,7 @@ export class UserRegisterComponent implements OnInit {
   }
 
   register(){
-    this.registrationForm.value.dateOfBirth=this.registrationForm.value.dateOfBirth.toISOString().split("T")[0];
+    // this.registrationForm.value.dateOfBirth=this.registrationForm.value.dateOfBirth.toISOString().split("T")[0];
     this.service.register(this.registrationForm.value).subscribe(
       (response)=>{
         this.user=response;

@@ -15,6 +15,8 @@ import { ViewProductComponent } from './view-product/view-product.component';
 import { UserLoginService } from './user-login/user-login.service';
 import { UserRegisterService } from './user-register/user-register.service';
 import { AuthenticatorService } from './auth/authenticator.service';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileService } from './profile/profile.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { AuthenticatorService } from './auth/authenticator.service';
     NavComponent,
     FooterComponent,
     HomeComponent,
-    ViewProductComponent
+    ViewProductComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { AuthenticatorService } from './auth/authenticator.service';
     AuthenticatorService,
     UserLoginService,
     UserRegisterService,
+    ProfileService,
     Title
   ],
   bootstrap: [AppComponent]
