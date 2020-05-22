@@ -1,4 +1,46 @@
-.navbar.color{
-    background-color: $mainBlue;
-    color: $mainOrange;
+.navbar-color{
+    background-color: #1b242f;
+    border-bottom: 4px solid rgba(255, 251, 0, 0.965);
 }
+
+.nav-link{
+    color: #fff;
+    font-weight: 400;
+}
+
+.navbar-brand{
+    color: #fff;
+    font-weight: 400;
+}
+
+a:hover{
+    color: rgba(255, 251, 0, 0.965);
+}
+
+a i{
+    font-size:20px;
+    color:#fff;
+}
+
+.navbar-toggler{
+
+    color: #fff;    
+    border-color: #fff;
+    
+}
+
+.navbar-toggler:hover {
+    outline:5px auto rgba(255, 251, 0, 0.965);
+}
+
+.navbar-toggler:focus{
+    outline:5px auto #fff;
+}
+
+.navbar-toggler:active{
+    outline: 5px auto rgba(255, 251, 0, 0.965);
+}
+ 
+
+
+
