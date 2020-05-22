@@ -1,47 +1,43 @@
 .navbar-color{
-    background-color: #1b242f;
-    //background-color: $mainBlue;
-    border-bottom: 4px solid rgba(255, 251, 0, 0.965);
+    /*background-color: #1b242f;*/
+    background-color: var(--colorPrimary);
+    border-bottom: 4px solid var(--colorAccent);
 }
 
 .nav-link{
-    color: #fff;
+    color: var(--colorTextLight);
     font-weight: 400;
 }
 
 .navbar-brand{
-    color: #fff;
+    color: var(--colorTextLight);
     font-weight: 400;
 }
 
 a:hover{
-    color: rgba(255, 251, 0, 0.965);
+    color: var(--colorAccent);
 }
 
 a i{
     font-size:20px;
-    color:#fff;
+    color:var(--colorTextLight);
 }
 
 .navbar-toggler{
 
-    color: #fff;    
+    color: var(--colorTextLight);    
     border-color: #fff;
     
 }
 
 .navbar-toggler:hover {
-    outline:5px auto rgba(255, 251, 0, 0.965);
+    outline:5px auto var(--colorAccent);
 }
 
 .navbar-toggler:focus{
-    outline:5px auto #fff;
+    outline:5px auto var(--colorTextLight);
 }
 
 .navbar-toggler:active{
-    outline: 5px auto rgba(255, 251, 0, 0.965);
+    outline: 5px auto var(--colorAccent);
 }
- 
-
-
-

@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   loggedInUser:User
   viewUser:User
   errorMessage:string
+  editProfileSwitch:boolean;
 
   constructor(private fb:FormBuilder,private auth: AuthenticatorService,private service: ProfileService, private router: Router,private title:Title) {
     title.setTitle('Profile')
@@ -37,6 +38,15 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/home'])      
     }
 
+    this.editProfileSwitch=true
+
+    this.profileForm=this.fb.group({
+      userName:[this.loggedInUser.userName],
+      emailId:[this.loggedInUser.emailId],
+      contactNo:[this.loggedInUser.contactNumber],
+      dateOfBirth:[this.loggedInUser.dateOfBirth]
+    })
+
     this.getUser()
   }
 
@@ -47,4 +57,11 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+  editProfile() {
+      this.editProfileSwitch=false;
+  }
+
+  updateDetails() {
+    return;
+  }
 }

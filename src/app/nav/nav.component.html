@@ -1,4 +1,4 @@
-<nav class="navbar navbar-color navbar-expand-md fixed-top" id="mainNav">
+<div><nav class="navbar navbar-color navbar-expand-md fixed-top" id="mainNav">
     <a class="navbar-brand"  [routerLink]="['/home']">Tee-Store</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +15,7 @@
             </li>
   
             <li class="nav-item">
-                <a class="nav-link" *ngIf="loggedIn" [routerLink]="['/view']"><i class="fas fa-shopping-cart"></i></a>
+                <a class="nav-link" *ngIf="loggedIn" [routerLink]="['/cart']"><i class="fas fa-shopping-cart"></i></a>
             </li>
             <li class="nav-item" *ngIf="loggedIn">
                   <a class="nav-link" (click)="logout()">Logout</a>
@@ -28,6 +28,7 @@
         </ul>
       </div>
     </nav>
+</div>
         <!--div *ngIf="temp==true">
           <p-dialog header="Log Out" (onHide)="cd()" [(visible)]="show" [modal]="true" [style]="{width:'300px',height:'200px'}">
              
