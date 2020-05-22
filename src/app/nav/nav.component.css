@@ -1,5 +1,6 @@
 .navbar-color{
     background-color: #1b242f;
+    //background-color: $mainBlue;
     border-bottom: 4px solid rgba(255, 251, 0, 0.965);
 }
 
