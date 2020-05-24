@@ -1,53 +1,100 @@
 <div class="container-fluid">
     <h3>{{viewUser.userName}}</h3>
-    <ul class="nav nav-tabs">
+    <!-- <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+            <a class="nav-link" id="address-tab" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="false">Address</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+            <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
           </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-      <div class="col-md-5 offset-md-2">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    </ul> -->
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+        <a class="nav-item nav-link" id="nav-address-tab" data-toggle="tab" href="#nav-address" role="tab" aria-controls="nav-address" aria-selected="false">Address</a>
+        <a class="nav-item nav-link" id="nav-orders-tab" data-toggle="tab" href="#nav-orders" role="tab" aria-controls="nav-orders" aria-selected="false">Orders</a>
+      </div>
+    </nav>
+    <div class="col-md-5 offset-md-2">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
           <form [formGroup]="profileForm" (ngSubmit)="updateDetails()" class="form">
             <div class="form-group">
-                  <label>User Name</label>        
-                  <input type="text" formControlName="userName" id="userName"class="form-control"> 
-                  <span class="error-message" *ngIf="profileForm.get('userName').invalid && profileForm.get('userName').touched" class="text-danger">Enter a valid Nmae</span>
-                  <br>
+                <label>User Name</label>        
+                <input type="text" formControlName="userName" id="userName"class="form-control"> 
+                <span class="error-message" *ngIf="profileForm.get('userName').invalid && profileForm.get('userName').touched" class="text-danger">Enter a valid Name</span>
               </div>
               <div class="form-group">
                 <label>Date of Birth</label>        
                 <input type="date" formControlName="dateOfBirth" id="dateOfBirth" class="form-control"> 
-                <span class="error-message" *ngIf="profileForm.get('dateOfBirth').invalid && profileForm.get('dateOfBirth').touched" class="text-danger">Enter the valid registered number</span>
+                <span class="error-message" *ngIf="profileForm.get('dateOfBirth').invalid && profileForm.get('dateOfBirth').touched" class="text-danger">You should be at least 16 years old</span>
               </div>
               <div class="form-group">
-                  <label>Contact Number{{editProfileSwitch}}</label>        
+                  <label>Contact Number</label>        
                   <input type="number" formControlName="contactNo" id="contactNo"class="form-control"> 
-                  <span class="error-message" *ngIf="profileForm.get('contactNo').invalid && profileForm.get('contactNo').touched" class="text-danger">Enter a valid Nmae</span>
-                  <br>
+                  <span class="error-message" *ngIf="profileForm.get('contactNo').invalid && profileForm.get('contactNo').touched" class="text-danger">Enter a valid mobile number</span>
               </div>
               <div class="form-group">
                 <label>Email Id</label>        
                 <input type="text" formControlName="emailId" id="emailId" class="form-control"> 
-                <span class="error-message" *ngIf="profileForm.get('emailId').invalid && profileForm.get('emailId').touched" class="text-danger">Enter the valid registered number</span>
+                <span class="error-message" *ngIf="profileForm.get('emailId').invalid && profileForm.get('emailId').touched" class="text-danger">Enter the valid email id</span>
               </div>
-            <div class="form-group">
+              <div class="form-group">
                 <div *ngIf="errorMessage" class="text-danger">
                     <h6>{{errorMessage}}</h6>
                 </div>
+            </div>
+            <div class="form-group">
+              <div *ngIf="profileUpdateSuccessMessage" class="text-success">
+                  <h6>{{profileUpdateSuccessMessage}}</h6>
+              </div>
             </div>
             <button type="submit" [disabled]="profileForm.invalid && profileForm.pristine" class="btn btn-primary float-right">Update Details</button>   
             <button type="button" (click)="editProfile()" class="btn btn-secondary float-right mr-1">{{editButtonText}}</button>
           </form>
         </div>
+        <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
+          <h1>Addreses</h1>
+          <div *ngFor="let a of viewUser.addresses; let i = index">
+            <label>Address {{i}}</label>
+            <div>{{a.street}}</div>
+            <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>
+          </div>
+          <div>
+            <div *ngIf="addAddressSwitch">
+              <form [formGroup]="addressForm" (ngSubmit)="addAddress()" class="form">
+                <div class="form-group">
+                  <label>Street Address</label>
+                  <input type="text" class="form-control" formControlName="street" placeholder="Floor, Apartment, Street">
+                  <span class="error-message" *ngIf="addressForm.get('street').invalid && addressForm.get('street').touched" class="text-danger">Enter valid street address</span>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>City</label>
+                    <input type="text" formControlName="city" class="form-control">
+                    <span class="error-message" *ngIf="addressForm.get('city').invalid && addressForm.get('city').touched" class="text-danger">Enter a valid city name</span>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>State</label>
+                    <input type="text" formControlName="state" class="form-control">
+                    <span class="error-message" *ngIf="addressForm.get('state').invalid && addressForm.get('state').touched" class="text-danger">Enter valid state</span>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label>Pin Code</label>
+                    <input type="number" formControlName="pinCode" class="form-control">
+                    <span class="error-message" *ngIf="addressForm.get('pinCode').invalid && addressForm.get('pinCode').touched" class="text-danger">Enter valid pin code</span>
+                  </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Register Address</button>
+              </form>
+            </div>
+            <button *ngIf="!addAddressSwitch" class="btn btn-primary" (click)="addAddressSwitcher()" type="button">Add Address</button>
+          </div>
         </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+        <div class="tab-pane fade" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">...</div>
+      </div>
     </div>
 </div>

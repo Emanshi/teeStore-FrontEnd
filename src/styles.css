@@ -3,3 +3,5 @@
     --colorAccent : rgba(255, 251, 0, 0.965);
     --colorTextLight : #fff;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

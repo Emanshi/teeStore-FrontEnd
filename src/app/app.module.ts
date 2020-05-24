@@ -17,6 +17,7 @@ import { UserRegisterService } from './user-register/user-register.service';
 import { AuthenticatorService } from './auth/authenticator.service';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile/profile.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ProfileService } from './profile/profile.service';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthenticatorService,
