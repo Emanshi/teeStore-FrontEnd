@@ -16,11 +16,20 @@ export class ProfileService {
     return this.http.get<User>(environment.userApi+"getUser/"+user.userId);
   }
 
-  updateProfileDetails(user:User):Observable<string>{
-    return this.http.post<string>(environment.userApi+"editUserProfile", user)
+  updateProfileDetails(userId:string, user:User):Observable<string>{
+    return this.http.post<string>(environment.userApi+"editUserProfile/"+userId, user)
   }
 
   addAddress(address:Address, userId:string):Observable<string>{
     return this.http.post<string>(environment.userApi+"addAddress/"+userId, address)
   }
+
+  editAddress(address:Address, addressId:string):Observable<string>{
+    return this.http.put<string>(environment.userApi+"editAddress/"+addressId, address)
+  }
+
+  deleteAddress(userId:string, addressId:string):Observable<string>{
+    return this.http.get<string>(environment.userApi+"deleteAddress?userId="+userId+"&addressId="+addressId)
+  }
+
 }

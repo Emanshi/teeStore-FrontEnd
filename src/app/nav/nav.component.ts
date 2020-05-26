@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthenticatorService } from '../auth/authenticator.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -10,7 +11,7 @@ export class NavComponent implements OnInit {
 loggedIn=false;
 userName;
 
-  constructor(private auth:AuthenticatorService) { }
+  constructor(private auth:AuthenticatorService,private router:Router) { }
 
   ngOnInit(): void {
     this.auth.sessionUser.subscribe(

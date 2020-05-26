@@ -14,6 +14,7 @@ import { AuthenticatorService } from '../auth/authenticator.service';
 export class ProfileComponent implements OnInit {
   profileForm:FormGroup
   addressForm:FormGroup
+  editAddressForm:FormGroup
   loggiedIn:boolean
   loggedInUser:User
   viewUser:User
@@ -87,7 +88,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateDetails() {
-    this.service.updateProfileDetails(this.profileForm.value).subscribe(
+    this.service.updateProfileDetails(this.viewUser.userId,this.profileForm.value).subscribe(
       (message)=>{
         this.profileUpdateSuccessMessage=message
         this.errorMessage=null
@@ -120,5 +121,9 @@ export class ProfileComponent implements OnInit {
         this.addAddressSuccessMessage=null
       }
     )
+  }
+
+  editAddress(){
+   // this.service.editAddress(
   }
 }
