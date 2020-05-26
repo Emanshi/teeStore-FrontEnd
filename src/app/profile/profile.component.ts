@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { User } from '../models/users';
 import { AuthenticatorService } from '../auth/authenticator.service';
+import { Address } from '../models/address';
 
 @Component({
   selector: 'app-profile',
@@ -20,9 +21,14 @@ export class ProfileComponent implements OnInit {
   viewUser:User
   profileUpdateSuccessMessage:string
   addAddressSuccessMessage:string
+  editAddressSuccessMessage:string
+  deleteAddressSuccessMessage:string
   errorMessage:string
+  editAddressId:string
+  editAddressIndex:number
   editProfileSwitch:boolean;
   addAddressSwitch:boolean;
+  editAddressSwitch:boolean
   editButtonText:string;
 
   constructor(private fb:FormBuilder,private auth: AuthenticatorService,private service: ProfileService, private router: Router,private title:Title) {
@@ -48,6 +54,8 @@ export class ProfileComponent implements OnInit {
     this.editButtonText='Edit'
 
     this.addAddressSwitch=false
+    this.editAddressSwitch=false
+    this.editAddressIndex=-1
 
     this.profileForm=this.fb.group({
       userName:[this.loggedInUser.userName],
@@ -104,26 +112,74 @@ export class ProfileComponent implements OnInit {
   addAddressSwitcher(){
     if (this.addAddressSwitch==false) {
       this.addAddressSwitch = true
+      this.editAddressSwitch = false
     } else {
       this.addAddressSwitch = false
+      this.editAddressSwitch = false
     }
   }
 
   addAddress(){
-    this.service.addAddress(this.addressForm.value, this.viewUser.userId).subscribe(
-      (message)=>{
-        this.addAddressSuccessMessage=message
+    if (this.addAddressSwitch==true) {
+      this.service.addAddress(this.addressForm.value, this.viewUser.userId).subscribe(
+        (message)=>{
+          this.addAddressSuccessMessage=message
+          this.errorMessage=null
+          this.addAddressSwitcher()
+        },
+        (error)=>{
+          this.errorMessage=error.error.message
+          this.addAddressSuccessMessage=null
+        }
+      )
+    } else if (this.editAddressSwitch==true) {
+      this.service.editAddress(this.addressForm.value, this.editAddressId).subscribe(
+        (success)=>{
+          this.editAddressSuccessMessage=success
+          this.errorMessage=null
+          this.editAddressSwitch=false
+        },
+        (err)=>this.errorMessage=err.error.message
+      )
+    }
+  }
+
+  editAddressSwitcher(a:Address, i){
+    this.editAddressIndex=i
+    if (this.editAddressSwitch==false) {
+      this.editAddressId=a.addressId
+      this.editAddressSwitch = true
+      this.addAddressSwitch = false
+      this.editAddressForm=this.fb.group({
+        street:[a.street, [Validators.required,Validators.maxLength(100)]],
+        city:[a.city, [Validators.required,Validators.maxLength(50)]],
+        state:[a.state, [Validators.required,Validators.maxLength(50)]],
+        pinCode:[a.pinCode,[Validators.required,Validators.pattern("^[1-9][0-9]{5}$")]]
+      })
+    } else {
+      this.editAddressSwitch = false
+      this.addAddressSwitch = false
+    }
+  }
+
+  editAddress(aId:string){
+    this.service.editAddress(this.addressForm.value, aId).subscribe(
+      (success)=>{
+        this.editAddressSuccessMessage=success
         this.errorMessage=null
-        this.addAddressSwitcher()
+        this.editAddressSwitch=false
       },
-      (error)=>{
-        this.errorMessage=error.error.message
-        this.addAddressSuccessMessage=null
-      }
+      (err)=>this.errorMessage=err.error.message
     )
   }
 
-  editAddress(){
-   // this.service.editAddress(
+  deleteAddress(aId:string) {
+    this.service.deleteAddress(this.viewUser.userId, aId).subscribe(
+      (success)=>{
+        this.deleteAddressSuccessMessage=success
+        this.errorMessage=null
+      },
+      (err)=>this.errorMessage=err.error.message
+    )
   }
 }

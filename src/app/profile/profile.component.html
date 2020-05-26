@@ -59,9 +59,39 @@
         <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
           <h1>Addreses</h1>
           <div *ngFor="let a of viewUser.addresses; let i = index">
-            <label>Address {{i}}</label>
-            <div>{{a.street}}</div>
-            <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>
+            <h3>Address {{i+1}}</h3>
+            <div *ngIf="!editAddressSwitch && i!=editAddressIndex">
+              <span><a (click)="editAddressSwitcher(a, i)">Edit</a></span><span><a (click)="deleteAddress(a.addressId)">Delete</a></span>
+              <div>{{a.street}}</div>
+              <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>
+            </div>
+            <div *ngIf="editAddressSwitch && i==editAddressIndex">
+              <form [formGroup]="editAddressForm" (ngSubmit)="editAddress(a.addressId)" class="form">
+                <div class="form-group">
+                  <label>Street Address</label>
+                  <input type="text" class="form-control" formControlName="street" placeholder="Floor, Apartment, Street">
+                  <span class="error-message" *ngIf="editAddressForm.get('street').invalid && editAddressForm.get('street').touched" class="text-danger">Enter valid street address</span>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>City</label>
+                    <input type="text" formControlName="city" class="form-control">
+                    <span class="error-message" *ngIf="editAddressForm.get('city').invalid && editAddressForm.get('city').touched" class="text-danger">Enter a valid city name</span>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>State</label>
+                    <input type="text" formControlName="state" class="form-control">
+                    <span class="error-message" *ngIf="editAddressForm.get('state').invalid && editAddressForm.get('state').touched" class="text-danger">Enter valid state</span>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label>Pin Code</label>
+                    <input type="number" formControlName="pinCode" class="form-control">
+                    <span class="error-message" *ngIf="editAddressForm.get('pinCode').invalid && editAddressForm.get('pinCode').touched" class="text-danger">Enter valid pin code</span>
+                  </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Update Address</button>
+              </form>
+            </div>
           </div>
           <div>
             <div *ngIf="addAddressSwitch">
