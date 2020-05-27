@@ -84,6 +84,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editProfile() {
+
     if (this.editProfileSwitch==true) {
       this.editButtonText='Cancel'
       this.editProfileSwitch=false;
@@ -101,6 +102,8 @@ export class ProfileComponent implements OnInit {
         this.profileUpdateSuccessMessage=message
         this.errorMessage=null
         this.editProfile()
+        this.getUser()
+        alert("kuch bhi")
       },
       (error)=>{
         this.errorMessage=error.error.message
@@ -163,7 +166,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editAddress(aId:string){
-    this.service.editAddress(this.addressForm.value, aId).subscribe(
+    this.service.editAddress(this.editAddressForm.value, aId).subscribe(
       (success)=>{
         this.editAddressSuccessMessage=success
         this.errorMessage=null
