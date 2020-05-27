@@ -60,7 +60,7 @@
           <h1>Addreses</h1>
           <div *ngFor="let a of viewUser.addresses; let i = index">
             <h3>Address {{i+1}}</h3>
-            <div *ngIf="!editAddressSwitch && i!=editAddressIndex">
+            <div *ngIf="!editAddressSwitch || i!=editAddressIndex">
               <span><a (click)="editAddressSwitcher(a, i)">Edit</a></span><span><a (click)="deleteAddress(a.addressId)">Delete</a></span>
               <div>{{a.street}}</div>
               <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>

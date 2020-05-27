@@ -171,6 +171,7 @@ export class ProfileComponent implements OnInit {
       },
       (err)=>this.errorMessage=err.error.message
     )
+    this.editAddressSwitch=false
   }
 
   deleteAddress(aId:string) {
