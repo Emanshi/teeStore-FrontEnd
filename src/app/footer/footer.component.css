@@ -1,0 +1,19 @@
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--colorPrimary);
+    color: var(--colorTextLight);
+    text-align: center;
+    padding: 20px 20px;
+
+}
+
+a{
+    color: var(--colorTextLight);
+}
+
+a:hover{
+    color: var(--colorAccent);
+}

@@ -1,0 +1,12 @@
+.card{
+    margin-top: 20%;
+    vertical-align:middle;
+    border-color: var(--colorPrimary);
+    background-color: var(--colorPrimary) ;
+    color: var(--colorTextLight)
+}
+
+.card-body{
+    background-color: rgba(var(--colorPrimary),.2);
+    //border-radius: 2px;
+}
