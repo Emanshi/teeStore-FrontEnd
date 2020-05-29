@@ -1,33 +1,36 @@
-<div><nav class="navbar navbar-color navbar-expand-md fixed-top" id="mainNav">
-    <a class="navbar-brand"  [routerLink]="['/home']">Tee-Store</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
-    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item" *ngIf="loggedIn">
-                <a class="nav-link" [routerLink]="['/profile']">Welcome {{userName}}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/hotdeals']" >Hot Deals<sup class="badge-padding">
-                  <span class="badge badge-danger">New</span></sup></a>
-            </li>
-  
-            <li class="nav-item">
-                <a class="nav-link" *ngIf="loggedIn" [routerLink]="['/cart']"><i class="fas fa-shopping-cart"></i></a>
-            </li>
-            <li class="nav-item" *ngIf="loggedIn">
-                  <a class="nav-link" (click)="logout()" [routerLink]="['/home']">Logout</a>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-color navbar-expand-md fixed-top" id="mainNav">
+        <a class="navbar-brand"  [routerLink]="['/home']">Tee-Store</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" *ngIf="loggedIn">
+                    <a class="nav-link" [routerLink]="['/profile']">Welcome {{userName}}</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/hotdeals']" >Hot Deals<sup class="badge-padding">
+                    <span class="badge badge-danger">New</span></sup></a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="loggedIn" [routerLink]="['/cart']"><i class="fas fa-shopping-cart"></i></a>
+                </li>
+                <li class="nav-item" *ngIf="loggedIn">
+                    <a class="nav-link" (click)="logout()" [routerLink]="['/home']">Logout</a>
+                </li>
+            
+                <li class="nav-item" *ngIf="!loggedIn">
+                <a class="nav-link" [routerLink]="['/login']">Login</a>
             </li>
         
-            <li class="nav-item" *ngIf="!loggedIn">
-              <a class="nav-link" [routerLink]="['/login']">Login</a>
-          </li>
-     
-        </ul>
-      </div>
-    </nav>
+            </ul>
+        </div>
+        </nav>
+    </div>    
 </div>
         <!--div *ngIf="temp==true">
           <p-dialog header="Log Out" (onHide)="cd()" [(visible)]="show" [modal]="true" [style]="{width:'300px',height:'200px'}">
