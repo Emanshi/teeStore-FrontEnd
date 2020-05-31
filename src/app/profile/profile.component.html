@@ -1,17 +1,6 @@
 <div class="container-fluid">
     <h3>{{viewUser.userName}}</h3>
-    <!-- <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="address-tab" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="false">Address</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
-          </li>
-    </ul> -->
-    <nav>
+    <nav style="margin: 3% 3% 3% 5%;">
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
         <a class="nav-item nav-link" id="nav-address-tab" data-toggle="tab" href="#nav-address" role="tab" aria-controls="nav-address" aria-selected="false">Address</a>
@@ -19,7 +8,7 @@
       </div>
     </nav>
     <div class="col-md-5 offset-md-2">
-      <div class="tab-content" id="nav-tabContent">
+      <div class="tab-content" id="nav-tabContent" style="margin-top: 3%;">
         <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
           <form [formGroup]="profileForm" (ngSubmit)="updateDetails()" class="form">
             <div class="form-group">
@@ -52,20 +41,25 @@
                   <h6>{{profileUpdateSuccessMessage}}</h6>
               </div>
             </div>
-            <button type="submit" [disabled]="profileForm.invalid && profileForm.pristine" class="btn btn-primary float-right">Update Details</button>   
-            <button type="button" (click)="editProfile()" class="btn btn-secondary float-right mr-1">{{editButtonText}}</button>
+            <button type="button" (click)="editProfile()" class="btn btn-dark float-right">{{editButtonText}}</button>
+            <button type="submit" [disabled]="profileForm.invalid && profileForm.pristine" class="btn btn-primary float-right mr-2" *ngIf="!editProfileSwitch">Update</button>
           </form>
         </div>
         <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
           <h1>Addreses</h1>
           <div *ngFor="let a of viewUser.addresses; let i = index">
             <h3>Address {{i+1}}</h3>
-            <div *ngIf="!editAddressSwitch || i!=editAddressIndex">
-              <span><a (click)="editAddressSwitcher(a, i)">Edit</a></span><span><a (click)="deleteAddress(a.addressId)">Delete</a></span>
-              <div>{{a.street}}</div>
-              <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>
+            <div class="row" *ngIf="!editAddressSwitch || i!=editAddressIndex" style="margin-top: 2%; margin-bottom: 3%; border-bottom: 2px; border-color: black;">
+              <div class="col-md-9">
+                <div>{{a.street}}</div>
+                <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>
+              </div>
+              <div class="col-md-3">
+                <button class="btn-sm btn-primary" style="margin-right: 5px;" (click)="editAddressSwitcher(a, i)">Edit</button>
+                <button class="btn-sm btn-danger" (click)="deleteAddressConfirmer(a.addressId)">Delete</button>
+              </div>
             </div>
-            <div *ngIf="editAddressSwitch && i==editAddressIndex">
+            <div *ngIf="editAddressSwitch && i==editAddressIndex" style="margin-bottom: 2%;">
               <form [formGroup]="editAddressForm" (ngSubmit)="editAddress(a.addressId)" class="form">
                 <div class="form-group">
                   <label>Street Address</label>
@@ -85,11 +79,12 @@
                   </div>
                   <div class="form-group col-md-2">
                     <label>Pin Code</label>
-                    <input type="number" formControlName="pinCode" class="form-control">
+                    <input type="text" formControlName="pinCode" class="form-control">
                     <span class="error-message" *ngIf="editAddressForm.get('pinCode').invalid && editAddressForm.get('pinCode').touched" class="text-danger">Enter valid pin code</span>
                   </div>
                 </div>
-                <button class="btn btn-primary" type="submit">Update Address</button>
+                <button class="btn-sm btn-primary" type="submit" [disabled]="editAddressForm.invalid">Update</button>&nbsp;
+                <button class="btn-sm btn-secondary" type="button" (click)="cancelEditAddress()">Cancel</button>
               </form>
             </div>
           </div>

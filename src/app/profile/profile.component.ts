@@ -6,6 +6,8 @@ import { Title } from '@angular/platform-browser';
 import { User } from '../models/users';
 import { AuthenticatorService } from '../auth/authenticator.service';
 import { Address } from '../models/address';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteAddressDialog } from './delete.address.dialog';
 
 @Component({
   selector: 'app-profile',
@@ -31,7 +33,7 @@ export class ProfileComponent implements OnInit {
   editAddressSwitch:boolean
   editButtonText:string;
 
-  constructor(private fb:FormBuilder,private auth: AuthenticatorService,private service: ProfileService, private router: Router,private title:Title) {
+  constructor(private fb:FormBuilder,private auth: AuthenticatorService,private dialog:MatDialog,private service: ProfileService, private router: Router,private title:Title) {
     title.setTitle('Profile')
    }
 
@@ -103,7 +105,6 @@ export class ProfileComponent implements OnInit {
         this.errorMessage=null
         this.editProfile()
         this.getUser()
-        alert("kuch bhi")
       },
       (error)=>{
         this.errorMessage=error.error.message
@@ -149,20 +150,21 @@ export class ProfileComponent implements OnInit {
 
   editAddressSwitcher(a:Address, i){
     this.editAddressIndex=i
-    if (this.editAddressSwitch==false) {
-      this.editAddressId=a.addressId
-      this.editAddressSwitch = true
-      this.addAddressSwitch = false
-      this.editAddressForm=this.fb.group({
-        street:[a.street, [Validators.required,Validators.maxLength(100)]],
-        city:[a.city, [Validators.required,Validators.maxLength(50)]],
-        state:[a.state, [Validators.required,Validators.maxLength(50)]],
-        pinCode:[a.pinCode,[Validators.required,Validators.pattern("^[1-9][0-9]{5}$")]]
-      })
-    } else {
-      this.editAddressSwitch = false
-      this.addAddressSwitch = false
-    }
+    this.editAddressId=a.addressId
+    this.editAddressSwitch = true
+    this.addAddressSwitch = false
+    this.editAddressForm=this.fb.group({
+      street:[a.street, [Validators.required,Validators.maxLength(100)]],
+      city:[a.city, [Validators.required,Validators.maxLength(50)]],
+      state:[a.state, [Validators.required,Validators.maxLength(50)]],
+      pinCode:[a.pinCode,[Validators.required,Validators.pattern("^[1-9][0-9]{5}$")]]
+    })
+  }
+
+  cancelEditAddress(){
+    this.editAddressIndex=-1
+    this.editAddressSwitch = false
+    this.addAddressSwitch = false
   }
 
   editAddress(aId:string){
@@ -177,13 +179,26 @@ export class ProfileComponent implements OnInit {
     this.editAddressSwitch=false
   }
 
+  deleteAddressConfirmer(aId:string): void {
+    const dialogRef = this.dialog.open(DeleteAddressDialog, {
+      width: '250px',
+      data: aId
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.deleteAddress(result)
+    });
+  }
+
   deleteAddress(aId:string) {
-    this.service.deleteAddress(this.viewUser.userId, aId).subscribe(
-      (success)=>{
-        this.deleteAddressSuccessMessage=success
-        this.errorMessage=null
-      },
-      (err)=>this.errorMessage=err.error.message
-    )
+    if (aId!=null){
+      this.service.deleteAddress(this.viewUser.userId, aId).subscribe(
+        (success)=>{
+          this.deleteAddressSuccessMessage=success
+          this.errorMessage=null
+        },
+        (err)=>this.errorMessage=err.error.message
+      )
+    }
   }
 }

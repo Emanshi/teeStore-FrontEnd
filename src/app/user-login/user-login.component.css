@@ -1,12 +1,18 @@
 .card{
     margin-top: 20%;
     vertical-align:middle;
-    border-color: var(--colorPrimary);
-    background-color: var(--colorPrimary) ;
-    color: var(--colorTextLight)
+    border: 2px solid var(--colorPrimary);
+    padding: 2em;
+    
 }
 
-.card-body{
-    background-color: rgba(var(--colorPrimary),.2);
-    //border-radius: 2px;
+.error-text{
+    color: #ff0000;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }

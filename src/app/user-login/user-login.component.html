@@ -1,16 +1,16 @@
 <div class="container-fluid">
     <div class = "row">
         <div class="col-md-4 offset-md-4">
-            <div class="card ">
+            <div class="card">
                 <div class="card-header">
                     Login
                 </div>
                 <div class="card-body">
                     <form [formGroup]="loginForm" (ngSubmit)="login()" class="form">
                         <div class="form-group">
-                            <label>Contact Number/Email Id<span class="text-danger">*</span></label>        
+                            <label>Contact Number/Email Id<span class="error-text">*</span></label>        
                             <input type="text" formControlName="userCred" id="userCred" class="form-control"> 
-                            <span class="error-message" *ngIf="loginForm.get('userCred').invalid && loginForm.get('userCred').touched" class="text-danger">Enter the valid registered number</span>
+                            <span class="error-message" *ngIf="loginForm.get('userCred').invalid && loginForm.get('userCred').touched" class="error-text">Enter the valid registered number</span>
                         </div>
         
                         <div class="form-group">
