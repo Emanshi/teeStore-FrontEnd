@@ -193,12 +193,12 @@ export class ProfileComponent implements OnInit {
   deleteAddress(aId:string) {
     if (aId!=null){
       this.service.deleteAddress(this.viewUser.userId, aId).subscribe(
-        (success)=>{
-          this.deleteAddressSuccessMessage=success
-          this.errorMessage=null
-        },
-        (err)=>this.errorMessage=err.error.message
+        success=>{ this.getUser()
+          alert(JSON.stringify(this.viewUser))}
+        ,
+        err=>this.errorMessage=err.error.message
       )
     }
+    
   }
 }
