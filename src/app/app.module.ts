@@ -21,6 +21,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile/profile.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { from } from 'rxjs';
+import { ViewProductService } from './view-product/view-product.service';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { from } from 'rxjs';
     UserLoginService,
     UserRegisterService,
     ProfileService,
+    ViewProductService,
     Title
   ],
   bootstrap: [AppComponent]
