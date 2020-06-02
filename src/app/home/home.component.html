@@ -1,8 +1,13 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="card-deck" style="margin-top: 50%;">
-            <div *ngFor="let p of jeansProductList">
-                <div class="card">
+        <div>
+            Random<br>words<br> for<br> fun<br> lorem<br> ipsum<br> dolor<br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card-deck">
+            <div>
+                <div class="card" *ngFor="let p of jeansProductList">
                     <div class="card-body">
                         {{p.productId}},
                         {{p.productName}},
@@ -12,7 +17,9 @@
                 </div>     
             </div>
         </div>
-        <div class="card-deck" style="margin-top: 50%;">
+    </div>
+    <div class="row">
+        <div class="card-deck">
             <div *ngFor="let p of shirtProductList">
                 <div class="card">
                     <div class="card-body">
@@ -23,6 +30,6 @@
                     </div>
                 </div>     
             </div>
-        </div>                 
+        </div>
     </div>
 </div>

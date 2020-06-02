@@ -18,16 +18,20 @@ export class HomeComponent implements OnInit {
   constructor(private productService:ViewProductService) { }
 
   ngOnInit(): void {
-    this.getProductByDiscount()
-    this.hotDeals()
+    this.productService.getProductByDiscount('JEANS').subscribe(
+      response=>this.jeansProductList=response 
+    )
+    this.productService.getProductByDiscount('SHIRT').subscribe(
+      response=>this.shirtProductList=response 
+    )
   }
 
   getProductByDiscount(){
-     this.productService.getProductByDiscount('JEANS').subscribe(
-         response=> this.jeansProductList= response 
-     )
-     this.productService.getProductByDiscount('SHIRT').subscribe(
-      response=> this.shirtProductList= response 
+    this.productService.getProductByDiscount('JEANS').subscribe(
+      response=>this.jeansProductList=response 
+    )
+    this.productService.getProductByDiscount('SHIRT').subscribe(
+      response=>alert(JSON.stringify(response))//this.shirtProductList=response 
     )  
 
   }
