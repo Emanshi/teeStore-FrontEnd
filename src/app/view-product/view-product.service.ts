@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
+import { Images } from '../models/images';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,8 @@ export class ViewProductService {
     return this.http.get<Product[]>(environment.productApi+'getProductByGroup/'+productGroup);
   }
 
+  getImagesForProduct(reference:string):Observable<Images[]>{
+    return this.http.get<Images[]>(environment.imageApi+'getImages/'+reference);
+  }
 
 }

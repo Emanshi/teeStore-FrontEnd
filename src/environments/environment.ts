@@ -8,7 +8,8 @@ export const environment = {
   loginApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/UserAPI/userLogin",
   registerApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/UserAPI/userRegister",
   userApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/UserAPI/",
-  productApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/ProductAPI/"
+  productApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/ProductAPI/",
+  imageApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/ImageAPI/"
 };
 
 /*
