@@ -6,7 +6,8 @@
                     <img class="card-img-top" [src]="p.images[0].linkImage" [alt]="p.productName">
                     <div class="card-title">{{p.productName}}</div>
                     <div class="card-body">                      
-                        <i class="fa fa-star" [style.background]='"linear-gradient(to right,"+ this.blueColor + " 50%," + this.orangColor + " 0)"'></i>   
+                        <i class="fa fa-star" [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i> &nbsp; {{p.avgRating}}   
+        
                     </div>
                 </div>     
             </div>
