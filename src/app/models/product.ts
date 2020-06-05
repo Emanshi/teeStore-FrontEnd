@@ -1,3 +1,5 @@
+import { Images } from './images';
+
 export class Product{
     productId:string;
     productName:string;
@@ -10,5 +12,7 @@ export class Product{
     dateOfAddition:Date;
     productInfo:string;
     discount:number;
-    avgRating:string;
+    avgRating:number;
+    totalRaters:string;
+    images:Images[]
 }

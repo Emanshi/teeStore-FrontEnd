@@ -28,8 +28,35 @@ export class HomeComponent implements OnInit {
    )
   }
 
-  getProductImages(imageList:Product[]){
-    
+  getTshirtByDiscount(){
+    this.productService.getProductByDiscount('TSHIRT').subscribe(
+      response=>{this.tshirtProductList=response }
+   )
   }
+
+  getShirtByDiscount(){
+    this.productService.getProductByDiscount('SHIRT').subscribe(
+      response=>{this.shirtProductList=response }
+   )
+  }
+
+  getTopsByDiscount(){
+    this.productService.getProductByDiscount('TOPS').subscribe(
+      response=>{this.topsProductList=response }
+   )
+  }
+
+  getTrousersByDiscount(){
+    this.productService.getProductByDiscount('TROUSERS').subscribe(
+      response=>{this.trousersProductList=response }
+   )
+  }
+
+  getSkirtsByDiscount(){
+    this.productService.getProductByDiscount('SKIRTS').subscribe(
+      response=>{this.skirtsProductList=response }
+   )
+  }
+
   
 }

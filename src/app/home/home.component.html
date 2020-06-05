@@ -1,32 +1,12 @@
 <div class="container-fluid">
-    <div class="row">
-        <div>
-            Random<br>words<br> for<br> fun<br> lorem<br> ipsum<br> dolor<br>
-        </div>
-    </div>
-    <div class="row">
-        <div class="card-deck">
+    <div class="row" style="margin-top:7%">
+        <div class="col-md-3">
             <div>
-                <div class="card" *ngFor="let p of jeansProductList">
-                    <div class="card-body">
-                        {{p.productId}},
-                        {{p.productName}},
-                        {{p.category}},
-                        {{p.size}}
-                    </div>
-                </div>     
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="card-deck">
-            <div *ngFor="let p of shirtProductList">
-                <div class="card">
-                    <div class="card-body">
-                        {{p.productId}},
-                        {{p.productName}},
-                        {{p.category}},
-                        {{p.size}}
+                <div class="card" style="width: 14rem;" *ngFor="let p of jeansProductList">
+                    <img class="card-img-top" [src]="p.images[0].linkImage" [alt]="p.productName">
+                    <div class="card-title">{{p.productName}}</div>
+                    <div class="card-body">                      
+                        <i class="fa fa-star" [style.background]='"linear-gradient(to right,"+ this.blueColor + " 50%," + this.orangColor + " 0)"'></i>   
                     </div>
                 </div>     
             </div>
