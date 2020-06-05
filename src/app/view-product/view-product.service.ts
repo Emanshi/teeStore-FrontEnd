@@ -21,7 +21,7 @@ export class ViewProductService {
   }
 
   getProductsByCategory(category:string):Observable<Product[]>{
-    return this.http.get<Product[]>(environment.productApi+'getProductByCategory/'+category);
+    return this.http.get<Product[]>(environment.productApi+'getProductsByCategory/'+category);
   }
 
   getProductById(productId:string):Observable<Product>{

@@ -1,5 +1,4 @@
 footer {
-    position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -8,7 +7,6 @@ footer {
     text-align: center;
     padding: 20px 20px;
     border-top: 4px solid var(--colorAccent);
-
 }
 
 a{

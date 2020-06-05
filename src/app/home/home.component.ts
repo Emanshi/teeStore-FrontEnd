@@ -18,44 +18,74 @@ export class HomeComponent implements OnInit {
   constructor(private productService:ViewProductService) { }
 
   ngOnInit(): void {
-
     this.getJeansByDiscount();
+    this.getShirtByDiscount();
+    this.getSkirtsByDiscount();
+    this.getTopsByDiscount();
+    this.getTshirtByDiscount();
+    this.getTrousersByDiscount();
+  }
+
+  sortProducts(productList:Product[]) {
+    productList.sort(
+      (o1, o2)=>{
+        if (o1.avgRating > o2.avgRating) {
+          return 1;
+        } else if (o1.avgRating < o2.avgRating) {
+            return -1;
+        } else {
+          if (o1.totalRaters > o2.totalRaters) {
+            return 1;
+          } else if (o1.totalRaters < o2.totalRaters) {
+            return -1;
+          }
+        }
+  
+        return 0;
+      }
+    )
   }
 
   getJeansByDiscount(){
-    this.productService.getProductByDiscount('JEANS').subscribe(
-      response=>{this.jeansProductList=response }
-   )
+    this.productService.getProductsByCategory('JEANS').subscribe(
+      response=>{this.jeansProductList=response
+      this.sortProducts(this.jeansProductList) }
+    )
   }
 
   getTshirtByDiscount(){
-    this.productService.getProductByDiscount('TSHIRT').subscribe(
-      response=>{this.tshirtProductList=response }
+    this.productService.getProductsByCategory('TSHIRT').subscribe(
+      response=>{this.tshirtProductList=response
+        this.sortProducts(this.tshirtProductList) }
    )
   }
 
   getShirtByDiscount(){
-    this.productService.getProductByDiscount('SHIRT').subscribe(
-      response=>{this.shirtProductList=response }
+    this.productService.getProductsByCategory('SHIRT').subscribe(
+      response=>{this.shirtProductList=response
+      this.sortProducts(this.shirtProductList) }
    )
   }
 
   getTopsByDiscount(){
-    this.productService.getProductByDiscount('TOPS').subscribe(
-      response=>{this.topsProductList=response }
+    this.productService.getProductsByCategory('TOPS').subscribe(
+      response=>{this.topsProductList=response
+      this.sortProducts(this.topsProductList) }
    )
   }
 
   getTrousersByDiscount(){
-    this.productService.getProductByDiscount('TROUSERS').subscribe(
-      response=>{this.trousersProductList=response }
-   )
+    this.productService.getProductsByCategory('TROUSERS').subscribe(
+      response=>{this.trousersProductList=response
+      this.sortProducts(this.trousersProductList) }
+    )
   }
 
   getSkirtsByDiscount(){
-    this.productService.getProductByDiscount('SKIRTS').subscribe(
-      response=>{this.skirtsProductList=response }
-   )
+    this.productService.getProductsByCategory('SKIRTS').subscribe(
+      response=>{this.skirtsProductList=response
+      this.sortProducts(this.skirtsProductList) }
+    )
   }
 
   
