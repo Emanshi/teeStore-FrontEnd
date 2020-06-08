@@ -23,5 +23,10 @@ li{
 }
 
 .nav-link:hover{
-    color: blueviolet;
+    color: var(--colorTextLight);
+}
+
+span[id]{
+    padding-top: 60px;
+    margin-top: -50px;
 }

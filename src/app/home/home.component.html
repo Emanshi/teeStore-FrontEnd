@@ -1,23 +1,23 @@
-<div class="container-fluid">
-    <div class="row" style="margin-top:4.5%;margin-bottom:2%;background-color: #dfdfdf;">
-        <ul class="nav nav-pills">
+<div class="container-fluid scroll-container">
+    <div class="row" style="margin-top:4%;margin-bottom:2%;background-color: #1ab188;">
+        <ul class="nav nav-pills" id="test">
             <li class="nav-item">
-                <a class="nav-link" href="#">Jeans</a>
+                <a class="nav-link" href="#jeans">Jeans</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Shirts</a>
+                <a class="nav-link" href="#shirts">Shirts</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">T-Shirts</a>
+                <a class="nav-link" href="#tshirts">T-Shirts</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Skirts</a>
+                <a class="nav-link" href="#skirts">Skirts</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Tops</a>
+                <a class="nav-link" href="#tops">Tops</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Trousers</a>
+                <a class="nav-link" href="#trousers">Trousers</a>
             </li>
         </ul>
     </div>
@@ -27,7 +27,7 @@
             <div>
                 <div class="card">
                     <div class="card-header">
-                        Jeans
+                        <span id="jeans"> Jeans</span>
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
@@ -41,17 +41,15 @@
                                             <div class="card-body">
                                                 <h3 class="card-title">{{p.productName}}</h3>
                                                 <p class="card-text">
-                                                   <span  [matTooltip]="p.avgRating"> 
-                                                   <span  *ngFor="let i of [1,2,3,4,5] ;let j = index"> 
-                                                       <i class="fa fa-star" *ngIf="j<p.avgRating" [matTooltip]="p.avgRating"
-                                                        style="color: orange;"
-                                                       ></i>
-                                                    </span>
-                                                    <span  *ngFor="let i of [1,2,3,4,5] ;let j = index"> 
-                                                        <i class="fa fa-star" *ngIf="j>p.avgRating"
-                                                         style="color: grey;"
-                                                        ></i>
-                                                     </span>
+                                                    <span [matTooltip]="p.avgRating">
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j<p.avgRating"
+                                                                [matTooltip]="p.avgRating" style="color: orange;"></i>
+                                                        </span>
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                                style="color: grey;"></i>
+                                                        </span>
                                                     </span>
                                                     &nbsp; {{p.avgRating}}
                                                     &nbsp; ({{p.totalRaters}}) <br /><br />
@@ -68,7 +66,7 @@
                 <br>
                 <div class="card">
                     <div class="card-header">
-                        Shirts
+                        <span id="shirts">Shirts</span>
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
@@ -98,7 +96,7 @@
                 <br>
                 <div class="card">
                     <div class="card-header">
-                        T-Shirts
+                        <span id="tshirts"> T-Shirts</span>
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
@@ -129,7 +127,7 @@
                 <br>
                 <div class="card">
                     <div class="card-header">
-                        Skirts
+                        <span id="skirts">Skirts</span>
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
@@ -160,11 +158,10 @@
                 <br>
                 <div class="card">
                     <div class="card-header">
-                        Tops
+                        <span id="tops">Tops</span>
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
-
                             <div class="col-md-2" *ngFor="let p of topsProductList; let i = index">
                                 <div class="row">
                                     <div class="card" *ngIf="i<6"
@@ -191,7 +188,7 @@
                 <br>
                 <div class="card">
                     <div class="card-header">
-                        Trousers
+                        <span id="trousers">Trousers</span>
                     </div>
                     <div class="card-body">
                         <div class="card-deck">

@@ -1,6 +1,6 @@
 :root {
     --colorPrimary : #1b242f;
-    --colorAccent : rgba(255, 251, 0, 0.965);
+    --colorAccent :  #1ab188;
     --colorTextLight : #fff;
 }
 html, body { height: 100%; }
