@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewProductService } from '../view-product/view-product.service';
 import { Product } from '../models/product';
+import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-home',
@@ -87,6 +88,5 @@ export class HomeComponent implements OnInit {
       this.sortProducts(this.skirtsProductList) }
     )
   }
-
   
 }

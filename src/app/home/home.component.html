@@ -1,5 +1,28 @@
 <div class="container-fluid">
-    <div class="row" style="margin-top:7%">
+    <div class="row" style="margin-top:4.5%;margin-bottom:2%;background-color: #dfdfdf;">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Jeans</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Shirts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">T-Shirts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Skirts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Tops</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Trousers</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row">
         <div class="col-md">
             <div>
                 <div class="card">
@@ -8,19 +31,38 @@
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
-                            <div class="card" style="width: 18rem;" *ngFor="let p of jeansProductList.splice(0,6); let i = index">
-                                <div  *ngIf="i<6">
-                                <img class="card-img-top" [src]="p.images[0].linkImage" [alt]="p.productName">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{p.productName}}</h3>
-                                    <p class="card-text">
-                                        <i class="fa fa-star" [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i> &nbsp; {{p.avgRating}}
-                                        &#x20B9; {{p.cost}}
-                                    </p>
+                            <div class="col-md-2" *ngFor="let p of jeansProductList; let i = index">
+                                <div class="row">
+                                    <div class="card text-center" *ngIf="i<6"
+                                        style="margin-left: 5%; margin-right: 5%;width: 18rem">
+                                        <div>
+                                            <img class="card-img-top" [src]="p.images[0].linkImage"
+                                                [alt]="p.productName">
+                                            <div class="card-body">
+                                                <h3 class="card-title">{{p.productName}}</h3>
+                                                <p class="card-text">
+                                                   <span  [matTooltip]="p.avgRating"> 
+                                                   <span  *ngFor="let i of [1,2,3,4,5] ;let j = index"> 
+                                                       <i class="fa fa-star" *ngIf="j<p.avgRating" [matTooltip]="p.avgRating"
+                                                        style="color: orange;"
+                                                       ></i>
+                                                    </span>
+                                                    <span  *ngFor="let i of [1,2,3,4,5] ;let j = index"> 
+                                                        <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                         style="color: grey;"
+                                                        ></i>
+                                                     </span>
+                                                    </span>
+                                                    &nbsp; {{p.avgRating}}
+                                                    &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <b>&#x20B9; {{p.cost}}</b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -30,19 +72,27 @@
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
-                            <div class="card" style="width: 18rem;" *ngFor="let p of shirtProductList.splice(0,6); let i = index">
-                                <div  *ngIf="i<6">
-                                <img class="card-img-top" [src]="p.images[0].linkImage" [alt]="p.productName">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{p.productName}}</h3>
-                                    <p class="card-text text-center">
-                                        <i class="fa fa-star" [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i> &nbsp; {{p.avgRating}}
-                                        &#x20B9; {{p.cost}}
-                                    </p>
+                            <div class="col-md-2" *ngFor="let p of shirtProductList; let i = index">
+                                <div class="row">
+                                    <div class="card" *ngIf="i<6"
+                                        style="margin-left: 5%; margin-right: 5%;width: 18rem">
+                                        <div>
+                                            <img class="card-img-top" [src]="p.images[0].linkImage"
+                                                [alt]="p.productName">
+                                            <div class="card-body">
+                                                <h3 class="card-title">{{p.productName}}</h3>
+                                                <p class="card-text text-center">
+                                                    <i class="fa fa-star"
+                                                        [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i>
+                                                    &nbsp; {{p.avgRating}}
+                                                    &#x20B9; {{p.cost}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -52,19 +102,28 @@
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
-                            <div class="card" style="width: 18rem;" *ngFor="let p of tshirtProductList.splice(0,6); let i = index">
-                                <div  *ngIf="i<6">
-                                <img class="card-img-top" [src]="p.images[0].linkImage" [alt]="p.productName">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{p.productName}}</h3>
-                                    <p class="card-text text-center">
-                                        <i class="fa fa-star" [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i> &nbsp; {{p.avgRating}}
-                                        &#x20B9; {{p.cost}}
-                                    </p>
+
+                            <div class="col-md-2" *ngFor="let p of tshirtProductList; let i = index">
+                                <div class="row">
+                                    <div class="card" *ngIf="i<6"
+                                        style="margin-left: 5%; margin-right: 5%;width: 18rem">
+                                        <div>
+                                            <img class="card-img-top" [src]="p.images[0].linkImage"
+                                                [alt]="p.productName">
+                                            <div class="card-body">
+                                                <h3 class="card-title">{{p.productName}}</h3>
+                                                <p class="card-text text-center">
+                                                    <i class="fa fa-star"
+                                                        [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i>
+                                                    &nbsp; {{p.avgRating}}
+                                                    &#x20B9; {{p.cost}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -74,19 +133,28 @@
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
-                            <div class="card" style="width: 18rem;" *ngFor="let p of skirtsProductList.splice(0,6); let i = index">
-                                <div  *ngIf="i<6">
-                                <img class="card-img-top" [src]="p.images[0].linkImage" [alt]="p.productName">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{p.productName}}</h3>
-                                    <p class="card-text text-center">
-                                        <i class="fa fa-star" [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i> &nbsp; {{p.avgRating}}
-                                        &#x20B9; {{p.cost}}
-                                    </p>
+
+                            <div class="col-md-2" *ngFor="let p of skirtsProductList; let i = index">
+                                <div class="row">
+                                    <div class="card" *ngIf="i<6"
+                                        style="margin-left: 5%; margin-right: 5%;width: 18rem">
+                                        <div>
+                                            <img class="card-img-top" [src]="p.images[0].linkImage"
+                                                [alt]="p.productName">
+                                            <div class="card-body">
+                                                <h3 class="card-title">{{p.productName}}</h3>
+                                                <p class="card-text text-center">
+                                                    <i class="fa fa-star"
+                                                        [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i>
+                                                    &nbsp; {{p.avgRating}}
+                                                    &#x20B9; {{p.cost}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -96,19 +164,28 @@
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
-                            <div class="card" style="width: 18rem;" *ngFor="let p of topsProductList.splice(0,6); let i = index">
-                                <div  *ngIf="i<6">
-                                <img class="card-img-top" [src]="p.images[0].linkImage" [alt]="p.productName">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{p.productName}}</h3>
-                                    <p class="card-text text-center">
-                                        <i class="fa fa-star" [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i> &nbsp; {{p.avgRating}}
-                                        &#x20B9; {{p.cost}}
-                                    </p>
+
+                            <div class="col-md-2" *ngFor="let p of topsProductList; let i = index">
+                                <div class="row">
+                                    <div class="card" *ngIf="i<6"
+                                        style="margin-left: 5%; margin-right: 5%;width: 18rem">
+                                        <div>
+                                            <img class="card-img-top" [src]="p.images[0].linkImage"
+                                                [alt]="p.productName">
+                                            <div class="card-body">
+                                                <h3 class="card-title">{{p.productName}}</h3>
+                                                <p class="card-text text-center">
+                                                    <i class="fa fa-star"
+                                                        [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i>
+                                                    &nbsp; {{p.avgRating}}
+                                                    &#x20B9; {{p.cost}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -118,19 +195,28 @@
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
-                            <div class="card" style="width: 18rem;" *ngFor="let p of trousersProductList.splice(0,6); let i = index">
-                                <div  *ngIf="i<6">
-                                <img class="card-img-top" [src]="p.images[0].linkImage" [alt]="p.productName">
-                                <div class="card-body">
-                                    <h3 class="card-title">{{p.productName}}</h3>
-                                    <p class="card-text text-center">
-                                        <i class="fa fa-star" [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i> &nbsp; {{p.avgRating}}
-                                        &#x20B9; {{p.cost}}
-                                    </p>
+
+                            <div class="col-md-2" *ngFor="let p of trousersProductList; let i = index">
+                                <div class="row">
+                                    <div class="card" *ngIf="i<6"
+                                        style="margin-left: 5%; margin-right: 5%;width: 18rem">
+                                        <div>
+                                            <img class="card-img-top" [src]="p.images[0].linkImage"
+                                                [alt]="p.productName">
+                                            <div class="card-body">
+                                                <h3 class="card-title">{{p.productName}}</h3>
+                                                <p class="card-text text-center">
+                                                    <i class="fa fa-star"
+                                                        [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i>
+                                                    &nbsp; {{p.avgRating}}
+                                                    &#x20B9; {{p.cost}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <br>
