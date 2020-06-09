@@ -1,60 +1,75 @@
-<div class = "row">
-    <div class="card">
-        <div class="card-header">
-            Login
-        </div>
-        <div class="card-body">
-            <form [formGroup]="registrationForm" (ngSubmit)="register()" class="form">
-                <div class="form-group">
-                    <label>User Name<span class="text-danger">*</span></label>        
-                    <input type="text" formControlName="userName" id="userName" class="form-control"> 
-                    <span class="error-message" *ngIf="registrationForm.get('userName').invalid && registrationForm.get('userName').touched" class="text-danger">Enter a valid name</span>
-                </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
 
-                <div class="form-group">
-                    <label>Email Id<span class="text-danger">*</span></label>        
-                    <input type="text" formControlName="emailId" id="emailId" class="form-control"> 
-                    <span class="error-message" *ngIf="registrationForm.get('emailId').invalid && registrationForm.get('emailId').touched" class="text-danger">Enter the valid email address</span>
-                </div>
+                <div class="card-body">
+                    <ul class="tab-group">
+                        <li class="tab active"> <a [routerLink]="['/register']">Register</a></li>
+                        <li class="tab"><a [routerLink]="['/login']">Log In</a></li>
+                    </ul>
+                    <form [formGroup]="registrationForm" (ngSubmit)="register()" class="form">
+                        <div class="form-group">
+                            <label>User Name<span class="text-danger">*</span></label>
+                            <input type="text" formControlName="userName" id="userName" class="form-control">
+                            <span class="error-message"
+                                *ngIf="registrationForm.get('userName').invalid && registrationForm.get('userName').touched"
+                                class="text-danger">Enter a valid name</span>
+                        </div>
 
-                <div class="form-group">
-                    <label>Contact No<span class="text-danger">*</span></label>        
-                    <input type="number" formControlName="contactNumber" id="contactNumber" class="form-control"> 
-                    <span class="error-message" *ngIf="registrationForm.get('contactNumber').invalid && registrationForm.get('contactNumber').touched" class="text-danger">Enter the valid registered number</span>
-                </div>
+                        <div class="form-group">
+                            <label>Email Id<span class="text-danger">*</span></label>
+                            <input type="text" formControlName="emailId" id="emailId" class="form-control">
+                            <span class="error-message"
+                                *ngIf="registrationForm.get('emailId').invalid && registrationForm.get('emailId').touched"
+                                class="text-danger">Enter the valid email address</span>
+                        </div>
 
-                <div class="form-group">
-                    <label>Date Of Birth<span class="text-danger">*</span></label>        
-                    <input type="date" formControlName="dateOfBirth" id="dateOfBirth" class="form-control"> 
-                    <span class="error-message" *ngIf="registrationForm.get('dateOfBirth').invalid && registrationForm.get('dateOfBirth').touched" class="text-danger">You should be more than 16 years old</span>
-                </div>                
-  
-                <div class="form-group">
-                    <label>
-                        Password<span class="text-danger">*</span>
-                        <span class="tooltip">?
-                            <span class="tooltiptext">Tooltip text</span>
-                        </span>
-                    </label>        
-                    <input type="password" formControlName="password" id="uPass"class="form-control"> 
-                    <span class="error-message" *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched" class="text-danger">Enter a valid password</span>
-                    <br>
+                        <div class="form-group">
+                            <label>Contact No<span class="text-danger">*</span></label>
+                            <input type="number" formControlName="contactNumber" id="contactNumber"
+                                class="form-control">
+                            <span class="error-message"
+                                *ngIf="registrationForm.get('contactNumber').invalid && registrationForm.get('contactNumber').touched"
+                                class="text-danger">Enter the valid registered number</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date Of Birth<span class="text-danger">*</span></label>
+                            <input type="date" formControlName="dateOfBirth" id="dateOfBirth" class="form-control">
+                            <span class="error-message"
+                                *ngIf="registrationForm.get('dateOfBirth').invalid && registrationForm.get('dateOfBirth').touched"
+                                class="text-danger">You should be more than 16 years old</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Password<span class="text-danger">*</span>
+                                <span class="tooltip">?
+                                    <span class="tooltiptext">Tooltip text</span>
+                                </span>
+                            </label>
+                            <input type="password" formControlName="password" id="uPass" class="form-control">
+                            <span class="error-message"
+                                *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched"
+                                class="text-danger">Enter a valid password</span>
+                            <br>
+                        </div>
+                        <div>
+                            <span><span class="text-danger">*</span> marked fields are mandatory</span>
+
+                        </div>
+                        <div class="form-group">
+                            <div *ngIf="errorMessage" class="text-danger">
+                                <h6>{{errorMessage}}</h6>
+                            </div>
+                        </div>
+
+                        <button type="submit" [disabled]="registrationForm.invalid"
+                            class="btn btn-primary">Register</button>
+                    </form>
                 </div>
-                <div>
-                      <span><span class="text-danger">*</span> marked fields are mandatory</span>
-                      
-                </div>
-                <div class="form-group">
-                    <div *ngIf="errorMessage" class="text-danger">
-                        <h6>{{errorMessage}}</h6>
-                    </div>
-                </div>
-  
-                <button type="submit" [disabled]="registrationForm.invalid" class="btn btn-primary">Register</button>   
-            </form>
+            </div>
         </div>
     </div>
-</div>
-<div>
-     Existing User? Login <a [routerLink]="['/login']">here</a>.
 </div>

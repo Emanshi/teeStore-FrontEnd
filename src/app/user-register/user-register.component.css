@@ -33,4 +33,47 @@
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
+
+
+.card{
+    margin-top: 20%;
+    vertical-align:middle;
+    border: 2px solid var(--colorPrimary);
+    padding: 2em;
+    
+}
+
+
+.tab-group {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+  }
+  .tab-group:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .tab-group li a {
+    display: block;
+    text-decoration: none;
+    padding: 15px;
+    background: rgba(160, 179, 176, 0.25);
+    color: #a0b3b0;
+    font-size: 20px;
+    float: left;
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: .5s ease;
+    transition: .5s ease;
+  }
+  .tab-group li a:hover {
+    background: #179b77;
+    color: #ffffff;
+  }
+  .tab-group .active a {
+    background: #1ab188;
+    color: #ffffff;
+  }
   
