@@ -36,4 +36,7 @@ export class ViewProductService {
     return this.http.get<Images[]>(environment.imageApi+'getImages/'+reference);
   }
 
+  getImageById(id:string):Observable<Images>{
+    return this.http.get<Images>(environment.imageApi+'getImage/'+id);
+  }
 }
