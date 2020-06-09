@@ -3,8 +3,6 @@
   vertical-align:middle;
   border: 2px solid var(--colorPrimary);
   padding: 2em;
-  background-color: #fdfdfd;
-  
 }
 
 .error-text{
@@ -39,7 +37,6 @@ button[disabled]{
   width: 50%;
   text-align: center;
   cursor: pointer;
-  -webkit-transition: .5s ease;
   transition: .5s ease;
 }
 .tab-group li a:hover {
@@ -54,6 +51,3 @@ button[disabled]{
 .button:hover, .button:focus {
   background: #179b77;
 }
-
-
-

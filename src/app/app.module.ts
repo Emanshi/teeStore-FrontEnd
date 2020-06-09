@@ -22,6 +22,7 @@ import { ProfileService } from './profile/profile.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { from } from 'rxjs';
 import { ViewProductService } from './view-product/view-product.service';
+import { RatingtooltipPipe } from './home/ratingtooltip.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ViewProductService } from './view-product/view-product.service';
     FooterComponent,
     HomeComponent,
     ViewProductComponent,
-    ProfileComponent
+    ProfileComponent,
+    RatingtooltipPipe
   ],
   imports: [
     BrowserModule,

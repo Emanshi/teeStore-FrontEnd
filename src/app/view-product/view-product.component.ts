@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewProductService } from './view-product.service';
 import { AuthenticatorService } from '../auth/authenticator.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-view-product',
@@ -10,17 +11,23 @@ import { Product } from '../models/product';
   styleUrls: ['./view-product.component.css']
 })
 export class ViewProductComponent implements OnInit {
-  products:Product[]
+  product:Product
+  productId:string
 
-  constructor(private service:ViewProductService,private auth:AuthenticatorService,private router:Router) { }
+  constructor(private service:ViewProductService,private auth:AuthenticatorService,private router:Router,private route:ActivatedRoute,private title:Title) { }
 
-  ngOnInit(): void {
-    this.getAllProducts()
+  ngOnInit(): void {    
+    this.route.params.subscribe(
+      param=>this.productId=param['pId']
+    );
+    this.loadProduct()
   }
 
-  getAllProducts(){
-    this.service.getAllProducts().subscribe(
-      response=>this.products=response
+  loadProduct(){
+    this.service.getProductById(this.productId).subscribe(
+      response=>{this.product=response;
+        this.title.setTitle(this.product.productName)
+      }
     )
   }
 

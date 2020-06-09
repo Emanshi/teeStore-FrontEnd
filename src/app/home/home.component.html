@@ -1,4 +1,4 @@
-<div class="container-fluid scroll-container">
+<div class="container-fluid">
     <div class="row" style="margin-top:4%;margin-bottom:2%;background-color: #1ab188;">
         <ul class="nav nav-pills" id="test">
             <li class="nav-item">
@@ -39,9 +39,9 @@
                                             <img class="card-img-top" [src]="p.images[0].linkImage"
                                                 [alt]="p.productName">
                                             <div class="card-body">
-                                                <h3 class="card-title">{{p.productName}}</h3>
+                                                <h3 class="card-title"><a class="stretched-link" [routerLink]="['/product',p.productId]" >{{p.productName}}</a></h3>
                                                 <p class="card-text">
-                                                    <span [matTooltip]="p.avgRating">
+                                                    <span matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
                                                             <i class="fa fa-star" *ngIf="j<p.avgRating"
                                                                 [matTooltip]="p.avgRating" style="color: orange;"></i>
@@ -72,18 +72,27 @@
                         <div class="card-deck">
                             <div class="col-md-2" *ngFor="let p of shirtProductList; let i = index">
                                 <div class="row">
-                                    <div class="card" *ngIf="i<6"
+                                    <div class="card text-center" *ngIf="i<6"
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
                                             <img class="card-img-top" [src]="p.images[0].linkImage"
                                                 [alt]="p.productName">
                                             <div class="card-body">
-                                                <h3 class="card-title">{{p.productName}}</h3>
+                                                <h3 class="card-title"><a class="stretched-link" [routerLink]="['/product',p.productId]" >{{p.productName}}</a></h3>
                                                 <p class="card-text text-center">
-                                                    <i class="fa fa-star"
-                                                        [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i>
+                                                    <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j<p.avgRating"
+                                                                [matTooltip]="p.avgRating" style="color: orange;"></i>
+                                                        </span>
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                                style="color: grey;"></i>
+                                                        </span>
+                                                    </span>
                                                     &nbsp; {{p.avgRating}}
-                                                    &#x20B9; {{p.cost}}
+                                                    &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <b>&#x20B9; {{p.cost}}</b>
                                                 </p>
                                             </div>
                                         </div>
@@ -103,18 +112,27 @@
 
                             <div class="col-md-2" *ngFor="let p of tshirtProductList; let i = index">
                                 <div class="row">
-                                    <div class="card" *ngIf="i<6"
+                                    <div class="card text-center" *ngIf="i<6"
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
                                             <img class="card-img-top" [src]="p.images[0].linkImage"
                                                 [alt]="p.productName">
                                             <div class="card-body">
-                                                <h3 class="card-title">{{p.productName}}</h3>
+                                                <h3 class="card-title"><a class="stretched-link" [routerLink]="['/product',p.productId]" >{{p.productName}}</a></h3>
                                                 <p class="card-text text-center">
-                                                    <i class="fa fa-star"
-                                                        [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i>
+                                                    <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j<p.avgRating"
+                                                                [matTooltip]="p.avgRating" style="color: orange;"></i>
+                                                        </span>
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                                style="color: grey;"></i>
+                                                        </span>
+                                                    </span>
                                                     &nbsp; {{p.avgRating}}
-                                                    &#x20B9; {{p.cost}}
+                                                    &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <b>&#x20B9; {{p.cost}}</b>
                                                 </p>
                                             </div>
                                         </div>
@@ -134,18 +152,27 @@
 
                             <div class="col-md-2" *ngFor="let p of skirtsProductList; let i = index">
                                 <div class="row">
-                                    <div class="card" *ngIf="i<6"
+                                    <div class="card text-center" *ngIf="i<6"
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
                                             <img class="card-img-top" [src]="p.images[0].linkImage"
                                                 [alt]="p.productName">
                                             <div class="card-body">
-                                                <h3 class="card-title">{{p.productName}}</h3>
+                                                <h3 class="card-title"><a class="stretched-link" [routerLink]="['/product',p.productId]" >{{p.productName}}</a></h3>
                                                 <p class="card-text text-center">
-                                                    <i class="fa fa-star"
-                                                        [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i>
+                                                    <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j<p.avgRating"
+                                                                [matTooltip]="p.avgRating" style="color: orange;"></i>
+                                                        </span>
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                                style="color: grey;"></i>
+                                                        </span>
+                                                    </span>
                                                     &nbsp; {{p.avgRating}}
-                                                    &#x20B9; {{p.cost}}
+                                                    &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <b>&#x20B9; {{p.cost}}</b>
                                                 </p>
                                             </div>
                                         </div>
@@ -164,18 +191,27 @@
                         <div class="card-deck">
                             <div class="col-md-2" *ngFor="let p of topsProductList; let i = index">
                                 <div class="row">
-                                    <div class="card" *ngIf="i<6"
+                                    <div class="card text-center" *ngIf="i<6"
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
                                             <img class="card-img-top" [src]="p.images[0].linkImage"
                                                 [alt]="p.productName">
                                             <div class="card-body">
-                                                <h3 class="card-title">{{p.productName}}</h3>
+                                                <h3 class="card-title"><a class="stretched-link" [routerLink]="['/product',p.productId]" >{{p.productName}}</a></h3>
                                                 <p class="card-text text-center">
-                                                    <i class="fa fa-star"
-                                                        [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i>
+                                                    <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j<p.avgRating"
+                                                                [matTooltip]="p.avgRating" style="color: orange;"></i>
+                                                        </span>
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                                style="color: grey;"></i>
+                                                        </span>
+                                                    </span>
                                                     &nbsp; {{p.avgRating}}
-                                                    &#x20B9; {{p.cost}}
+                                                    &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <b>&#x20B9; {{p.cost}}</b>
                                                 </p>
                                             </div>
                                         </div>
@@ -195,18 +231,27 @@
 
                             <div class="col-md-2" *ngFor="let p of trousersProductList; let i = index">
                                 <div class="row">
-                                    <div class="card" *ngIf="i<6"
+                                    <div class="card text-center" *ngIf="i<6"
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
                                             <img class="card-img-top" [src]="p.images[0].linkImage"
                                                 [alt]="p.productName">
                                             <div class="card-body">
-                                                <h3 class="card-title">{{p.productName}}</h3>
+                                                <h3 class="card-title"><a class="stretched-link" [routerLink]="['/product',p.productId]" >{{p.productName}}</a></h3>
                                                 <p class="card-text text-center">
-                                                    <i class="fa fa-star"
-                                                        [style.background]='"linear-gradient(to right, orange"+ (p.avgRating*100)+"%, grey "+ (100-p.avgRating*100)+"%)"'></i>
+                                                    <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j<p.avgRating"
+                                                                [matTooltip]="p.avgRating" style="color: orange;"></i>
+                                                        </span>
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                                style="color: grey;"></i>
+                                                        </span>
+                                                    </span>
                                                     &nbsp; {{p.avgRating}}
-                                                    &#x20B9; {{p.cost}}
+                                                    &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <b>&#x20B9; {{p.cost}}</b>
                                                 </p>
                                             </div>
                                         </div>

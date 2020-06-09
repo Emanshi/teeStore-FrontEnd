@@ -12,7 +12,7 @@ const routes: Routes = [
   { path : 'register', component : UserRegisterComponent },
   { path : 'home', component : HomeComponent },
   { path : 'profile', component : ProfileComponent},
-  { path : 'product', component : ViewProductComponent},
+  { path : 'product/:pId', component : ViewProductComponent},
   { path: '', component : HomeComponent },
   { path: "**", redirectTo : "", pathMatch : 'full' } 
 

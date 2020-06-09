@@ -65,7 +65,6 @@
     width: 50%;
     text-align: center;
     cursor: pointer;
-    -webkit-transition: .5s ease;
     transition: .5s ease;
   }
   .tab-group li a:hover {

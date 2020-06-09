@@ -1,16 +1,13 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="card-deck">
-            <div *ngFor="let p of products">
-                <div class="card">
-                    <div class="card-body">
-                        {{p.productId}},
-                        {{p.productName}},
-                        {{p.category}},
-                        {{p.size}}
-                    </div>
-                </div>     
+        <div class="card">
+            <img class="card-img-top" [src]="product.images[0].linkImage" [alt]="product.productName">
+            <div class="card-body">
+                {{product.productId}},
+                {{product.productName}},
+                {{product.category}},
+                {{product.size}}
             </div>
-        </div>                 
+        </div>
     </div>
 </div>
