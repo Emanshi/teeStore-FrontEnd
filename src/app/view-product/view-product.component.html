@@ -1,34 +1,39 @@
 <div class="container-fluid">
-    <div class="row" style="margin-top: 5%;">
+    <div class="row" style="margin-top: 6%;">
         <div class="col-md-5">
             <div class="row">
                 <div class="col-md-3">
                     <div *ngFor="let image of product.images; let i = index">
-                        <img class="img-thumbnail" [src]="image.linkImage" [alt]="product.productName" width=50% style="padding: 5px;"
-                            (click)="loadImage(i)">
+                        <img class="img-thumbnail" [src]="image.linkImage" [alt]="product.productName" width=50%
+                            style="padding: 5px;object-fit: cover;" (mouseenter)="loadImage(i)">
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <img class="img-rounded" [src]="displayImage.linkImage" [alt]="product.productName">
+                    <!-- <img class="img-rounded" [src]="displayImage.linkImage" [alt]="product.productName"> -->
+                    <lib-ngx-image-zoom class="img-rounded img-responsive" [thumbImage]="displayImage.linkImage" [fullImage]="displayImage.linkImage" [zoomMode]="'hover'" [magnification]="1.75"
+                    [enableScrollZoom]="true"></lib-ngx-image-zoom>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <button class="btn-lg btn-block text-light" style="margin: 10px; background-color: var(--colorPrimary);">Buy Now</button>
+                    <button class="btn-lg btn-block text-light"
+                        style="margin: 10px; background-color: var(--colorPrimary);">Buy Now</button>
                 </div>
                 <div class="col-md-6">
-                    <button class="btn-lg btn-block text-light" style="margin: 10px; background-color: var(--colorAccent);">Add to Cart</button>
+                    <button class="btn-lg btn-block text-light"
+                        style="margin: 10px; background-color: var(--colorAccent);">Add to Cart</button>
                 </div>
             </div>
         </div>
         <div class="col=md-6 offset-md-1">
             <h1 class="text-capitalize">{{product.productName}}</h1>
-            <label class="label">Category :&nbsp;</label>{{product.category}}
-            <label class="label">Size :&nbsp;</label>{{product.size}}
+            <label class="label">Category :&nbsp;</label>{{product.category}}<br /><br />
+            <label class="label">Size :&nbsp;</label>
             <button class="btn-sm btn-light">S</button>&nbsp;
             <button class="btn-sm btn-light">M</button>&nbsp;
-            <button class="btn-sm btn-light">L</button>
-            <!-- <div>{{product.productInfo}}</div> -->
+            <button class="btn-sm btn-light">L</button><br /><br />
+            <label class="label">Product Info</label>
+            <div>{{product.productInfo}}</div>
         </div>
     </div>
 </div>

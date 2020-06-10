@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { from } from 'rxjs';
 import { ViewProductService } from './view-product/view-product.service';
 import { RatingtooltipPipe } from './home/ratingtooltip.pipe';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { RatingtooltipPipe } from './home/ratingtooltip.pipe';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgxImageZoomModule
   ],
   providers: [
     AuthenticatorService,

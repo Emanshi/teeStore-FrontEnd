@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product';
 import { Title } from '@angular/platform-browser';
 import { Images } from '../models/images';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @Component({
   selector: 'app-view-product',
