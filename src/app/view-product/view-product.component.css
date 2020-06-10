@@ -1,0 +1,6 @@
+.img-thumbnail{
+    padding: 5px; 
+    margin-bottom: 5px; 
+    object-fit: cover;
+    max-height: 80px;
+}
