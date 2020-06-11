@@ -36,15 +36,17 @@
                                     <div class="card text-center" *ngIf="i<6"
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
-                                            <img class="card-img-top" [src]="p.images[0].linkImage"
-                                                [alt]="p.productName">
+                                            <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
+                                                    [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                             <div class="card-body">
-                                                <h3 class="card-title"><a class="stretched-link" [routerLink]="['/product',p.productId]" >{{p.productName}}</a></h3>
+                                                <h3 class="card-title"><a
+                                                        [routerLink]="['/product',p.productId]">{{p.productName}}</a>
+                                                </h3>
                                                 <p class="card-text">
                                                     <span matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
                                                             <i class="fa fa-star" *ngIf="j<p.avgRating"
-                                                                [matTooltip]="p.avgRating" style="color: orange;"></i>
+                                                                style="color: orange;"></i>
                                                         </span>
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
                                                             <i class="fa fa-star" *ngIf="j>p.avgRating"
@@ -75,10 +77,12 @@
                                     <div class="card text-center" *ngIf="i<6"
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
-                                            <img class="card-img-top" [src]="p.images[0].linkImage"
-                                                [alt]="p.productName">
+                                            <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
+                                                [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                             <div class="card-body">
-                                                <h3 class="card-title"><a class="stretched-link" [routerLink]="['/product',p.productId]" >{{p.productName}}</a></h3>
+                                                <h3 class="card-title"><a
+                                                        [routerLink]="['/product',p.productId]">{{p.productName}}</a>
+                                                </h3>
                                                 <p class="card-text text-center">
                                                     <span matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
@@ -115,10 +119,12 @@
                                     <div class="card text-center" *ngIf="i<6"
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
-                                            <img class="card-img-top" [src]="p.images[0].linkImage"
-                                                [alt]="p.productName">
+                                            <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
+                                                [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                             <div class="card-body">
-                                                <h3 class="card-title"><a class="stretched-link" [routerLink]="['/product',p.productId]" >{{p.productName}}</a></h3>
+                                                <h3 class="card-title"><a
+                                                        [routerLink]="['/product',p.productId]">{{p.productName}}</a>
+                                                </h3>
                                                 <p class="card-text text-center">
                                                     <span matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
@@ -155,10 +161,12 @@
                                     <div class="card text-center" *ngIf="i<6"
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
-                                            <img class="card-img-top" [src]="p.images[0].linkImage"
-                                                [alt]="p.productName">
+                                            <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
+                                                [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                             <div class="card-body">
-                                                <h3 class="card-title"><a class="stretched-link" [routerLink]="['/product',p.productId]" >{{p.productName}}</a></h3>
+                                                <h3 class="card-title"><a
+                                                        [routerLink]="['/product',p.productId]">{{p.productName}}</a>
+                                                </h3>
                                                 <p class="card-text text-center">
                                                     <span matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
@@ -194,10 +202,12 @@
                                     <div class="card text-center" *ngIf="i<6"
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
-                                            <img class="card-img-top" [src]="p.images[0].linkImage"
-                                                [alt]="p.productName">
+                                            <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
+                                                [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                             <div class="card-body">
-                                                <h3 class="card-title"><a class="stretched-link" [routerLink]="['/product',p.productId]" >{{p.productName}}</a></h3>
+                                                <h3 class="card-title"><a
+                                                        [routerLink]="['/product',p.productId]">{{p.productName}}</a>
+                                                </h3>
                                                 <p class="card-text text-center">
                                                     <span matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
@@ -234,10 +244,12 @@
                                     <div class="card text-center" *ngIf="i<6"
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
-                                            <img class="card-img-top" [src]="p.images[0].linkImage"
-                                                [alt]="p.productName">
+                                            <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
+                                                [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                             <div class="card-body">
-                                                <h3 class="card-title"><a class="stretched-link" [routerLink]="['/product',p.productId]" >{{p.productName}}</a></h3>
+                                                <h3 class="card-title"><a
+                                                        [routerLink]="['/product',p.productId]">{{p.productName}}</a>
+                                                </h3>
                                                 <p class="card-text text-center">
                                                     <span matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">

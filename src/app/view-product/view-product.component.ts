@@ -6,6 +6,7 @@ import { Product } from '../models/product';
 import { Title } from '@angular/platform-browser';
 import { Images } from '../models/images';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { Review } from '../models/review';
 
 @Component({
   selector: 'app-view-product',
@@ -16,6 +17,7 @@ export class ViewProductComponent implements OnInit {
   product:Product
   productId:string
   displayImage:Images
+  reviews:Review[]
 
   constructor(private service:ViewProductService,private auth:AuthenticatorService,private router:Router,private route:ActivatedRoute,private title:Title) { }
 
@@ -32,7 +34,14 @@ export class ViewProductComponent implements OnInit {
         this.product=response
         this.displayImage=response.images[0]
         this.title.setTitle(this.product.productName)
+        this.loadTopReviews()
       }
+    )
+  }
+
+  loadTopReviews(){
+    this.service.getReviews(this.productId).subscribe(
+      res=>this.reviews=res
     )
   }
 

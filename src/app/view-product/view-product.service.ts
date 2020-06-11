@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
 import { Images } from '../models/images';
+import { Review } from '../models/review';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,9 @@ export class ViewProductService {
 
   getImageById(id:string):Observable<Images>{
     return this.http.get<Images>(environment.imageApi+'getImage/'+id);
+  }
+
+  getReviews(productId:string):Observable<Review[]>{
+    return this.http.get<Review[]>(environment.reviewApi+'getTopReviews/'+productId)
   }
 }
