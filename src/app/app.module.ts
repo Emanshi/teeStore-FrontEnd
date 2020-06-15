@@ -24,6 +24,7 @@ import { from } from 'rxjs';
 import { ViewProductService } from './view-product/view-product.service';
 import { RatingtooltipPipe } from './home/ratingtooltip.pipe';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     HomeComponent,
     ViewProductComponent,
     ProfileComponent,
-    RatingtooltipPipe
+    RatingtooltipPipe,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { Product } from '../models/product';
 import { environment } from 'src/environments/environment';
 import { Images } from '../models/images';
 import { Review } from '../models/review';
+import { ReviewCounts } from '../models/review-counts';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,9 @@ export class ViewProductService {
 
   getReviews(productId:string):Observable<Review[]>{
     return this.http.get<Review[]>(environment.reviewApi+'getTopReviews/'+productId)
+  }
+
+  getReviewCounts(productId:string):Observable<ReviewCounts>{
+    return this.http.get<ReviewCounts>(environment.reviewApi+'getRatingCounts/'+productId)
   }
 }

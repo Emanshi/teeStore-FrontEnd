@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { Images } from '../models/images';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { Review } from '../models/review';
+import { ReviewCounts } from '../models/review-counts';
 
 @Component({
   selector: 'app-view-product',
@@ -18,6 +19,8 @@ export class ViewProductComponent implements OnInit {
   productId:string
   displayImage:Images
   reviews:Review[]
+  reviewCounts:ReviewCounts
+  maxReviews:number
 
   constructor(private service:ViewProductService,private auth:AuthenticatorService,private router:Router,private route:ActivatedRoute,private title:Title) { }
 
@@ -42,6 +45,13 @@ export class ViewProductComponent implements OnInit {
   loadTopReviews(){
     this.service.getReviews(this.productId).subscribe(
       res=>this.reviews=res
+    )
+    this.service.getReviewCounts(this.productId).subscribe(
+      res=>{
+        this.reviewCounts=res
+        let arr = [res.one,res.two,res.three,res.four,res.five]
+        this.maxReviews=Math.max.apply(Math, arr)
+      }
     )
   }
 
