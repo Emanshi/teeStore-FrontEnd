@@ -25,6 +25,8 @@ import { ViewProductService } from './view-product/view-product.service';
 import { RatingtooltipPipe } from './home/ratingtooltip.pipe';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { ProductsComponent } from './products/products.component';
+import { AllReviewsComponent } from './all-reviews/all-reviews.component';
+import { AllReviewsService } from './all-reviews/all-reviews.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { ProductsComponent } from './products/products.component';
     ViewProductComponent,
     ProfileComponent,
     RatingtooltipPipe,
-    ProductsComponent
+    ProductsComponent,
+    AllReviewsComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import { ProductsComponent } from './products/products.component';
     UserRegisterService,
     ProfileService,
     ViewProductService,
+    AllReviewsService,
     Title
   ],
   bootstrap: [AppComponent]
