@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Review } from '../models/review';
 import { ViewProductService } from '../view-product/view-product.service';
 import { ReviewCounts } from '../models/review-counts';
+import { Product } from '../models/product';
+import { pid } from 'process';
 
 @Component({
   selector: 'app-all-reviews',
@@ -15,6 +17,7 @@ export class AllReviewsComponent implements OnInit {
   reviews:Review[]
   reviewCounts:ReviewCounts
   maxReviews:number
+  p:Product
 
   constructor(private service:AllReviewsService,private route:ActivatedRoute,private vpService:ViewProductService) { }
 
@@ -35,6 +38,9 @@ export class AllReviewsComponent implements OnInit {
         let arr = [res.one,res.two,res.three,res.four,res.five]
         this.maxReviews=Math.max.apply(Math, arr)
       }
+    )
+    this.vpService.getProductById(this.productId).subscribe(
+      res=>this.p=res
     )
   }
 

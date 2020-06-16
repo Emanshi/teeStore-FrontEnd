@@ -1,6 +1,31 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-md-3 offset-md-1" style="margin-top: 2%;">
+            <div class="card text-center mt-5">
+                <div>
+                    <a [routerLink]="['/product',p.productId]"><img class="card-img-top" [src]="p.images[0].linkImage"
+                            [alt]="p.productName"></a>
+                    <div class="card-body">
+                        <h3 class="card-title h6 text-capitalize"><a [routerLink]="['/product',p.productId]">{{p.productName}}</a>
+                        </h3>
+                        <p class="card-text">
+                            <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                                <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                    <i class="fa fa-star" *ngIf="j<p.avgRating" style="color: orange;"></i>
+                                </span>
+                                <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                    <i class="fa fa-star" *ngIf="j>p.avgRating" style="color: grey;"></i>
+                                </span>
+                            </span>
+                            &nbsp; {{p.avgRating}}
+                            &nbsp; ({{p.totalRaters}}) <br /><br />
+                            <b>&#x20B9; {{p.cost}}</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
             <div class="card mb-5" style="margin-top: 10%;">
                 <div class="card-header h6">
                     <span class="h3">Ratings & Reviews</span>
@@ -11,15 +36,15 @@
                                 <mat-option value="Most Helpful" (click)="sortByHelpful()">
                                     Most Helpful
                                 </mat-option>
-                            
+
                                 <mat-option value="Top Rated" (click)="sortByRating()">
                                     Top Rated
                                 </mat-option>
-                            
+
                                 <mat-option value="Least Liked" (click)="sortByRatingRev()">
                                     Least Liked
                                 </mat-option>
-                            
+
                                 <mat-option value="Recent Reviews" (click)="sortByDate()">
                                     Recent Reviews
                                 </mat-option>
@@ -30,7 +55,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Total Ratings</h5>
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="progress mb-1">
