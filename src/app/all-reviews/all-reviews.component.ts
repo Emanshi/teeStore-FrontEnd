@@ -37,4 +37,62 @@ export class AllReviewsComponent implements OnInit {
       }
     )
   }
+
+  sortByHelpful() {
+    this.reviews.sort(
+      (a,b)=>{
+        if (a.ratingHelpful>b.ratingHelpful) {
+          return -1
+        } else if (a.ratingHelpful<b.ratingHelpful) {
+          return 1
+        } else {
+          return 0
+        }
+      }
+    )
+  }
+
+  sortByRating() {
+    let ratings = ['ONE','TWO','THREE','FOUR','FIVE']
+    this.reviews.sort(
+      (a,b)=>{
+        if (ratings.indexOf(a.ratings) > ratings.indexOf(b.ratings)) {
+          return -1
+        } else if (ratings.indexOf(a.ratings) < ratings.indexOf(b.ratings)) {
+          return 1
+        } else {
+          return 0
+        }
+      }
+    )
+  }
+
+  sortByRatingRev() {
+    let ratings = ['ONE','TWO','THREE','FOUR','FIVE']
+    this.reviews.sort(
+      (a,b)=>{
+        if (ratings.indexOf(a.ratings) > ratings.indexOf(b.ratings)) {
+          return 1
+        } else if (ratings.indexOf(a.ratings) < ratings.indexOf(b.ratings)) {
+          return -1
+        } else {
+          return 0
+        }
+      }
+    )
+  }
+
+  sortByDate() {
+    this.reviews.sort(
+      (a,b)=>{
+        if (a.reviewDate > b.reviewDate) {
+          return -1
+        } else if (a.reviewDate < b.reviewDate) {
+          return 1
+        } else {
+          return 0
+        }
+      }
+    )
+  }
 }

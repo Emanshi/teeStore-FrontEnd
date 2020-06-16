@@ -1,9 +1,31 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <div class="card mb-5 mt-5">
+            <div class="card mb-5" style="margin-top: 10%;">
                 <div class="card-header h6">
-                    Ratings & Reviews
+                    <span class="h3">Ratings & Reviews</span>
+                    <span class="float-right">
+                        <mat-form-field>
+                            <mat-label>Sort by --</mat-label>
+                            <mat-select>
+                                <mat-option value="Most Helpful" (click)="sortByHelpful()">
+                                    Most Helpful
+                                </mat-option>
+                            
+                                <mat-option value="Top Rated" (click)="sortByRating()">
+                                    Top Rated
+                                </mat-option>
+                            
+                                <mat-option value="Least Liked" (click)="sortByRatingRev()">
+                                    Least Liked
+                                </mat-option>
+                            
+                                <mat-option value="Recent Reviews" (click)="sortByDate()">
+                                    Recent Reviews
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </span>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Total Ratings</h5>
@@ -57,7 +79,9 @@
                             </div>
                         </div>
                         <div class="col-md-2 text-center">
-                            <div class="h3 mt-auto">{{(reviewCounts.one+reviewCounts.two+reviewCounts.three+reviewCounts.four+reviewCounts.five)/(5*(reviewCounts.one+reviewCounts.two+reviewCounts.three+reviewCounts.four+reviewCounts.five))}} <i class="fa fa-star" aria-hidden="true"></i>
+                            <div class="h3 mt-auto">
+                                {{(reviewCounts.one+(reviewCounts.two*2)+(reviewCounts.three*3)+(reviewCounts.four*4)+(reviewCounts.five*5))/(reviewCounts.one+reviewCounts.two+reviewCounts.three+reviewCounts.four+reviewCounts.five)}}
+                                <i class="fa fa-star" aria-hidden="true"></i>
                             </div>
                             out of 5
                             <br><small>({{reviewCounts.one+reviewCounts.two+reviewCounts.three+reviewCounts.four+reviewCounts.five}}
@@ -82,7 +106,7 @@
                     </li>
                 </ul>
                 <div class="card-body">
-                    <a href="#" class="card-link">All Reviews</a>
+                    <a href="#" class="card-link">Add Review</a>
                 </div>
             </div>
         </div>

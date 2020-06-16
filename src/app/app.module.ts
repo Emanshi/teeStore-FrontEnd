@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatSelectModule } from '@angular/material/select'
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -51,6 +53,8 @@ import { AllReviewsService } from './all-reviews/all-reviews.service';
     BrowserAnimationsModule,
     MatDialogModule,
     MatTooltipModule,
+    MatFormFieldModule,
+    MatSelectModule,
     NgxImageZoomModule
   ],
   providers: [
