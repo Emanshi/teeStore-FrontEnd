@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ViewProductComponent } from './view-product/view-product.component';
 import { AllReviewsComponent } from './all-reviews/all-reviews.component';
+import { ProductsComponent } from './products/products.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path : 'register', component : UserRegisterComponent },
   { path : 'home', component : HomeComponent },
   { path : 'profile', component : ProfileComponent },
+  { path : 'products', component : ProductsComponent },
   { path : 'product/:pId', component : ViewProductComponent },
   { path : 'reviews/:pId', component : AllReviewsComponent },
   { path: '', component : HomeComponent },
