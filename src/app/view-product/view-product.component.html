@@ -37,7 +37,7 @@
                     <label class="label">Category :&nbsp;</label>
                 </div>
                 <div class="col-md-9">
-                    {{product.category}}
+                    <a class="text-bold" [routerLink]="['/products']" [queryParams]="{filter: 'category',value:product.category}">{{product.category}}</a>
                 </div>
             </div>
 

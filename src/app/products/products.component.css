@@ -1,0 +1,13 @@
+.card-img-top {
+    width: 100%;
+    height: 17vw;
+    object-fit: cover;
+}
+
+.hover-scale {
+    transition: transform .3s;
+}
+
+.hover-scale:hover {
+    transform: scale(1.2);
+}
