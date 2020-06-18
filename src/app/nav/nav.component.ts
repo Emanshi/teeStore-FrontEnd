@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthenticatorService } from '../auth/authenticator.service';
-import { Router } from '@angular/router';
+import { Router} from '@angular/router';
+import { NavService } from './nav.service';
 
 @Component({
   selector: 'app-nav',
@@ -10,8 +11,9 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
 loggedIn=false;
 userName;
+search:string;
 
-  constructor(private auth:AuthenticatorService,private router:Router) { }
+  constructor(private auth:AuthenticatorService,private router:Router,private service:NavService) { }
 
   ngOnInit(): void {
     this.auth.sessionUser.subscribe(
@@ -22,6 +24,14 @@ userName;
         }
       }
     )
+  }
+
+  onKey(event: any) { 
+    this.search = event.target.value;
+  }
+
+  getProductBySearch(){
+    this.router.navigate( ['/products'], { queryParams: { filter: 'search',value:this.search}});
   }
 
   logout() {

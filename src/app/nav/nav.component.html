@@ -7,15 +7,23 @@
             <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
+
+            <ul class="navbar-nav mx-auto">
+                <li class="mx-auto">
+                    <form class="form-inline">
+                        <input class="form-control input-lg" (keyup)="onKey($event)" style="width:450px;" type="search" placeholder="Search for awesome products" aria-label="Search" >
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="getProductBySearch()"><i class="fa fa-search" aria-hidden="true"></i></button>
+                      </form>
+                    </li>
+            </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" *ngIf="loggedIn">
                     <a class="nav-link" [routerLink]="['/profile']">Welcome {{userName}}</a>
-                </li>
+                </li>               
                 <li class="nav-item">
                 <a class="nav-link" [routerLink]="['/hotdeals']" >Hot Deals<sup class="badge-padding">
                     <span class="badge badge-danger">New</span></sup></a>
-                </li>
-    
+                </li>    
                 <li class="nav-item">
                     <a class="nav-link" *ngIf="loggedIn" [routerLink]="['/cart']"><i class="fas fa-shopping-cart"></i></a>
                 </li>
