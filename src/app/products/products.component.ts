@@ -36,4 +36,74 @@ export class ProductsComponent implements OnInit {
       )
     }
   }
+
+  sortByPopularuty() {
+    this.products.sort(
+      (a,b)=>{
+        if (a.totalRaters>b.totalRaters) {
+          return -1
+        } else if (a.totalRaters<b.totalRaters) {
+          return 1
+        } else {
+          return 0
+        }
+      }
+    )
+  }
+
+  sortByRating() {
+    this.products.sort(
+      (a,b)=>{
+        if (a.avgRating > b.avgRating) {
+          return -1
+        } else if (a.avgRating < b.avgRating) {
+          return 1
+        } else {
+          return 0
+        }
+      }
+    )
+  }
+
+  sortByPrice() {
+    this.products.sort(
+      (a,b)=>{
+        if (a.cost > b.cost) { 
+          return 1
+        } else if (a.cost < b.cost) {
+          return -1
+        } else {
+          return 0
+        }
+      }
+    )
+  }
+
+  sortByPriceRev() {
+    this.products.sort(
+      (a,b)=>{
+        if (a.cost > b.cost) {
+          return -1
+        } else if (a.cost < b.cost) {
+          return 1
+        } else {
+          return 0
+        }
+      }
+    )
+  }
+
+  sortByDate() {
+    this.products.sort(
+      (a,b)=>{
+        if (a.dateOfAddition > b.dateOfAddition) {
+          return -1
+        } else if (a.dateOfAddition < b.dateOfAddition) {
+          return 1
+        } else {
+          return 0
+        }
+      }
+    )
+  }
 }
