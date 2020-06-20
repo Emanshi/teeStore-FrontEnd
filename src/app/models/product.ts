@@ -4,11 +4,9 @@ export class Product{
     productId:string;
     productName:string;
     cost:number;
-    size:string;
+    sizeAndQuantity:Map<string, number>;
     sex:string;
     category:string;
-    productGroup:string;
-    quantity:number;
     dateOfAddition:Date;
     productInfo:string;
     discount:number;

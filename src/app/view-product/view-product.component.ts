@@ -21,6 +21,7 @@ export class ViewProductComponent implements OnInit {
   reviews:Review[]
   reviewCounts:ReviewCounts
   maxReviews:number
+  objectKeys = Object.keys;
 
   constructor(private service:ViewProductService,private auth:AuthenticatorService,private router:Router,private route:ActivatedRoute,private title:Title) { }
 

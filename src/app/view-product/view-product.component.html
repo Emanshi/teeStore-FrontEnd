@@ -46,9 +46,10 @@
                     <label class="label">Size :&nbsp;</label>
                 </div>
                 <div class="col-md-9">
-                    <button class="btn-sm btn-light">S</button>&nbsp;
-                    <button class="btn-sm btn-light">M</button>&nbsp;
-                    <button class="btn-sm btn-light">L</button>
+                    <span *ngFor="let key of objectKeys(product.sizeAndQuantity)">
+                        <button class="btn-sm btn-light" [disabled]="product.sizeAndQuantity[key]==0">{{key}}</button>&nbsp;
+                    </span>
+                    
                 </div>
             </div>
 
