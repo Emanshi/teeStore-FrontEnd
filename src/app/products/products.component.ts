@@ -16,17 +16,10 @@ export class ProductsComponent implements OnInit {
   lowValue: number = 40;
   highValue: number = 60;
   options: Options = {
-    floor: 0,
+    floor:0,
     ceil: 500,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return '' + value;
-        case LabelType.High:
-          return '' + value;
-        default:
-          return '' + value;
-      }
+    translate: (value: number, label: LabelType): string => {  
+          return '';
     }
   };
 

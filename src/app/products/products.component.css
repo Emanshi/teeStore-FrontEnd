@@ -32,13 +32,15 @@
     background: var(--colorAccent);
 }
 ::ng-deep .custom-slider .ng5-slider .ng5-slider-pointer {
-    width: 8px;
-    height: 16px;
+    width: 13px;
+    height: 13px;
     top: auto;
-    bottom: 0;
+    bottom: 0;    
     background-color: var(--colorPrimary);
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-radius: 50%;
+}
+::ng-deep .custom-slider .ng5-slider .ng5-slider-bubble {
+   color: var(--colorTextLight)
 }
 ::ng-deep .custom-slider .ng5-slider .ng5-slider-pointer:after {
     display: none;
