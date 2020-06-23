@@ -5,6 +5,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatSelectModule } from '@angular/material/select'
+import { MatExpansionModule } from '@angular/material/expansion'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatSliderModule } from '@angular/material/slider'
+import { Ng5SliderModule } from 'ng5-slider'
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -55,6 +59,10 @@ import { AllReviewsService } from './all-reviews/all-reviews.service';
     MatTooltipModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    Ng5SliderModule,
     NgxImageZoomModule
   ],
   providers: [

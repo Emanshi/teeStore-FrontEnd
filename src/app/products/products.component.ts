@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from './products.service';
 import { Product } from '../models/product';
+import { Options, LabelType } from 'ng5-slider';
 
 @Component({
   selector: 'app-products',
@@ -12,6 +13,22 @@ export class ProductsComponent implements OnInit {
   filter:string
   value:string
   products:Product[]
+  lowValue: number = 40;
+  highValue: number = 60;
+  options: Options = {
+    floor: 0,
+    ceil: 500,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return '' + value;
+        case LabelType.High:
+          return '' + value;
+        default:
+          return '' + value;
+      }
+    }
+  };
 
   constructor(private route:ActivatedRoute, private service:ProductsService) { }
 
@@ -23,6 +40,14 @@ export class ProductsComponent implements OnInit {
         this.loadProducts()
       }
     )
+  }
+
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return value;
   }
 
   loadProducts() {

@@ -1,6 +1,68 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 offset-md-2" style="margin-top: 5%;">
+        <div class="col-md-3" style="margin-top: 7%;">
+            <div class="card">
+                <div class="card-header">
+                    <span class="h5">Filters</span>
+                </div>
+                <mat-accordion multi="true">
+                    <mat-expansion-panel expanded="true"> 
+                        <mat-expansion-panel-header>
+                            Gender
+                        </mat-expansion-panel-header>
+                        <mat-checkbox>Men</mat-checkbox> <br />
+                        <mat-checkbox>Women</mat-checkbox>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Size
+                        </mat-expansion-panel-header>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-checkbox>XS</mat-checkbox> <br />
+                                <mat-checkbox>S</mat-checkbox> <br />
+                                <mat-checkbox>M</mat-checkbox> <br />
+                            </div>
+                            <div class="col-md-6">
+                                <mat-checkbox>L</mat-checkbox> <br />
+                                <mat-checkbox>XL</mat-checkbox> <br />
+                                <mat-checkbox>XXL</mat-checkbox>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Price
+                        </mat-expansion-panel-header>
+                        <div class="custom-slider">
+                            <ng5-slider [(value)]="lowValue" [(highValue)]="highValue" [options]="options"></ng5-slider>
+                          </div>                  
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Discount
+                        </mat-expansion-panel-header>                        
+                                <mat-checkbox>25% or more</mat-checkbox> <br />
+                                <mat-checkbox>20% to 25&</mat-checkbox> <br />
+                                <mat-checkbox>15% to 20%</mat-checkbox> <br />                           
+                                <mat-checkbox>10% to 15%</mat-checkbox> <br />
+                                <mat-checkbox>5% and below</mat-checkbox>                               
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Ratings
+                        </mat-expansion-panel-header>                        
+                                <mat-checkbox>4+ ratings</mat-checkbox> <br />
+                                <mat-checkbox>3+ ratings</mat-checkbox> <br />
+                                <mat-checkbox>2+ ratings</mat-checkbox> <br /> 
+                                <mat-checkbox>Most disliked</mat-checkbox> <br />                                                      
+                    </mat-expansion-panel>
+                                           
+                </mat-accordion>
+            </div>
+        </div>
+
+        <div class="col-md-9" style="margin-top: 5%;">
             <div class="card m-3">
                 <div class="card-header head-container">
                     <span class="h5 text-capitalize vertical-center">Showing results for : <b>{{value}}</b></span>
@@ -29,7 +91,7 @@
                 </div>
                 <div class="card-body">
                     <div class="card-deck">
-                        <div class="col-md-3 mb-4" *ngFor="let p of products; let i = index">
+                        <div class="col-md-3 mb-2" *ngFor="let p of products; let i = index">
                             <div class="row">
                                 <div class="card text-center hover-scale mb-3"
                                     style="margin-left: 5%; margin-right: 5%;width: 18rem">
