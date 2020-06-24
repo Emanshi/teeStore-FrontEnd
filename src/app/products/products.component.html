@@ -10,8 +10,8 @@
                         <mat-expansion-panel-header>
                             Gender
                         </mat-expansion-panel-header>
-                        <mat-checkbox [(ngModel)]="filters.male">Men</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.female">Women</mat-checkbox>
+                        <mat-checkbox [(ngModel)]="filters.male" (change)="filtering()">Men</mat-checkbox> <br />
+                        <mat-checkbox [(ngModel)]="filters.female" (change)="filtering()">Women</mat-checkbox>
                     </mat-expansion-panel>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
@@ -19,14 +19,14 @@
                         </mat-expansion-panel-header>
                         <div class="row">
                             <div class="col-md-6">
-                                <mat-checkbox [(ngModel)]="filters.xs">XS</mat-checkbox> <br />
-                                <mat-checkbox [(ngModel)]="filters.s">S</mat-checkbox> <br />
-                                <mat-checkbox [(ngModel)]="filters.m">M</mat-checkbox> <br />
+                                <mat-checkbox [(ngModel)]="filters.xs" (change)="filtering()">XS</mat-checkbox> <br />
+                                <mat-checkbox [(ngModel)]="filters.s" (change)="filtering()">S</mat-checkbox> <br />
+                                <mat-checkbox [(ngModel)]="filters.m" (change)="filtering()">M</mat-checkbox> <br />
                             </div>
                             <div class="col-md-6">
-                                <mat-checkbox [(ngModel)]="filters.l">L</mat-checkbox> <br />
-                                <mat-checkbox [(ngModel)]="filters.xl">XL</mat-checkbox> <br />
-                                <mat-checkbox [(ngModel)]="filters.xxl">XXL</mat-checkbox>
+                                <mat-checkbox [(ngModel)]="filters.l" (change)="filtering()">L</mat-checkbox> <br />
+                                <mat-checkbox [(ngModel)]="filters.xl" (change)="filtering()">XL</mat-checkbox> <br />
+                                <mat-checkbox [(ngModel)]="filters.xxl" (change)="filtering()">XXL</mat-checkbox>
                             </div>
                         </div>
                     </mat-expansion-panel>

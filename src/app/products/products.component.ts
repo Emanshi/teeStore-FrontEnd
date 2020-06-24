@@ -50,6 +50,11 @@ export class ProductsComponent implements OnInit {
     return value;
   }
 
+  filtering() {
+    this.products=this.productsArray.filter(p=>(p.sex==='M'&&this.filters.male==true)||(p.sex==='F'&&this.filters.female==true)||(this.filters.female==false&&this.filters.male==false))
+    this.products=this.products.filter(p=>(('XS' in p.sizeAndQuantity)&&this.filters.xs==true)||(('S' in p.sizeAndQuantity)&&this.filters.s==true)||(('M' in p.sizeAndQuantity)&&this.filters.m==true)||(('L' in p.sizeAndQuantity)&&this.filters.l==true)||(('XL' in p.sizeAndQuantity)&&this.filters.xl==true)||(('XXL' in p.sizeAndQuantity)&&this.filters.xxl==true)||(this.filters.xs==false&&this.filters.s==false&&this.filters.m==false&&this.filters.l==false&&this.filters.xl==false&&this.filters.xxl==false))
+  }
+
   loadProducts() {
     if (this.filter=='category') {
       this.service.getProductsByCategory(this.value).subscribe(
