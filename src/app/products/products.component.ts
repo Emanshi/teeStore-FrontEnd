@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from './products.service';
 import { Product } from '../models/product';
 import { Options, LabelType } from 'ng5-slider';
+import { Filter } from './filter';
 
 @Component({
   selector: 'app-products',
@@ -13,6 +14,8 @@ export class ProductsComponent implements OnInit {
   filter:string
   value:string
   products:Product[]
+  productsArray:Product[]
+  filters:Filter
   lowValue: number = 40;
   highValue: number = 60;
   options: Options = {
@@ -26,6 +29,10 @@ export class ProductsComponent implements OnInit {
   constructor(private route:ActivatedRoute, private service:ProductsService) { }
 
   ngOnInit(): void {
+    this.filters={
+      male:true,female:true,xs:true,s:true,m:true,l:true,xl:true,xxl:true,percent25:true,percent20:true,highPrice:0,
+      lowPrice:0,percent15:true,percent10:true,percent5:true,ratings4:true,ratings3:true,ratings2:true,ratings1:true
+    }
     this.route.queryParams.subscribe(
       params=>{
         this.filter=params['filter']
@@ -46,16 +53,22 @@ export class ProductsComponent implements OnInit {
   loadProducts() {
     if (this.filter=='category') {
       this.service.getProductsByCategory(this.value).subscribe(
-        res=>this.products=res
+        res=>{
+          this.products=res
+          this.productsArray=res
+        }
       )
     } else if (this.filter=='search') {
       this.service.getProductsByQuery(this.value).subscribe(
-        res=>this.products=res
+        res=>{
+          this.products=res
+          this.productsArray=res
+        }
       )
     }
   }
 
-  sortByPopularuty() {
+  sortByPopularity() {
     this.products.sort(
       (a,b)=>{
         if (a.totalRaters>b.totalRaters) {

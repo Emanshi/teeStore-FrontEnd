@@ -1,0 +1,21 @@
+export class Filter {
+    male:boolean
+    female:boolean
+    xs:boolean
+    s:boolean
+    m:boolean
+    l:boolean
+    xl:boolean
+    xxl:boolean
+    highPrice:number
+    lowPrice:number
+    percent25:boolean
+    percent20:boolean
+    percent15:boolean
+    percent10:boolean
+    percent5:boolean
+    ratings4:boolean
+    ratings3:boolean
+    ratings2:boolean
+    ratings1:boolean
+}
