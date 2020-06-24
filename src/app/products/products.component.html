@@ -35,7 +35,7 @@
                             Price
                         </mat-expansion-panel-header>
                         <div class="custom-slider">
-                            <ng5-slider [(value)]="filters.lowPrice" [(highValue)]="filters.highPrice" [options]="options"></ng5-slider>
+                            <ng5-slider [(value)]="filters.lowPrice" [(highValue)]="filters.highPrice" [options]="options" (valueChange)="filtering()"></ng5-slider>
                             <span style="float: left"> {{filters.lowPrice | currency:'INR'}}</span>
                             <span style="float: right"> {{filters.highPrice | currency:'INR'}}</span>
                         </div>
@@ -44,20 +44,20 @@
                         <mat-expansion-panel-header>
                             Discount
                         </mat-expansion-panel-header>
-                        <mat-checkbox [(ngModel)]="filters.percent25">25% or more</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.percent20">20% to 25&</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.percent15">15% to 20%</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.percent10">10% to 15%</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.percent5">5% and below</mat-checkbox>
+                        <mat-checkbox [(ngModel)]="filters.percent25" (change)="filtering()">25% or more</mat-checkbox> <br />
+                        <mat-checkbox [(ngModel)]="filters.percent20" (change)="filtering()">20% to 25&</mat-checkbox> <br />
+                        <mat-checkbox [(ngModel)]="filters.percent15" (change)="filtering()">15% to 20%</mat-checkbox> <br />
+                        <mat-checkbox [(ngModel)]="filters.percent10" (change)="filtering()">10% to 15%</mat-checkbox> <br />
+                        <mat-checkbox [(ngModel)]="filters.percent5" (change)="filtering()">10% and below</mat-checkbox>
                     </mat-expansion-panel>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             Ratings
                         </mat-expansion-panel-header>
-                        <mat-checkbox [(ngModel)]="filters.ratings4">4+ ratings</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.ratings3">3+ ratings</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.ratings2">2+ ratings</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.ratings1">Most disliked</mat-checkbox> <br />
+                        <mat-checkbox [(ngModel)]="filters.ratings4" (change)="filtering()">4+ ratings</mat-checkbox> <br />
+                        <mat-checkbox [(ngModel)]="filters.ratings3" (change)="filtering()">3+ ratings</mat-checkbox> <br />
+                        <mat-checkbox [(ngModel)]="filters.ratings2" (change)="filtering()">2+ ratings</mat-checkbox> <br />
+                        <mat-checkbox [(ngModel)]="filters.ratings1" (change)="filtering()">Most disliked</mat-checkbox> <br />
                     </mat-expansion-panel>
 
                 </mat-accordion>

@@ -32,12 +32,13 @@
     background: var(--colorAccent);
 }
 ::ng-deep .custom-slider .ng5-slider .ng5-slider-pointer {
-    width: 13px;
-    height: 13px;
+    width: 8px;
+    height: 16px;
     top: auto;
     bottom: 0;    
     background-color: var(--colorPrimary);
-    border-radius: 50%;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 ::ng-deep .custom-slider .ng5-slider .ng5-slider-bubble {
    color: var(--colorTextLight)
