@@ -30,8 +30,8 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.filters={
-      male:true,female:true,xs:true,s:true,m:true,l:true,xl:true,xxl:true,percent25:true,percent20:true,highPrice:0,
-      lowPrice:0,percent15:true,percent10:true,percent5:true,ratings4:true,ratings3:true,ratings2:true,ratings1:true
+      male:false,female:false,xs:false,s:false,m:false,l:false,xl:false,xxl:false,percent25:false,percent20:false,highPrice:0,
+      lowPrice:0,percent15:false,percent10:false,percent5:false,ratings4:false,ratings3:false,ratings2:false,ratings1:false
     }
     this.route.queryParams.subscribe(
       params=>{
