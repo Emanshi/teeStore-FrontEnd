@@ -3,9 +3,8 @@
     --colorAccent :  #1ab188;
     --colorTextLight : #fff;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {  scroll-behavior: smooth;position: relative;   min-height: 100%;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; padding-bottom: 115px;}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-html {  scroll-behavior: smooth;}
+
+
