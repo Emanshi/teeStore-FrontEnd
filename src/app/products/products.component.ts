@@ -83,6 +83,11 @@ export class ProductsComponent implements OnInit {
           this.products=res
           this.productsArray=res
           this.assignPriceLimits()
+        },
+        err=>{
+          this.productsArray=[]
+          this.products=[]
+          //alert(err.message)
         }
       )
     }
