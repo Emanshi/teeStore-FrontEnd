@@ -75,38 +75,38 @@
                                     <div class="row">
                                         <div class="col-md-10">
                                             <div class="progress mb-1">
-                                                <div class="progress-bar bg-success text-left pl-2" role="progressbar"
+                                                <div class="progress-bar bg-success text-left" role="progressbar"
                                                     [style.width.%]="reviewCounts.five/maxReviews*100"
                                                     aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                    {{reviewCounts.five}} reviews
+                                                    <span class="ml-2" *ngIf="reviewCounts.five">{{reviewCounts.five}} reviews</span>
                                                 </div>
                                             </div>
                                             <div class="progress mb-1">
-                                                <div class="progress-bar bg-success text-left pl-2" role="progressbar"
+                                                <div class="progress-bar bg-success text-left" role="progressbar"
                                                     [style.width.%]="reviewCounts.four/maxReviews*100"
                                                     aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                                                    {{reviewCounts.four}} reviews
+                                                    <span class="ml-2" *ngIf="reviewCounts.four">{{reviewCounts.four}} reviews</span>
                                                 </div>
                                             </div>
                                             <div class="progress mb-1">
-                                                <div class="progress-bar bg-warning text-left pl-2" role="progressbar"
+                                                <div class="progress-bar bg-warning text-left" role="progressbar"
                                                     [style.width.%]="reviewCounts.three/maxReviews*100"
                                                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                                    {{reviewCounts.three}} reviews
+                                                    <span class="ml-2" *ngIf="reviewCounts.three">{{reviewCounts.three}} reviews</span>
                                                 </div>
                                             </div>
                                             <div class="progress mb-1">
-                                                <div class="progress-bar bg-warning text-left pl-2" role="progressbar"
+                                                <div class="progress-bar bg-warning text-left" role="progressbar"
                                                     [style.width.%]="reviewCounts.two/maxReviews*100" aria-valuenow="75"
                                                     aria-valuemin="0" aria-valuemax="100">
-                                                    {{reviewCounts.two}} reviews
+                                                    <span class="ml-2" *ngIf="reviewCounts.two">{{reviewCounts.two}} reviews</span>
                                                 </div>
                                             </div>
                                             <div class="progress mb-1">
-                                                <div class="progress-bar bg-danger text-left pl-2" role="progressbar"
+                                                <div class="progress-bar bg-danger text-left" role="progressbar"
                                                     [style.width.%]="reviewCounts.one/maxReviews*100"
                                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                                    {{reviewCounts.one}} reviews
+                                                    <span class="ml-2" *ngIf="reviewCounts.one">{{reviewCounts.one}} reviews</span>
                                                 </div>
                                             </div>
                                         </div>

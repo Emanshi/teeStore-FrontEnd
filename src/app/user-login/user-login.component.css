@@ -48,6 +48,6 @@ button[disabled]{
   color: #ffffff;
 }
 
-.button:hover, .button:focus {
-  background: #179b77;
+.btn-primary{
+  background-color: #179b77;
 }

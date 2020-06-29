@@ -4,3 +4,11 @@
     object-fit: cover;
     max-height: 80px;
 }
+
+button:disabled,
+button[disabled]{
+    background-color: #ededed;
+    cursor: not-allowed;
+    color:#454545;
+}
+
