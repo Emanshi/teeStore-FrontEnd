@@ -118,7 +118,7 @@
                     <li class="list-group-item">
                         <div class="mb-3">
                             <span class="h6">{{r.reviewTitle}}</span>
-                            <span class="float-right">{{r.ratings}} <i class="fa fa-star" aria-hidden="true"
+                            <span class="float-right">{{ratingNumbers.indexOf(r.ratings)}} <i class="fa fa-star" aria-hidden="true"
                                     [ngStyle]="{'color': (r.ratings=='FIVE'||r.ratings=='FOUR') ? 'green' : ((r.ratings=='TWO'||r.ratings=='THREE') ? 'orange' : 'red')}"></i></span>
                         </div>
                         <p>{{r.reviewBody}}</p>

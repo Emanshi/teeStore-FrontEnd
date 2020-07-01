@@ -33,6 +33,8 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { ProductsComponent } from './products/products.component';
 import { AllReviewsComponent } from './all-reviews/all-reviews.component';
 import { AllReviewsService } from './all-reviews/all-reviews.service';
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { AllReviewsService } from './all-reviews/all-reviews.service';
     ProfileComponent,
     RatingtooltipPipe,
     ProductsComponent,
-    AllReviewsComponent
+    AllReviewsComponent,
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { Images } from '../models/images';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { Review } from '../models/review';
 import { ReviewCounts } from '../models/review-counts';
+import { User } from '../models/users';
 
 @Component({
   selector: 'app-view-product',
@@ -15,12 +16,15 @@ import { ReviewCounts } from '../models/review-counts';
   styleUrls: ['./view-product.component.css']
 })
 export class ViewProductComponent implements OnInit {
+  loggiedIn:boolean
+  loggedInUser:User
   product:Product
   productId:string
   displayImage:Images
   reviews:Review[]
   reviewCounts:ReviewCounts
   maxReviews:number
+  ratingNumbers=['','ONE','TWO','THREE','FOUR','FIVE']
   objectKeys = Object.keys;
 
   constructor(private service:ViewProductService,private auth:AuthenticatorService,private router:Router,private route:ActivatedRoute,private title:Title) { }
@@ -58,5 +62,39 @@ export class ViewProductComponent implements OnInit {
 
   loadImage(index:number) {
     this.displayImage=this.product.images[index]
+  }
+
+  addToCart(){
+    this.loggiedIn=false
+    this.auth.sessionUser.subscribe(
+      (data)=>{
+        this.loggedInUser=data;
+        if(data.userName!=null){
+          this.loggiedIn=true
+        }
+      }
+    )
+
+    if(!this.loggiedIn){
+      this.router.navigate(['/login'])      
+    }
+    this.router.navigate(['/cart'])
+  }
+
+  buyNow(){
+    this.loggiedIn=false
+    this.auth.sessionUser.subscribe(
+      (data)=>{
+        this.loggedInUser=data;
+        if(data.userName!=null){
+          this.loggiedIn=true
+        }
+      }
+    )
+
+    if(!this.loggiedIn){
+      this.router.navigate(['/login'])      
+    }
+    this.router.navigate(['/cart'])
   }
 }

@@ -18,6 +18,7 @@ export class AllReviewsComponent implements OnInit {
   reviewCounts:ReviewCounts
   maxReviews:number
   p:Product
+  ratingNumbers=['','ONE','TWO','THREE','FOUR','FIVE']
 
   constructor(private service:AllReviewsService,private route:ActivatedRoute,private vpService:ViewProductService) { }
 

@@ -25,7 +25,7 @@
                     <span class="badge badge-danger">New</span></sup></a>
                 </li>    
                 <li class="nav-item">
-                    <a class="nav-link" *ngIf="loggedIn" [routerLink]="['/cart']"><i class="fas fa-shopping-cart"></i></a>
+                    <a class="nav-link" [routerLink]="['/cart']" *ngIf="loggedIn" [routerLink]="['/cart']"><i class="fas fa-shopping-cart"></i></a>
                 </li>
                 <li class="nav-item" *ngIf="loggedIn">
                     <a class="nav-link" (click)="logout()" [routerLink]="['/home']">Logout</a>
