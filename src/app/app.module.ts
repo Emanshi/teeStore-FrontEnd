@@ -35,6 +35,7 @@ import { AllReviewsComponent } from './all-reviews/all-reviews.component';
 import { AllReviewsService } from './all-reviews/all-reviews.service';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { CartGuardService } from './cart/cart-guard.service';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ProfileService,
     ViewProductService,
     AllReviewsService,
+    CartGuardService,
     Title
   ],
   bootstrap: [AppComponent]

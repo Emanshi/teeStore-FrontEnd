@@ -1,0 +1,12 @@
+.btn{
+    background-color: var(--colorAccent);
+    color: var(--colorTextLight);
+  }
+
+.btn:active{
+    background-color: var(--colorAccent);
+}
+
+.btn:focus{
+    background-color: var(--colorAccent);
+}

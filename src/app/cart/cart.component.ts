@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CartService } from './cart.service';
 import { Router } from '@angular/router';
 import { User } from '../models/users';
 import { Title } from '@angular/platform-browser';
 import { AuthenticatorService } from '../auth/authenticator.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -34,4 +35,7 @@ export class CartComponent implements OnInit {
     }
   }
 
-}
+  
+}  
+
+
