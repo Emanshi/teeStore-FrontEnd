@@ -24,7 +24,9 @@ export class ViewProductComponent implements OnInit {
   reviews:Review[]
   reviewCounts:ReviewCounts
   maxReviews:number
+  selectedSize:string
   ratingNumbers=['','ONE','TWO','THREE','FOUR','FIVE']
+  cartResp:number
   objectKeys = Object.keys;
 
   constructor(private service:ViewProductService,private auth:AuthenticatorService,private router:Router,private route:ActivatedRoute,private title:Title) { }
@@ -33,6 +35,7 @@ export class ViewProductComponent implements OnInit {
     this.route.params.subscribe(
       param=>this.productId=param['pId']
     );
+    this.selectedSize='XYZ'
     this.loadProduct()
   }
 
@@ -65,20 +68,28 @@ export class ViewProductComponent implements OnInit {
   }
 
   addToCart(){
-    this.loggiedIn=false
-    this.auth.sessionUser.subscribe(
-      (data)=>{
-        this.loggedInUser=data;
-        if(data.userName!=null){
-          this.loggiedIn=true
+    if (this.selectedSize==='XYZ') {
+      alert("Please Select a Size")
+    } else {
+      alert("You selected "+this.selectedSize)
+      this.loggiedIn=false
+      this.auth.sessionUser.subscribe(
+        (data)=>{
+          this.loggedInUser=data;
+          if(data.userName!=null){
+            this.loggiedIn=true
+          }
         }
-      }
-    )
+      )
 
-    if(!this.loggiedIn){
-      this.router.navigate(['/login'])      
+      if(!this.loggiedIn){
+        this.router.navigate(['/login'])      
+      }
+      this.service.addProductTocart(this.productId,this.loggedInUser.userId,this.selectedSize).subscribe(
+        res=>this.cartResp=res
+      )
     }
-    this.router.navigate(['/cart'])
+    //this.router.navigate(['/cart'])
   }
 
   buyNow(){

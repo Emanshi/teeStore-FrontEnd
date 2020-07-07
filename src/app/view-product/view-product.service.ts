@@ -49,4 +49,8 @@ export class ViewProductService {
   getReviewCounts(productId:string):Observable<ReviewCounts>{
     return this.http.get<ReviewCounts>(environment.reviewApi+'getRatingCounts/'+productId)
   }
+
+  addProductTocart(productId:string,userId:string,size:string):Observable<number>{
+    return this.http.get<number>(environment.cartApi+"addProduct?userId="+userId+"&productId="+productId+"&size="+size)
+  }
 }

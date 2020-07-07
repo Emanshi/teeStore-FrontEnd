@@ -5,13 +5,13 @@
                 <div class="card-header">
                     <span class="h5">Price Details</span>
                 </div>
-                
-                    <ul class="list-group">
-                        <li class="list-group-item">Price</li>
-                        <li class="list-group-item">Delivery Fees</li>
-                        <li class="list-group-item">Total Amount</li>
-                    </ul>
-                
+
+                <ul class="list-group">
+                    <li class="list-group-item">Price</li>
+                    <li class="list-group-item">Delivery Fees</li>
+                    <li class="list-group-item">Total Amount</li>
+                </ul>
+
             </div>
         </div>
 
@@ -22,9 +22,30 @@
                 <div class="card-header">
                     <span class="h5">MY CART</span>
                 </div>
-                <div class="card-body text-center">
+                <div *ngIf="cart" class="card-body">
+                    <div *ngFor="let p of cart.products; let i = index">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img [src]="p.images[0].linkImage" height=200px>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="h3 text-capitalize">{{p.productName}}</div>
+                                <div class="text-secondary">Size : {{cart.sizes[i]}}</div>
+                                <div>
+                                    <span><button [disabled]="cart.quantities[i]<=1" (click)="cart.quantities[i]=cart.quantities[i]-1">-</button></span>
+                                    <span>{{cart.quantities[i]}}</span>
+                                    <span><button  (click)="cart.quantities[i]=cart.quantities[i]+1">+</button></span>
+                                </div>
+                                <div>
+                                    <button>Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!cart" class="card-body text-center">
                     <div class="h1 m-5">Your cart is empty</div>
-                    <button class="h4 mt-5 btn btn-lg" [routerLink]="['/home']" >Shop Now</button>
+                    <button class="h4 mt-5 btn btn-lg" [routerLink]="['/home']">Shop Now</button>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import { User } from '../models/users';
 import { Title } from '@angular/platform-browser';
 import { AuthenticatorService } from '../auth/authenticator.service';
 import { Observable } from 'rxjs';
+import { Cart } from '../models/cart';
 
 @Component({
   selector: 'app-cart',
@@ -14,6 +15,7 @@ import { Observable } from 'rxjs';
 export class CartComponent implements OnInit {
   loggiedIn:boolean
   loggedInUser:User
+  cart:Cart
 
   constructor(private service:CartService,private router:Router,private auth:AuthenticatorService,private title:Title) {
     title.setTitle('Cart')
@@ -33,6 +35,10 @@ export class CartComponent implements OnInit {
     if(!this.loggiedIn){
       this.router.navigate(['/login'])      
     }
+
+    this.service.getCart(this.loggedInUser.userId).subscribe(
+      res=>this.cart=res
+    )
   }
 
   

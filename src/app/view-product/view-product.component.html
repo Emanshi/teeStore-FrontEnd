@@ -62,7 +62,7 @@
                 <div class="col-md-9">
                     <span *ngFor="let key of objectKeys(product.sizeAndQuantity)">
                         <button class="btn-sm btn-light"
-                            [disabled]="product.sizeAndQuantity[key]==0">{{key}}</button>&nbsp;
+                            [disabled]="product.sizeAndQuantity[key]==0" (click)="selectedSize=key">{{key}}</button>&nbsp;
                     </span>
 
                 </div>
