@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { AuthenticatorService } from '../auth/authenticator.service';
 import { Observable } from 'rxjs';
 import { Cart } from '../models/cart';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +17,10 @@ export class CartComponent implements OnInit {
   loggiedIn:boolean
   loggedInUser:User
   cart:Cart
+  deliveryDate:Date
+  cartCost:number
+  cartTotal:number
+  deliveryFee:number
 
   constructor(private service:CartService,private router:Router,private auth:AuthenticatorService,private title:Title) {
     title.setTitle('Cart')
@@ -37,10 +42,39 @@ export class CartComponent implements OnInit {
     }
 
     this.service.getCart(this.loggedInUser.userId).subscribe(
-      res=>this.cart=res
+      res=>{this.cart=res
+        this.calculateCost()
+      }
     )
+
+    this.deliveryDate=new Date()
+    this.deliveryDate.setDate(this.deliveryDate.getDate()+4)
   }
 
+  addQty(i:number){
+    this.cart.quantities[i]=this.cart.quantities[i]+1
+    this.calculateCost()
+  }
+
+  subQty(i:number){
+    this.cart.quantities[i]=this.cart.quantities[i]-1
+    this.calculateCost()
+  }
+  
+  calculateCost(){
+    this.cartCost=0
+    this.cartTotal=0
+    for(let i=0;i<this.cart.products.length;i++){
+      this.cartCost+=this.cart.products[i].cost*(1-this.cart.products[i].discount/100)*this.cart.quantities[i] 
+      this.cartTotal+=this.cart.products[i].cost*this.cart.quantities[i]
+    }
+    if(this.cartCost>9500){
+      this.deliveryFee=0
+    }else{
+      this.deliveryFee=250
+    }
+       
+  }
   
 }  
 

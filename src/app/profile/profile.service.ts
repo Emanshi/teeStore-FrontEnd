@@ -29,7 +29,7 @@ export class ProfileService {
   }
 
   deleteAddress(userId:string, addressId:string):Observable<string>{
-    return this.http.get<string>(environment.userApi+"deleteAddress?userId="+userId+"&addressId="+addressId)
+    return this.http.delete<string>(environment.userApi+"deleteAddress?userId="+userId+"&addressId="+addressId)
   }
 
 }
