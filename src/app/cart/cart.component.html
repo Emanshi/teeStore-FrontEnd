@@ -34,7 +34,7 @@
                 <div class="card-header">
                     <span class="h5">MY CART</span>
                 </div>
-                <div *ngIf="cart.products.length>0" class="card-body">
+                <div *ngIf="cart && cart.products.length>0" class="card-body">
                     <ul *ngFor="let p of cart.products; let i = index" class="list-group">
                         <li class="list-group-item">
                             <div class="row mb-3">
@@ -59,7 +59,7 @@
                                         <span>{{cart.quantities[i]}}</span>&nbsp;&nbsp;
                                         <span><button class="btn-sm btn-light"
                                                 (click)="addQty(i)">+</button></span>&nbsp;&nbsp;
-                                        <span><button class="btn btn-dark">Remove</button></span>
+                                        <span><button class="btn btn-dark" (click)="removeProduct(i)">Remove</button></span>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -73,8 +73,9 @@
                     <div class="h1 m-5">Your cart is empty</div>
                     <button class="h4 mt-5 btn btn-lg" [routerLink]="['/home']">Shop Now</button>
                 </div>  
-                <div *ngIf="cart.products.length>0" class="card-footer">
-                    <button class="btn-lg btn-primary">Place Order</button>
+                <div *ngIf="cart && cart.products.length>0" class="card-footer">
+                    <button class="btn-lg btn-primary float-right" style="background-color: var(--colorAccent); border: var(--colorAccent);">Place Order</button>
+                    <button class="btn-lg btn-secondary float-right mr-2">Clear Cart</button>
                 </div>
             </div>                    
         </div>

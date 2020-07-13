@@ -15,6 +15,10 @@ export class CartService {
     return this.http.get<Cart>(environment.cartApi+"getCart?userId="+userId)
   }
 
+  removeProduct(userId:string, productId:string, size:string):Observable<number> {
+    return this.http.delete<number>(environment.cartApi+"removeProduct?userId="+userId+"&productId="+productId+"&size="+size)
+  }
+
   // addProductToCart(category:string):Observable<> {
   //   return this.http.get<>(environment.productApi+'getProductsByCategory/'+category)
   // }

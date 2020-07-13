@@ -75,6 +75,19 @@ export class CartComponent implements OnInit {
     }
        
   }
+
+  removeProduct(i:number) {
+    this.service.removeProduct(this.loggedInUser.userId, this.cart.products[i].productId, this.cart.sizes[i]).subscribe(
+      res=>{
+        alert(res)
+        this.cart.products.splice(i, 1)
+        this.cart.quantities.splice(i, 1)
+        this.cart.sizes.splice(i, 1)
+        this.calculateCost()
+      },
+      err => alert(err.error.errorMessage)
+    )  
+  }
   
 }  
 
