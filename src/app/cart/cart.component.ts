@@ -73,13 +73,13 @@ export class CartComponent implements OnInit {
     }else{
       this.deliveryFee=250
     }
-       
+    this.service.cart=this.cart
   }
 
   removeProduct(i:number) {
     this.service.removeProduct(this.loggedInUser.userId, this.cart.products[i].productId, this.cart.sizes[i]).subscribe(
       res=>{
-        alert(res)
+        console.log('Product removed with result : ' +res)
         this.cart.products.splice(i, 1)
         this.cart.quantities.splice(i, 1)
         this.cart.sizes.splice(i, 1)
@@ -87,6 +87,20 @@ export class CartComponent implements OnInit {
       },
       err => alert(err.error.errorMessage)
     )  
+  }
+
+  clearCart() {
+    this.service.clearCart(this.cart.cartId).subscribe(
+      res =>{
+        alert(res)
+        this.cart.products=[]
+        this.cart.sizes=[]
+        this.cart.quantities=[]
+        this.cart.totalCost=0
+        this.service.cart=this.cart
+      },
+      err => alert(err.errorMessage)
+    )
   }
   
 }  

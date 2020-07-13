@@ -71,7 +71,6 @@ export class ViewProductComponent implements OnInit {
     if (this.selectedSize==='XYZ') {
       alert("Please Select a Size")
     } else {
-      alert("You selected "+this.selectedSize)
       this.loggiedIn=false
       this.auth.sessionUser.subscribe(
         (data)=>{
