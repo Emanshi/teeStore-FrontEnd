@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CartService {
+  changed=false
   cart:Cart
 
   constructor(private http:HttpClient) { }
@@ -24,8 +25,8 @@ export class CartService {
     return this.http.put<string>(environment.cartApi+'editCart/'+cartId, this.cart)
   }
 
-  clearCart(cartId:string):Observable<string> {
-    return this.http.delete<string>(environment.cartApi+'clearCart/'+cartId)
+  clearCart(cartId:string):Observable<Cart> {
+    return this.http.delete<Cart>(environment.cartApi+'clearCart/'+cartId)
   }
   // addProductToCart(category:string):Observable<> {
   //   return this.http.get<>(environment.productApi+'getProductsByCategory/'+category)

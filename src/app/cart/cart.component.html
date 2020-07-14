@@ -18,9 +18,9 @@
                     </li>
                     <li class="list-group-item">
                         <span class="float-left">Total Amount</span>
-                        <span class="float-right">&#x20B9; {{cartCost + deliveryFee | number:'.0-2'}}</span>
+                        <span class="float-right">&#x20B9; {{cart.totalCost | number:'.0-2'}}</span>
                     </li>
-                    <li class="list-group-item text-success">You will save ₹ {{cartTotal-cartCost | number:'.0-2'}} on
+                    <li class="list-group-item text-success" *ngIf="cart && cart.products.length>0">You will save ₹ {{cartTotal-cartCost | number:'.0-2'}} on
                         this order</li>
                 </ul>
 

@@ -7,6 +7,8 @@ import { AuthenticatorService } from '../auth/authenticator.service';
 import { Observable } from 'rxjs';
 import { Cart } from '../models/cart';
 import { Product } from '../models/product';
+import { ClearCartDialog } from './clear.cart.dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-cart',
@@ -22,7 +24,7 @@ export class CartComponent implements OnInit {
   cartTotal:number
   deliveryFee:number
 
-  constructor(private service:CartService,private router:Router,private auth:AuthenticatorService,private title:Title) {
+  constructor(private service:CartService,private router:Router,private dialog:MatDialog,private auth:AuthenticatorService,private title:Title) {
     title.setTitle('Cart')
    }
 
@@ -54,11 +56,13 @@ export class CartComponent implements OnInit {
   addQty(i:number){
     this.cart.quantities[i]=this.cart.quantities[i]+1
     this.calculateCost()
+    this.service.changed=true
   }
 
   subQty(i:number){
     this.cart.quantities[i]=this.cart.quantities[i]-1
     this.calculateCost()
+    this.service.changed=true
   }
   
   calculateCost(){
@@ -68,12 +72,24 @@ export class CartComponent implements OnInit {
       this.cartCost+=this.cart.products[i].cost*(1-this.cart.products[i].discount/100)*this.cart.quantities[i] 
       this.cartTotal+=this.cart.products[i].cost*this.cart.quantities[i]
     }
-    if(this.cartCost>9500){
+    if(this.cartCost>1499 || this.cart.products.length==0){
       this.deliveryFee=0
     }else{
       this.deliveryFee=250
     }
+    this.cart.totalCost=this.cartCost+this.deliveryFee
     this.service.cart=this.cart
+  }
+
+  clearCartConfirmer(aId:string): void {
+    const dialogRef = this.dialog.open(ClearCartDialog, {
+      width: '250px',
+      data: aId
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.removeProduct(result)
+    });
   }
 
   removeProduct(i:number) {
@@ -92,14 +108,11 @@ export class CartComponent implements OnInit {
   clearCart() {
     this.service.clearCart(this.cart.cartId).subscribe(
       res =>{
-        alert(res)
-        this.cart.products=[]
-        this.cart.sizes=[]
-        this.cart.quantities=[]
+        this.cart=res
         this.cart.totalCost=0
         this.service.cart=this.cart
       },
-      err => alert(err.errorMessage)
+      err => alert(err.error.errorMessage)
     )
   }
   
