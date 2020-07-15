@@ -53,9 +53,9 @@
                 <h6>{{profileUpdateSuccessMessage}}</h6>
               </div>
             </div>
-            <button type="button" (click)="editProfile()" class="btn btn-dark float-right">{{editButtonText}}</button>
-            <button type="submit" [disabled]="profileForm.invalid && profileForm.pristine"
-              class="btn btn-primary float-right mr-2" *ngIf="!editProfileSwitch">Update</button>
+            <button mat-raised-button color="dark" type="button" (click)="editProfile()" class="float-right">{{editButtonText}}</button>
+            <button mat-raised-button color="accent" type="submit" [disabled]="profileForm.invalid && profileForm.pristine"
+              class="float-right mr-2" *ngIf="!editProfileSwitch">Update</button>
           </form>
         </div>
         <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
@@ -64,14 +64,14 @@
             <h3>Address {{i+1}}</h3>
             <div class="row" *ngIf="!editAddressSwitch || i!=editAddressIndex"
               style="margin-top: 2%; margin-bottom: 3%; border-bottom: 2px; border-color: black;">
-              <div class="col-md-9">
+              <div class="col-md-8">
                 <div>{{a.street}}</div>
                 <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>
               </div>
-              <div class="col-md-3">
-                <button class="btn-sm btn-primary" style="margin-right: 5px;"
+              <div class="col-md-4">
+                <button mat-raised-button color="warn" class="float-right" (click)="deleteAddressConfirmer(a.addressId)">Delete</button>
+                <button mat-raised-button color="secondary" class="float-right mr-2" 
                   (click)="editAddressSwitcher(a, i)">Edit</button>
-                <button class="btn-sm btn-danger" (click)="deleteAddressConfirmer(a.addressId)">Delete</button>
               </div>
             </div>
             <div *ngIf="editAddressSwitch && i==editAddressIndex" style="margin-bottom: 2%;">
@@ -107,9 +107,9 @@
                       class="text-danger">Enter valid pin code</span>
                   </div>
                 </div>
-                <button class="btn-sm btn-primary" type="submit"
+                <button mat-raised-button color="accent"  type="submit"
                   [disabled]="editAddressForm.invalid">Update</button>&nbsp;
-                <button class="btn-sm btn-secondary" type="button" (click)="cancelEditAddress()">Cancel</button>
+                <button mat-raised-button color="secondary"  type="button" (click)="cancelEditAddress()">Cancel</button>
               </form>
             </div>
           </div>
@@ -147,10 +147,10 @@
                       class="text-danger">Enter valid pin code</span>
                   </div>
                 </div>
-                <button class="btn btn-primary" type="submit">Register Address</button>
+                <button mat-raised-button color="accent" type="submit">Register Address</button>
               </form>
             </div>
-            <button *ngIf="!addAddressSwitch" class="btn btn-primary" (click)="addAddressSwitcher()" type="button">Add
+            <button *ngIf="!addAddressSwitch" mat-raised-button color="accent" (click)="addAddressSwitcher()" type="button">Add
               Address</button>
           </div>
         </div>

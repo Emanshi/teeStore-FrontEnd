@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSliderModule } from '@angular/material/slider'
+import { MatButtonModule } from '@angular/material/button';
 import { Ng5SliderModule } from 'ng5-slider'
 
 import { HttpClientModule } from '@angular/common/http';
@@ -67,6 +68,7 @@ import { CartGuardService } from './cart/cart-guard.service';
     MatExpansionModule,
     MatCheckboxModule,
     MatSliderModule,
+    MatButtonModule,
     Ng5SliderModule,
     NgxImageZoomModule
   ],

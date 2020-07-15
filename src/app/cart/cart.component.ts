@@ -4,11 +4,10 @@ import { Router } from '@angular/router';
 import { User } from '../models/users';
 import { Title } from '@angular/platform-browser';
 import { AuthenticatorService } from '../auth/authenticator.service';
-import { Observable } from 'rxjs';
 import { Cart } from '../models/cart';
-import { Product } from '../models/product';
 import { ClearCartDialog } from './clear.cart.dialog';
 import { MatDialog } from '@angular/material/dialog';
+import { RemoveProductDialog } from './remove.product.dialog';
 
 @Component({
   selector: 'app-cart',
@@ -81,10 +80,10 @@ export class CartComponent implements OnInit {
     this.service.cart=this.cart
   }
 
-  clearCartConfirmer(aId:string): void {
-    const dialogRef = this.dialog.open(ClearCartDialog, {
+  removeProductConfirmer(i:number): void {
+    const dialogRef = this.dialog.open(RemoveProductDialog, {
       width: '250px',
-      data: aId
+      data: i
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -105,12 +104,25 @@ export class CartComponent implements OnInit {
     )  
   }
 
+  clearCartConfirmer(): void {
+    const dialogRef = this.dialog.open(ClearCartDialog, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.clearCart()
+      }
+    });
+  }
+
   clearCart() {
     this.service.clearCart(this.cart.cartId).subscribe(
       res =>{
         this.cart=res
         this.cart.totalCost=0
         this.service.cart=this.cart
+        this.calculateCost()
       },
       err => alert(err.error.errorMessage)
     )

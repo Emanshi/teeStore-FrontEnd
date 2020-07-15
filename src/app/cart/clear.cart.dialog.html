@@ -1,9 +1,9 @@
-<h1 mat-dialog-title>Delete</h1>
+<h1 mat-dialog-title>Clear Cart</h1>
 <div mat-dialog-content>
   <p>Are you Sure?</p>
-  <label>This address will be deleted</label>
+  <label>This cart will be cleared</label>
 </div>
 <div mat-dialog-actions>
-  <button class="btn-sm btn-secondary" (click)="onNoClick()" cdkFocusInitial>Cancel</button>&nbsp;
-  <button class="btn-sm btn-danger" (click)="onYesClick()">Okay</button>
+  <button mat-stroked-button class="float-right" color="accent" (click)="onNoClick()" cdkFocusInitial>Cancel</button>&nbsp;
+  <button mat-stroked-button class="float-right mr-1" (click)="onYesClick()">Okay</button>
 </div>
