@@ -142,7 +142,8 @@ export class CheckoutComponent implements OnInit {
     if (!this.addressSelected) {
       this.snackBar.open('Please select an address', 'Okay', {
         duration: 50000,
-        verticalPosition: 'bottom'
+        verticalPosition: 'bottom',
+        panelClass: 'light-snackbar'
       });
     } else {
       this.addressAccordian=false

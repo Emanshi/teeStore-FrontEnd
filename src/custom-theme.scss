@@ -244,3 +244,11 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
     font-family: 'Roboto';
   }
 }
+
+.light-snackbar {
+  background: #F44336;
+}
+
+.light-snackbar button {
+  color: wheat;
+}
