@@ -33,60 +33,156 @@
                 <div class="card-header">
                     <span class="h5">CHECKOUT</span>
                 </div>
-                <mat-accordion multi="true">
-                    <!-- <mat-expansion-panel expanded="true">
+                <mat-accordion>
+                    <mat-expansion-panel [expanded]="addressAccordian">
                         <mat-expansion-panel-header>
                             Delivery Address
                         </mat-expansion-panel-header>
-                        </mat-expansion-panel> -->
-                    <mat-expansion-panel>
+                        <div class="card">
+
+                            <div *ngIf="viewUser.addresses && viewUser.addresses.length>0" class="card-body">
+                                <div *ngFor="let a of viewUser.addresses; let i = index">
+                                    <mat-radio-button (change)="setAddress(i)">
+                                        <div class="ml-3">
+                                            <mat-label class="h5">Address {{i+1}}</mat-label>
+                                            <div>{{a.street}}</div>
+                                            <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>
+                                        </div>
+                                    </mat-radio-button>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button mat-raised-button color="accent"
+                                    (click)="proceedAddressSelected()">Continue</button>
+                            </div>
+
+                        </div>
+
+                        <!--<div *ngFor="let a of viewUser.addresses; let i = index">
+                            <h3>Address {{i+1}}</h3>
+                            <div class="row"
+                                style="margin-top: 2%; margin-bottom: 3%; border-bottom: 2px; border-color: black;">
+                                <mat-radio-button><div class="col-md-8">
+                                    <div>{{a.street}}</div>
+                                    <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>
+                                </div>
+                            </mat-radio-button>
+                            </div>
+                        </div>
+                        <div>
+                            <div *ngIf="addAddressSwitch">
+                                <form [formGroup]="addressForm" (ngSubmit)="addAddress()" class="form">
+                                    <div class="form-group">
+                                        <label>Street Address</label>
+                                        <input type="text" class="form-control" formControlName="street"
+                                            placeholder="Floor, Apartment, Street">
+                                        <span class="error-message"
+                                            *ngIf="addressForm.get('street').invalid && addressForm.get('street').touched"
+                                            class="text-danger">Enter valid street address</span>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>City</label>
+                                            <input type="text" formControlName="city" class="form-control">
+                                            <span class="error-message"
+                                                *ngIf="addressForm.get('city').invalid && addressForm.get('city').touched"
+                                                class="text-danger">Enter a valid city name</span>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>State</label>
+                                            <input type="text" formControlName="state" class="form-control">
+                                            <span class="error-message"
+                                                *ngIf="addressForm.get('state').invalid && addressForm.get('state').touched"
+                                                class="text-danger">Enter valid state</span>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Pin Code</label>
+                                            <input type="number" formControlName="pinCode" class="form-control">
+                                            <span class="error-message"
+                                                *ngIf="addressForm.get('pinCode').invalid && addressForm.get('pinCode').touched"
+                                                class="text-danger">Enter valid pin code</span>
+                                        </div>
+                                    </div>
+                                    <button mat-raised-button color="accent" type="submit">Register Address</button>
+                                </form>
+                            </div>
+                            <button *ngIf="!addAddressSwitch" mat-raised-button color="accent"
+                                (click)="addAddressSwitcher()" type="button">Add
+                                Address</button>
+                        </div>-->
+                    </mat-expansion-panel>
+                    <mat-expansion-panel [expanded]="cartAccordian">
                         <mat-expansion-panel-header>
                             Cart
                         </mat-expansion-panel-header>
                         <div class="card">
-                            <div *ngIf="cart && cart.products.length>0" class="card-body">
-                                <ul *ngFor="let p of cart.products; let i = index" class="list-group">
-                                    <li class="list-group-item">
-                                        <div class="row mb-3">
-                                            <div class="col-md-3 text-center">
-                                                <a [routerLink]="['/product',p.productId]"> <img class="img-thumbnail"
-                                                        [src]="p.images[0].linkImage" height="50"></a>
+                            <ul *ngFor="let p of cart.products; let i = index" class="list-group">
+                                <li class="list-group-item">
+                                    <div class="row mb-3">
+                                        <div class="col-md-3 text-center">
+                                            <a [routerLink]="['/product',p.productId]"> <img class="img-thumbnail"
+                                                    [src]="p.images[0].linkImage" height="50"></a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="h6 text-capitalize"><a
+                                                    [routerLink]="['/product',p.productId]">{{p.productName}}</a>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="h6 text-capitalize"><a
-                                                        [routerLink]="['/product',p.productId]">{{p.productName}}</a>
-                                                </div>
-                                                <div class="text-secondary">Size : {{cart.sizes[i]}}</div>
-                                                <div>
-                                                    <span *ngIf="!p.discount"><b>&#x20B9;
-                                                            {{p.cost*cart.quantities[i]}}</b></span>
-                                                    <span *ngIf="p.discount"><b>&#x20B9;
-                                                            {{(p.cost*(1-p.discount/100))*cart.quantities[i] | number:'.0-2'}}</b></span>&nbsp;
-                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
-                                                            {{p.cost*cart.quantities[i]}}</del></span>&nbsp;
-                                                    <sup><span *ngIf="p.discount"
-                                                            class="badge badge-success">{{p.discount}}%
-                                                            off</span></sup>
-                                                </div><br />
-                                                <div>
-                                                    <span><button mat-mini-fab color="dark"
-                                                            [disabled]="cart.quantities[i]<=1"
-                                                            (click)="subQty(i)">-</button></span>&nbsp;&nbsp;
-                                                    <span>{{cart.quantities[i]}}</span>&nbsp;&nbsp;
-                                                    <span><button mat-mini-fab color="dark"
-                                                            (click)="addQty(i)">+</button></span>&nbsp;&nbsp;
-                                                    <span><button mat-button color="accent"
-                                                            (click)="removeProductConfirmer(i)">Remove</button></span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="text-secondary">Delivery by
-                                                    {{deliveryDate | date:'EEEE, MMM d'}}</div>
+                                            <div class="text-secondary">Size : {{cart.sizes[i]}}</div>
+                                            <div>
+                                                <span *ngIf="!p.discount"><b>&#x20B9;
+                                                        {{p.cost*cart.quantities[i]}}</b></span>
+                                                <span *ngIf="p.discount"><b>&#x20B9;
+                                                        {{(p.cost*(1-p.discount/100))*cart.quantities[i] | number:'.0-2'}}</b></span>&nbsp;
+                                                <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
+                                                        {{p.cost*cart.quantities[i]}}</del></span>&nbsp;
+                                                <sup><span *ngIf="p.discount"
+                                                        class="badge badge-success">{{p.discount}}%
+                                                        off</span></sup>
+                                            </div><br />
+                                            <div>
+                                                <span><button mat-mini-fab color="dark"
+                                                        [disabled]="cart.quantities[i]<=1"
+                                                        (click)="subQty(i)">-</button></span>&nbsp;&nbsp;
+                                                <span>{{cart.quantities[i]}}</span>&nbsp;&nbsp;
+                                                <span><button mat-mini-fab color="dark"
+                                                        (click)="addQty(i)">+</button></span>&nbsp;&nbsp;
+                                                <span><button mat-button color="accent"
+                                                        (click)="removeProductConfirmer(i)">Remove</button></span>
                                             </div>
                                         </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                        <div class="col-md-3">
+                                            <div class="text-secondary">Delivery by
+                                                {{deliveryDate | date:'EEEE, MMM d'}}</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <button mat-raised-button color="accent"
+                                    (click)="proceedCartConfirmed()">Continue</button>
+                        </div>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel [expanded]="payAccordian">
+                        <mat-expansion-panel-header>
+                            Cart
+                        </mat-expansion-panel-header>
+                        <div class="card">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <mat-radio-button>Card Pay</mat-radio-button>
+                                </li>
+                                <li>
+                                    <mat-radio-button>UPI Pay</mat-radio-button>
+                                </li>
+                                <li>
+                                    <mat-radio-button>Cash On Delivery</mat-radio-button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <button mat-raised-button color="accent"
+                                    (click)="placeOrder()">Confirm and Place Order</button>
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>

@@ -9,10 +9,11 @@ import { MatExpansionModule } from '@angular/material/expansion'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSliderModule } from '@angular/material/slider'
 import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
 import { Ng5SliderModule } from 'ng5-slider'
 
 import { HttpClientModule } from '@angular/common/http';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserLoginComponent } from './user-login/user-login.component';
@@ -67,9 +68,11 @@ import { CartGuardService } from './cart/cart-guard.service';
     MatSelectModule,
     MatExpansionModule,
     MatCheckboxModule,
+    MatRadioModule,
     MatSliderModule,
     MatButtonModule,
     Ng5SliderModule,
+    MatSnackBarModule,
     NgxImageZoomModule
   ],
   providers: [

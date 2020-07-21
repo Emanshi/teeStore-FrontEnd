@@ -9,6 +9,8 @@ import { RemoveProductDialog } from '../cart/remove.product.dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfileService } from '../profile/profile.service';
 import { CheckoutService } from './checkout.service';
+import { Address } from '../models/address';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-checkout',
@@ -25,21 +27,37 @@ export class CheckoutComponent implements OnInit {
   cartCost:number
   cartTotal:number
   deliveryFee:number
+  viewUser:User
+  addressAccordian:boolean
+  cartAccordian:boolean
+  payAccordian:boolean
+  addressSelected:Address
 
-  constructor(private route:ActivatedRoute,private router:Router,private auth:AuthenticatorService,
-    private dialog:MatDialog,private cartService:CartService,private profileService:ProfileService,
-    private service:CheckoutService,private title:Title) {
+  constructor(
+    private route:ActivatedRoute,
+    private router:Router,
+    private auth:AuthenticatorService,
+    private dialog:MatDialog,
+    private cartService:CartService,
+    private profileService:ProfileService,
+    private snackBar:MatSnackBar,
+    private service:CheckoutService,
+    private title:Title
+    ) {
     title.setTitle('CheckOut')
    }
 
   ngOnInit(): void {
-
+    this.addressAccordian=true
     this.loggiedIn=false
     this.auth.sessionUser.subscribe(
       (data)=>{
         this.loggedInUser =data;
         if(data.userName!=null){
           this.loggiedIn=true
+          this.profileService.getUser(this.loggedInUser).subscribe(
+            res=>this.viewUser=res
+          )      
         }
       }
     )
@@ -116,4 +134,37 @@ export class CheckoutComponent implements OnInit {
     )  
   }
 
+  setAddress(index:number) {
+    this.addressSelected=this.viewUser.addresses[index]
+  }
+
+  proceedAddressSelected() {
+    if (!this.addressSelected) {
+      this.snackBar.open('Please select an address', 'Okay', {
+        duration: 50000,
+        verticalPosition: 'bottom'
+      });
+    } else {
+      this.addressAccordian=false
+      this.cartAccordian=true
+    }
+  }
+
+  proceedCartConfirmed() {
+    if (!this.addressSelected) {
+      alert('Please select an address')
+    } else {
+      if (this.cartService.changed==true) {
+        this.cartService.updateCart(this.cart.cartId).subscribe(
+          res => console.log('Cart saved with res : '+res),
+          err => alert(JSON.stringify(err))
+        )
+        this.cartService.changed=false
+      }
+      this.cartAccordian=false
+      this.payAccordian=true
+    }
+  }
+
+  placeOrder() {}
 }
