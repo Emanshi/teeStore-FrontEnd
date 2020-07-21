@@ -39,10 +39,10 @@
                         <li class="list-group-item">
                             <div class="row mb-3">
                                 <div class="col-md-3 text-center">
-                                    <img class="img-thumbnail" [src]="p.images[0].linkImage" height="50">
+                                   <a [routerLink]="['/product',p.productId]"> <img class="img-thumbnail"  [src]="p.images[0].linkImage" height="50"></a>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="h6 text-capitalize">{{p.productName}}</div>
+                                    <div class="h6 text-capitalize"><a [routerLink]="['/product',p.productId]">{{p.productName}}</a></div>
                                     <div class="text-secondary">Size : {{cart.sizes[i]}}</div>
                                     <div>
                                         <span *ngIf="!p.discount"><b>&#x20B9; {{p.cost*cart.quantities[i]}}</b></span>
@@ -54,10 +54,10 @@
                                                 off</span></sup>
                                     </div><br />
                                     <div>
-                                        <span><button mat-icon-button color="light"  [disabled]="cart.quantities[i]<=1"
+                                        <span><button mat-mini-fab color="dark"  [disabled]="cart.quantities[i]<=1"
                                                 (click)="subQty(i)">-</button></span>&nbsp;&nbsp;
                                         <span>{{cart.quantities[i]}}</span>&nbsp;&nbsp;
-                                        <span><button mat-icon-button color="light"
+                                        <span><button mat-mini-fab color="dark"
                                                 (click)="addQty(i)">+</button></span>&nbsp;&nbsp;
                                         <span><button mat-button color="accent" (click)="removeProductConfirmer(i)">Remove</button></span>
                                     </div>
@@ -74,7 +74,7 @@
                     <button class="h4 mt-5 btn btn-lg" [routerLink]="['/home']">Shop Now</button>
                 </div>  
                 <div *ngIf="cart && cart.products.length>0" class="card-footer">
-                    <button mat-raised-button color="accent" class="float-right">Place Order</button>
+                    <button mat-raised-button color="accent" class="float-right" (click)="placeOrder()">Place Order</button>
                     <button mat-raised-button color="secondary" class="float-right mr-2" (click)="clearCartConfirmer()">Clear Cart</button>
                 </div>
             </div>                    

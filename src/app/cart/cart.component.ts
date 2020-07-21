@@ -127,6 +127,10 @@ export class CartComponent implements OnInit {
       err => alert(err.error.errorMessage)
     )
   }
+
+  placeOrder(){
+    this.router.navigate( ['/checkout'], { queryParams: { type: 'cart',value:this.cart.cartId}});
+  }
   
 }  
 

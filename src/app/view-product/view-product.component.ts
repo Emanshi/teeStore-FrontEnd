@@ -83,12 +83,14 @@ export class ViewProductComponent implements OnInit {
 
       if(!this.loggiedIn){
         this.router.navigate(['/login'])      
+      }else{
+        this.service.addProductTocart(this.productId,this.loggedInUser.userId,this.selectedSize).subscribe(
+          res=>this.cartResp=res
+        )
+        this.router.navigate(['/cart'])
       }
-      this.service.addProductTocart(this.productId,this.loggedInUser.userId,this.selectedSize).subscribe(
-        res=>this.cartResp=res
-      )
     }
-    //this.router.navigate(['/cart'])
+    
   }
 
   buyNow(){
@@ -104,7 +106,8 @@ export class ViewProductComponent implements OnInit {
 
     if(!this.loggiedIn){
       this.router.navigate(['/login'])      
+    }else{
+      this.router.navigate( ['/checkout'], { queryParams: { type: 'product',value:this.productId}});
     }
-    this.router.navigate(['/cart'])
   }
 }

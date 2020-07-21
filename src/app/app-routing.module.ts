@@ -9,6 +9,7 @@ import { AllReviewsComponent } from './all-reviews/all-reviews.component';
 import { ProductsComponent } from './products/products.component';
 import { CartComponent } from './cart/cart.component';
 import { CartGuardService } from './cart/cart-guard.service';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path : 'product/:pId', component : ViewProductComponent },
   { path : 'reviews/:pId', component : AllReviewsComponent },
   { path : 'cart', component : CartComponent, canDeactivate:[CartGuardService]},
+  { path : 'checkout', component : CheckoutComponent},
   { path: '', component : HomeComponent },
   { path: "**", redirectTo : "", pathMatch : 'full' } 
 ];

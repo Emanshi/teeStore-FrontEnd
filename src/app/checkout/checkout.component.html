@@ -1,1 +1,96 @@
-<p>checkout works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4" style="margin-top: 7%;">
+            <div class="card">
+                <div class="card-header">
+                    <span class="h5">Price Details</span>
+                </div>
+
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="float-left">Price</span>
+                        <span class="float-right">&#x20B9; {{cartCost | number:'.0-2'}}</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="float-left">Delivery Fees</span>
+                        <span class="float-right" *ngIf="deliveryFee>0">&#x20B9; {{deliveryFee}}</span>
+                        <span class="float-right text-success" *ngIf="deliveryFee==0">FREE</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="float-left">Total Amount</span>
+                        <span class="float-right">&#x20B9; {{cart.totalCost | number:'.0-2'}}</span>
+                    </li>
+                    <li class="list-group-item text-success" *ngIf="cart && cart.products.length>0">You will save ₹
+                        {{cartTotal-cartCost | number:'.0-2'}} on
+                        this order</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="col-md-8" style="margin-top: 7%;">
+            <div class="card">
+                <div class="card-header">
+                    <span class="h5">CHECKOUT</span>
+                </div>
+                <mat-accordion multi="true">
+                    <!-- <mat-expansion-panel expanded="true">
+                        <mat-expansion-panel-header>
+                            Delivery Address
+                        </mat-expansion-panel-header>
+                        </mat-expansion-panel> -->
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Cart
+                        </mat-expansion-panel-header>
+                        <div class="card">
+                            <div *ngIf="cart && cart.products.length>0" class="card-body">
+                                <ul *ngFor="let p of cart.products; let i = index" class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row mb-3">
+                                            <div class="col-md-3 text-center">
+                                                <a [routerLink]="['/product',p.productId]"> <img class="img-thumbnail"
+                                                        [src]="p.images[0].linkImage" height="50"></a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="h6 text-capitalize"><a
+                                                        [routerLink]="['/product',p.productId]">{{p.productName}}</a>
+                                                </div>
+                                                <div class="text-secondary">Size : {{cart.sizes[i]}}</div>
+                                                <div>
+                                                    <span *ngIf="!p.discount"><b>&#x20B9;
+                                                            {{p.cost*cart.quantities[i]}}</b></span>
+                                                    <span *ngIf="p.discount"><b>&#x20B9;
+                                                            {{(p.cost*(1-p.discount/100))*cart.quantities[i] | number:'.0-2'}}</b></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
+                                                            {{p.cost*cart.quantities[i]}}</del></span>&nbsp;
+                                                    <sup><span *ngIf="p.discount"
+                                                            class="badge badge-success">{{p.discount}}%
+                                                            off</span></sup>
+                                                </div><br />
+                                                <div>
+                                                    <span><button mat-mini-fab color="dark"
+                                                            [disabled]="cart.quantities[i]<=1"
+                                                            (click)="subQty(i)">-</button></span>&nbsp;&nbsp;
+                                                    <span>{{cart.quantities[i]}}</span>&nbsp;&nbsp;
+                                                    <span><button mat-mini-fab color="dark"
+                                                            (click)="addQty(i)">+</button></span>&nbsp;&nbsp;
+                                                    <span><button mat-button color="accent"
+                                                            (click)="removeProductConfirmer(i)">Remove</button></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="text-secondary">Delivery by
+                                                    {{deliveryDate | date:'EEEE, MMM d'}}</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </div>
+</div>
