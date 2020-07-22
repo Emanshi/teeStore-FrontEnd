@@ -245,10 +245,20 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
   }
 }
 
-.light-snackbar {
-  background: #F44336;
+.warn-snackbar {
+  color: white;
+
+  button {
+    background: var(--warn-color);
+    color: whitesmoke;
+  }
 }
 
-.light-snackbar button {
-  color: wheat;
+.primary-snackbar {
+  color: white;
+
+  button {
+    background: var(--accent-darker-color);
+    color: whitesmoke;
+  }
 }

@@ -21,8 +21,8 @@ export class CartService {
     return this.http.delete<number>(environment.cartApi+"removeProduct?userId="+userId+"&productId="+productId+"&size="+size)
   }
 
-  updateCart(cartId:string):Observable<string> {
-    return this.http.put<string>(environment.cartApi+'editCart/'+cartId, this.cart)
+  updateCart(cartId:string) {
+    return this.http.put(environment.cartApi+'editCart/'+cartId, this.cart, {responseType: 'text'})
   }
 
   clearCart(cartId:string):Observable<Cart> {

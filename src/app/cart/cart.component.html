@@ -71,7 +71,8 @@
                 </div>
                 <div *ngIf="!cart || cart.products.length==0" class="card-body text-center">
                     <div class="h1 m-5">Your cart is empty</div>
-                    <button class="h4 mt-5 btn btn-lg" [routerLink]="['/home']">Shop Now</button>
+                    <button mat-raised-button color="accent" class="mt-5"
+                    style="height: 50px; display: block; margin-left: auto; margin-right: auto;" [routerLink]="['/home']">Shop Now</button>
                 </div>  
                 <div *ngIf="cart && cart.products.length>0" class="card-footer">
                     <button mat-raised-button color="accent" class="float-right" (click)="placeOrder()">Place Order</button>
