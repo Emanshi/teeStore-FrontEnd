@@ -11,6 +11,8 @@ import { ProfileService } from '../profile/profile.service';
 import { CheckoutService } from './checkout.service';
 import { Address } from '../models/address';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Product } from '../models/product';
+import { ViewProductService } from '../view-product/view-product.service';
 
 @Component({
   selector: 'app-checkout',
@@ -18,99 +20,110 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  type:string
-  value:string
-  loggiedIn:boolean
-  loggedInUser:User
-  cart:Cart  
-  deliveryDate:Date
-  cartCost:number
-  cartTotal:number
-  deliveryFee:number
-  viewUser:User
-  addressAccordian:boolean
-  cartAccordian:boolean
-  payAccordian:boolean
-  addressSelected:Address
+  type: string
+  value: string
+  loggiedIn: boolean
+  loggedInUser: User
+  cart: Cart
+  deliveryDate: Date
+  cartCost: number
+  cartTotal: number
+  deliveryFee: number
+  viewUser: User
+  selectedSize:string
+  addressAccordian: boolean
+  cartAccordian: boolean
+  payAccordian: boolean
+  addressSelected: Address
 
   constructor(
-    private route:ActivatedRoute,
-    private router:Router,
-    private auth:AuthenticatorService,
-    private dialog:MatDialog,
-    private cartService:CartService,
-    private profileService:ProfileService,
-    private snackBar:MatSnackBar,
-    private service:CheckoutService,
-    private title:Title
-    ) {
+    private route: ActivatedRoute,
+    private router: Router,
+    private auth: AuthenticatorService,
+    private dialog: MatDialog,
+    private cartService: CartService,
+    private profileService: ProfileService,
+    private productService:ViewProductService,
+    private snackBar: MatSnackBar,
+    private service: CheckoutService,
+    private title: Title
+  ) {
     title.setTitle('CheckOut')
-   }
+  }
 
   ngOnInit(): void {
-    this.addressAccordian=true
-    this.loggiedIn=false
+    this.addressAccordian = true
+    this.loggiedIn = false
     this.auth.sessionUser.subscribe(
-      (data)=>{
-        this.loggedInUser =data;
-        if(data.userName!=null){
-          this.loggiedIn=true
+      (data) => {
+        this.loggedInUser = data;
+        if (data.userName != null) {
+          this.loggiedIn = true
           this.profileService.getUser(this.loggedInUser).subscribe(
-            res=>this.viewUser=res
-          )      
+            res => this.viewUser = res
+          )
         }
       }
     )
 
-    if(!this.loggiedIn){
-      this.router.navigate(['/login'])      
+    if (!this.loggiedIn) {
+      this.router.navigate(['/login'])
     }
     this.route.queryParams.subscribe(
-      params=>{
-        this.type=params['type']
-        this.value=params['value']
-      }
-    )
-    
-    this.cartService.getCart(this.loggedInUser.userId).subscribe(
-      res=>{this.cart=res 
-        this.calculateCost()
+      params => {
+        this.type = params['type']
+        this.value = params['value']
+        this.selectedSize = params['size']
       }
     )
 
-    this.deliveryDate=new Date()
-    this.deliveryDate.setDate(this.deliveryDate.getDate()+4)
-  }  
-
-  addQty(i:number){
-    this.cart.quantities[i]=this.cart.quantities[i]+1
-    this.calculateCost()
-    this.cartService.changed=true
-  }
-
-  subQty(i:number){
-    this.cart.quantities[i]=this.cart.quantities[i]-1
-    this.calculateCost()
-    this.cartService.changed=true
-  }
-  
-  calculateCost(){
-    this.cartCost=0
-    this.cartTotal=0
-    for(let i=0;i<this.cart.products.length;i++){
-      this.cartCost+=this.cart.products[i].cost*(1-this.cart.products[i].discount/100)*this.cart.quantities[i] 
-      this.cartTotal+=this.cart.products[i].cost*this.cart.quantities[i]
+    if (this.type == 'cart') {
+      this.cartService.getCart(this.loggedInUser.userId).subscribe(
+        res => {
+          this.cart = res
+          this.calculateCost()
+        }
+      )
+    } else {
+      let p:Product
+      this.productService.getProductById(this.value).subscribe(
+        res=>{this.cart={cartId:'',totalCost:res.cost,products:[res],user:this.loggedInUser,sizes:[this.selectedSize],quantities:[1]}}
+      )
     }
-    if(this.cartCost>1499 || this.cart.products.length==0){
-      this.deliveryFee=0
-    }else{
-      this.deliveryFee=250
-    }
-    this.cart.totalCost=this.cartCost+this.deliveryFee
-    this.cartService.cart=this.cart
+
+    this.deliveryDate = new Date()
+    this.deliveryDate.setDate(this.deliveryDate.getDate() + 4)
   }
 
-  removeProductConfirmer(i:number): void {
+  addQty(i: number) {
+    this.cart.quantities[i] = this.cart.quantities[i] + 1
+    this.calculateCost()
+    this.cartService.changed = true
+  }
+
+  subQty(i: number) {
+    this.cart.quantities[i] = this.cart.quantities[i] - 1
+    this.calculateCost()
+    this.cartService.changed = true
+  }
+
+  calculateCost() {
+    this.cartCost = 0
+    this.cartTotal = 0
+    for (let i = 0; i < this.cart.products.length; i++) {
+      this.cartCost += this.cart.products[i].cost * (1 - this.cart.products[i].discount / 100) * this.cart.quantities[i]
+      this.cartTotal += this.cart.products[i].cost * this.cart.quantities[i]
+    }
+    if (this.cartCost > 1499 || this.cart.products.length == 0) {
+      this.deliveryFee = 0
+    } else {
+      this.deliveryFee = 250
+    }
+    this.cart.totalCost = this.cartCost + this.deliveryFee
+    this.cartService.cart = this.cart
+  }
+
+  removeProductConfirmer(i: number): void {
     const dialogRef = this.dialog.open(RemoveProductDialog, {
       width: '250px',
       data: i
@@ -121,21 +134,21 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  removeProduct(i:number) {
+  removeProduct(i: number) {
     this.cartService.removeProduct(this.loggedInUser.userId, this.cart.products[i].productId, this.cart.sizes[i]).subscribe(
-      res=>{
-        console.log('Product removed with result : ' +res)
+      res => {
+        console.log('Product removed with result : ' + res)
         this.cart.products.splice(i, 1)
         this.cart.quantities.splice(i, 1)
         this.cart.sizes.splice(i, 1)
         this.calculateCost()
       },
       err => alert(err.error.errorMessage)
-    )  
+    )
   }
 
-  setAddress(index:number) {
-    this.addressSelected=this.viewUser.addresses[index]
+  setAddress(index: number) {
+    this.addressSelected = this.viewUser.addresses[index]
   }
 
   proceedAddressSelected() {
@@ -146,8 +159,8 @@ export class CheckoutComponent implements OnInit {
         panelClass: 'warn-snackbar'
       });
     } else {
-      this.addressAccordian=false
-      this.cartAccordian=true
+      this.addressAccordian = false
+      this.cartAccordian = true
     }
   }
 
@@ -155,17 +168,17 @@ export class CheckoutComponent implements OnInit {
     if (!this.addressSelected) {
       alert('Please select an address')
     } else {
-      if (this.cartService.changed==true) {
+      if (this.cartService.changed == true && this.type=='cart') {
         this.cartService.updateCart(this.cart.cartId).subscribe(
-          res => console.log('Cart saved with res : '+res),
+          res => console.log('Cart saved with res : ' + res),
           err => alert(JSON.stringify(err))
         )
-        this.cartService.changed=false
+        this.cartService.changed = false
       }
-      this.cartAccordian=false
-      this.payAccordian=true
+      this.cartAccordian = false
+      this.payAccordian = true
     }
   }
 
-  placeOrder() {}
+  placeOrder() { }
 }

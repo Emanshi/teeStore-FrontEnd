@@ -31,7 +31,7 @@ export class ViewProductComponent implements OnInit {
   selectedSize: string
   ratingNumbers = ['', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE']
   cartResp: number
-  inCart:boolean
+  inCart: boolean
   objectKeys = Object.keys;
 
   constructor(private service: ViewProductService, private cartService: CartService, private snackBar: MatSnackBar, private auth: AuthenticatorService, private router: Router, private route: ActivatedRoute, private title: Title) { }
@@ -73,7 +73,7 @@ export class ViewProductComponent implements OnInit {
         this.cart = res
         for (let i = 0; i < this.cart.products.length; i++) {
           if (this.cart.products[i].productId == this.product.productId && this.cart.sizes[i] == this.selectedSize) {
-            this.inCart=true
+            this.inCart = true
             break
           }
         }
@@ -106,8 +106,6 @@ export class ViewProductComponent implements OnInit {
         panelClass: 'warn-snackbar'
       });
     } else {
-
-
       if (!this.loggiedIn) {
         this.router.navigate(['/login'])
       } else {
@@ -130,8 +128,8 @@ export class ViewProductComponent implements OnInit {
   }
 
   sizeSelection(key) {
-    this.inCart=false
-    this.selectedSize=key
+    this.inCart = false
+    this.selectedSize = key
     this.loadCart()
   }
 
@@ -149,7 +147,15 @@ export class ViewProductComponent implements OnInit {
     if (!this.loggiedIn) {
       this.router.navigate(['/login'])
     } else {
-      this.router.navigate(['/checkout'], { queryParams: { type: 'product', value: this.productId } });
+      if (this.selectedSize === 'XYZ') {
+        this.snackBar.open('Please select a size', 'Okay', {
+          duration: 50000,
+          verticalPosition: 'bottom',
+          panelClass: 'warn-snackbar'
+        });
+      } else {
+        this.router.navigate(['/checkout'], { queryParams: { type: 'product', value: this.productId, size: this.selectedSize } });
+      }
     }
   }
 }
