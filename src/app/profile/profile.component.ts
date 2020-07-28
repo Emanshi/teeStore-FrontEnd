@@ -8,6 +8,7 @@ import { AuthenticatorService } from '../auth/authenticator.service';
 import { Address } from '../models/address';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteAddressDialog } from './delete.address.dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -33,7 +34,14 @@ export class ProfileComponent implements OnInit {
   editAddressSwitch:boolean
   editButtonText:string;
 
-  constructor(private fb:FormBuilder,private auth: AuthenticatorService,private dialog:MatDialog,private service: ProfileService, private router: Router,private title:Title) {
+  constructor(
+    private fb:FormBuilder,
+    private auth: AuthenticatorService,
+    private dialog:MatDialog,
+    private service: ProfileService, 
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private title:Title) {
     title.setTitle('Profile')
    }
 
@@ -173,6 +181,12 @@ export class ProfileComponent implements OnInit {
         this.editAddressSuccessMessage=success
         this.errorMessage=null
         this.editAddressSwitch=false
+        this.viewUser.addresses[this.editAddressIndex]=this.editAddressForm.value
+        this.snackBar.open('Address has been updated', 'Okay', {
+          duration: 5000,
+          verticalPosition: 'bottom',
+          panelClass: 'primary-snackbar'
+        });
       },
       (err)=>this.errorMessage=err.error.message
     )
