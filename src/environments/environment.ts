@@ -12,6 +12,7 @@ export const environment = {
   imageApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/ImageAPI/",
   reviewApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/ReviewAPI/",
   cartApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/CartAPI/",
+  orderApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/OrdersAPI/"
 
 };
 

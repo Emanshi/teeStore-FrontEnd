@@ -1,16 +1,16 @@
-<div class="container-fluid">  
-    <h3>{{viewUser.userName}}</h3>
-    <nav style="margin: 3% 3% 3% 5%;">
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-          aria-controls="nav-profile" aria-selected="false">Profile</a>
-        <a class="nav-item nav-link" id="nav-address-tab" data-toggle="tab" href="#nav-address" role="tab"
-          aria-controls="nav-address" aria-selected="false">Address</a>
-        <a class="nav-item nav-link" id="nav-orders-tab" data-toggle="tab" href="#nav-orders" role="tab"
-          aria-controls="nav-orders" aria-selected="false">Orders</a>
-      </div>
-    </nav>
-    <div class="row">
+<div class="container-fluid">
+  <h3>{{viewUser.userName}}</h3>
+  <nav style="margin: 3% 3% 3% 5%;">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+        aria-controls="nav-profile" aria-selected="false">Profile</a>
+      <a class="nav-item nav-link" id="nav-address-tab" data-toggle="tab" href="#nav-address" role="tab"
+        aria-controls="nav-address" aria-selected="false">Address</a>
+      <a class="nav-item nav-link" id="nav-orders-tab" data-toggle="tab" href="#nav-orders" role="tab"
+        aria-controls="nav-orders" aria-selected="false">Orders</a>
+    </div>
+  </nav>
+  <div class="row">
     <div class="col-md-5 offset-md-2">
       <div class="tab-content" id="nav-tabContent" style="margin-top: 3%;">
         <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -53,9 +53,11 @@
                 <h6>{{profileUpdateSuccessMessage}}</h6>
               </div>
             </div>
-            <button mat-raised-button color="dark" type="button" (click)="editProfile()" class="float-right">{{editButtonText}}</button>
-            <button mat-raised-button color="accent" type="submit" [disabled]="profileForm.invalid && profileForm.pristine"
-              class="float-right mr-2" *ngIf="!editProfileSwitch">Update</button>
+            <button mat-raised-button color="dark" type="button" (click)="editProfile()"
+              class="float-right">{{editButtonText}}</button>
+            <button mat-raised-button color="accent" type="submit"
+              [disabled]="profileForm.invalid && profileForm.pristine" class="float-right mr-2"
+              *ngIf="!editProfileSwitch">Update</button>
           </form>
         </div>
         <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
@@ -69,8 +71,9 @@
                 <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>
               </div>
               <div class="col-md-4">
-                <button mat-raised-button color="warn" class="float-right" (click)="deleteAddressConfirmer(a.addressId)">Delete</button>
-                <button mat-raised-button color="secondary" class="float-right mr-2" 
+                <button mat-raised-button color="warn" class="float-right"
+                  (click)="deleteAddressConfirmer(a.addressId)">Delete</button>
+                <button mat-raised-button color="secondary" class="float-right mr-2"
                   (click)="editAddressSwitcher(a, i)">Edit</button>
               </div>
             </div>
@@ -107,9 +110,9 @@
                       class="text-danger">Enter valid pin code</span>
                   </div>
                 </div>
-                <button mat-raised-button color="accent"  type="submit"
+                <button mat-raised-button color="accent" type="submit"
                   [disabled]="editAddressForm.invalid">Update</button>&nbsp;
-                <button mat-raised-button color="secondary"  type="button" (click)="cancelEditAddress()">Cancel</button>
+                <button mat-raised-button color="secondary" type="button" (click)="cancelEditAddress()">Cancel</button>
               </form>
             </div>
           </div>
@@ -150,12 +153,67 @@
                 <button mat-raised-button color="accent" type="submit">Register Address</button>
               </form>
             </div>
-            <button *ngIf="!addAddressSwitch" mat-raised-button color="accent" (click)="addAddressSwitcher()" type="button">Add
+            <button *ngIf="!addAddressSwitch" mat-raised-button color="accent" (click)="addAddressSwitcher()"
+              type="button">Add
               Address</button>
           </div>
         </div>
-        <div class="tab-pane fade" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">...</div>
+
+        <div class="tab-pane fade" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
+          <div class="col-md-8" style="margin-top: 7%;">
+            <div class="card">
+              <div class="card-header">
+                <span class="h5">CHECKOUT</span>
+              </div>
+              <mat-accordion>
+                <mat-expansion-panel expanded=true>
+                  <mat-expansion-panel-header>
+                    Cart
+                  </mat-expansion-panel-header>
+                  <div class="card">
+                    <ul *ngFor="let p of cart.products; let i = index" class="list-group">
+                      <li class="list-group-item">
+                        <div class="row mb-3">
+                          <div class="col-md-3 text-center">
+                            <a [routerLink]="['/product',p.productId]"> <img class="img-thumbnail"
+                                [src]="p.images[0].linkImage" height="50"></a>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="h6 text-capitalize"><a
+                                [routerLink]="['/product',p.productId]">{{p.productName}}</a>
+                            </div>
+                            <div class="text-secondary">Size : {{cart.sizes[i]}}</div>
+                            <div>
+                              <span *ngIf="!p.discount"><b>&#x20B9;
+                                  {{p.cost*cart.quantities[i]}}</b></span>
+                              <span *ngIf="p.discount"><b>&#x20B9;
+                                  {{(p.cost*(1-p.discount/100))*cart.quantities[i] | number:'.0-2'}}</b></span>&nbsp;
+                              <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
+                                  {{p.cost*cart.quantities[i]}}</del></span>&nbsp;
+                              <sup><span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                  off</span></sup>
+                            </div><br />
+                            <!-- <div>
+                              <span><button mat-mini-fab color="dark" [disabled]="cart.quantities[i]<=1"
+                                  (click)="subQty(i)">-</button></span>&nbsp;&nbsp;
+                              <span>{{cart.quantities[i]}}</span>&nbsp;&nbsp;
+                              <span><button mat-mini-fab color="dark" (click)="addQty(i)">+</button></span>&nbsp;&nbsp;
+                              <span><button mat-button color="accent"
+                                  (click)="removeProductConfirmer(i)">Remove</button></span>
+                            </div> -->
+                          </div>
+                          <div class="col-md-3">
+                            <div class="text-secondary">Delivery by
+                              {{deliveryDate | date:'EEEE, MMM d'}}</div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>

@@ -180,5 +180,11 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  placeOrder() { }
+  placeOrder() { 
+    this.service.placeOrder(this.cart).subscribe(
+      res => alert('Successful'),
+      err => alert(JSON.stringify(err))
+    )
+
+  }
 }
