@@ -9,6 +9,7 @@ import { Address } from '../models/address';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteAddressDialog } from './delete.address.dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Orders } from '../models/orders';
 
 @Component({
   selector: 'app-profile',
@@ -33,6 +34,7 @@ export class ProfileComponent implements OnInit {
   addAddressSwitch:boolean;
   editAddressSwitch:boolean
   editButtonText:string;
+  orders:Orders[]
 
   constructor(
     private fb:FormBuilder,
@@ -88,8 +90,18 @@ export class ProfileComponent implements OnInit {
 
   getUser() {
     this.service.getUser(this.loggedInUser).subscribe(
-      (response)=>this.viewUser=response,
+      (response)=>{
+        this.viewUser=response
+        this.getOrders()
+      },
       (error)=>this.errorMessage=error.error.message
+    )
+  }
+
+  getOrders() {
+    this.service.getOrderByUserId(this.viewUser.userId).subscribe(
+      res=>this.orders=res,
+      err=>console.log(err)
     )
   }
 

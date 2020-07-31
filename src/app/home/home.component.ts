@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ViewProductService } from '../view-product/view-product.service';
 import { Product } from '../models/product';
 import {MatTooltip} from '@angular/material/tooltip';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,9 @@ export class HomeComponent implements OnInit {
   topsProductList:Product[];
   trousersProductList:Product[];
 
-  constructor(private productService:ViewProductService) { }
+  constructor(private productService:ViewProductService, private title:Title) { 
+    title.setTitle("TeeStore")
+  }
 
   ngOnInit(): void {
     this.getJeansByDiscount();

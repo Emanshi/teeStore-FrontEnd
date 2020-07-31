@@ -4,6 +4,7 @@ import { User } from '../models/users';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Address } from '../models/address';
+import { Orders } from '../models/orders';
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +33,7 @@ export class ProfileService {
     return this.http.delete<string>(environment.userApi+"deleteAddress?userId="+userId+"&addressId="+addressId)
   }
 
+  getOrderByUserId(userId:string):Observable<Orders[]>{
+    return this.http.get<Orders[]>(environment.orderApi+"getOrderByUserId?userId="+userId)
+  }
 }

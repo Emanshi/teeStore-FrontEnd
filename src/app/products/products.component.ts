@@ -4,6 +4,7 @@ import { ProductsService } from './products.service';
 import { Product } from '../models/product';
 import { Options, LabelType } from 'ng5-slider';
 import { Filter } from './filter';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-products',
@@ -24,7 +25,9 @@ export class ProductsComponent implements OnInit {
     }
   };
 
-  constructor(private route:ActivatedRoute, private service:ProductsService) { }
+  constructor(private route:ActivatedRoute, private service:ProductsService, private title:Title) { 
+    title.setTitle("Products")
+  }
 
   ngOnInit(): void {
     this.filters={
