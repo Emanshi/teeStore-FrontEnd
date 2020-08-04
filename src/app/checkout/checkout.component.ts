@@ -181,10 +181,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   placeOrder() { 
-    this.service.placeOrder(this.cart).subscribe(
+    this.service.placeOrder(this.cart, this.addressSelected.addressId, 'Card').subscribe(
       res => alert('Successful'),
       err => alert(JSON.stringify(err))
     )
-
   }
 }

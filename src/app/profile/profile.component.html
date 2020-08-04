@@ -176,7 +176,7 @@
               <div class="card-header">
                 <span class="h5">My Orders</span>
               </div>
-              <mat-accordion>
+              <mat-accordion *ngIf="orders && orders.length>0">
                 <mat-expansion-panel *ngFor="let order of orders; let j = index">
                   <mat-expansion-panel-header>
                     Order : {{order.orderId}}
@@ -196,7 +196,7 @@
                             <div class="text-secondary">Size : {{order.sizes[i]}}</div>
                             <div class="text-secondary">Qty : {{order.quantities[i]}}</div>
                             <div class="mt-1"><b>&#x20B9;
-                                  {{order.prices[i]*order.quantities[i]}}</b></div><br />
+                                {{order.prices[i]*order.quantities[i]}}</b></div><br />
                             <!-- <div>
                               <span><button mat-mini-fab color="dark" [disabled]="cart.quantities[i]<=1"
                                   (click)="subQty(i)">-</button></span>&nbsp;&nbsp;
@@ -214,13 +214,19 @@
                       </li>
                     </ul>
                     <div class="card-footer"><b>
-                      Total Price : &#x20B9; {{order.totalCost}}</b>
+                        Total Price : &#x20B9; {{order.totalCost}}</b>
                       <button mat-raised-button color="accent" class="float-right">View Order</button>
                     </div>
                   </div>
                 </mat-expansion-panel>
               </mat-accordion>
+              <div class="card-body text-center p-4" *ngIf="!orders || orders.length==0">
+                <div class="h1 m-5">No Orders Placed Yet</div>
+                <button mat-raised-button color="accent" class="mt-5"
+                  style="height: 50px; display: block; margin-left: auto; margin-right: auto;"
+                  [routerLink]="['/home']">Shop Now</button>
               </div>
+            </div>
           </div>
         </div>
       </div>

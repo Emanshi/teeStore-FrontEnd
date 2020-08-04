@@ -1,5 +1,6 @@
 import { Product } from './product';
 import { User } from './users';
+import { Address } from './address';
 
 export class Orders{
     orderId:string;
@@ -9,4 +10,6 @@ export class Orders{
     totalCost:number;
     timeOfOrder:Date;
     user:User;
+    deliveryAddress:Address;
+    paymentType:string;
 }
