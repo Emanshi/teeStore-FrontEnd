@@ -10,6 +10,7 @@ export class Orders{
     totalCost:number;
     timeOfOrder:Date;
     user:User;
+    sizes:string[];
     deliveryAddress:Address;
     paymentType:string;
 }

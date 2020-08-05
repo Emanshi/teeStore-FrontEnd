@@ -11,7 +11,7 @@ export class CheckoutService {
 
   constructor(private http:HttpClient) { }
 
-  placeOrder(cart: Cart, aId:string, payment:string):Observable<Cart> {
-    return this.http.post<Cart>(environment.orderApi+'buyNow/'+aId+'?payment='+payment, cart);
+  placeOrder(cart: Cart, aId:string, payment:string) {
+    return this.http.post(environment.orderApi+'buyNow/'+aId+'?payment='+payment, cart, {responseType: 'text'});
   }
 }

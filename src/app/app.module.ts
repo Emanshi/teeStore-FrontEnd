@@ -38,6 +38,8 @@ import { AllReviewsService } from './all-reviews/all-reviews.service';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartGuardService } from './cart/cart-guard.service';
+import { ViewOrdersComponent } from './view-orders/view-orders.component';
+import { ViewOrdersService } from './view-orders/view-orders.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { CartGuardService } from './cart/cart-guard.service';
     ProductsComponent,
     AllReviewsComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ViewOrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +84,7 @@ import { CartGuardService } from './cart/cart-guard.service';
     UserRegisterService,
     ProfileService,
     ViewProductService,
+    ViewOrdersService,
     AllReviewsService,
     CartGuardService,
     Title

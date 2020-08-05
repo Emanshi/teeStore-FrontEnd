@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <div class="row" style="margin-top: 6%;">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    Order : {{order.orderId}}, placed on {{order.timeOfOrder | date:'EEEE, MMM d'}}
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <ul *ngFor="let p of order.products; let i = index" class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row mb-3">
+                                            <div class="col-md-3 text-center">
+                                                <a [routerLink]="['/product',p.productId]"> <img class="img-thumbnail"
+                                                        [src]="p.images[0].linkImage" height="50"></a>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="h6 text-capitalize"><a
+                                                        [routerLink]="['/product',p.productId]">{{p.productName}}</a>
+                                                </div>
+                                                <div class="text-secondary">Size : {{order.sizes[i]}}</div>
+                                                <div class="text-secondary">Qty : {{order.quantities[i]}}</div>
+                                                <div class="mt-1"><b>&#x20B9;
+                                                        {{order.prices[i]*order.quantities[i]}}</b>
+                                                </div><br />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="text-secondary" *ngIf="today>deliverDate">In
+                                                    Transit</div>
+                                                <div class="text-secondary" *ngIf="today<deliverDate">
+                                                    Delivered</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="card-footer"><b>
+                                        Total Price : &#x20B9; {{order.totalCost}}</b>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h1>Delivery Address :</h1> <br>
+                            {{order.deliveryAddress.street}},<br>
+                            {{order.deliveryAddress.city}},<br>
+                            {{order.deliveryAddress.state}} - {{order.deliveryAddress.pinCode}}<br>
+
+                            <h1>Payment Method :</h1>
+                            {{order.paymentType}}
+                        </div>
+                    </div>
+                </div>
+                <!-- <ul class="list-group list-group-flush" *ngFor="let o of order.products">
+                    <li class="list-group-item">{{o.productName}}</li>
+                </ul> -->
+                <div class="card-footer">
+                    {{order.totalCost}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

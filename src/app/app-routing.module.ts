@@ -10,6 +10,7 @@ import { ProductsComponent } from './products/products.component';
 import { CartComponent } from './cart/cart.component';
 import { CartGuardService } from './cart/cart-guard.service';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ViewOrdersComponent } from './view-orders/view-orders.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path : 'reviews/:pId', component : AllReviewsComponent },
   { path : 'cart', component : CartComponent, canDeactivate:[CartGuardService]},
   { path : 'checkout', component : CheckoutComponent},
+  { path : 'order', component : ViewOrdersComponent},
   { path: '', component : HomeComponent },
   { path: "**", redirectTo : "", pathMatch : 'full' } 
 ];

@@ -182,7 +182,14 @@ export class CheckoutComponent implements OnInit {
 
   placeOrder() { 
     this.service.placeOrder(this.cart, this.addressSelected.addressId, 'Card').subscribe(
-      res => alert('Successful'),
+      res => {
+        this.snackBar.open('Congrats! Order has been placed', 'Thanks', {
+          duration: 5000,
+          verticalPosition: 'bottom',
+          panelClass: 'primary-snackbar'
+        });
+        this.router.navigate(['/order'], { queryParams: { id: res } });
+      },
       err => alert(JSON.stringify(err))
     )
   }

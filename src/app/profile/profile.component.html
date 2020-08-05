@@ -215,7 +215,7 @@
                     </ul>
                     <div class="card-footer"><b>
                         Total Price : &#x20B9; {{order.totalCost}}</b>
-                      <button mat-raised-button color="accent" class="float-right">View Order</button>
+                      <button mat-raised-button color="accent" class="float-right" [routerLink]="['/order']" [queryParams]="{id: order.orderId}">View Order</button>
                     </div>
                   </div>
                 </mat-expansion-panel>
