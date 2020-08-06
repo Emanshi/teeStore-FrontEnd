@@ -6,3 +6,15 @@ img {
     height: 120px;
     object-fit: cover;
 }
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+.hover-scale {
+    transition: transform .3s;
+}
+
+.hover-scale:hover {
+    transform: scale(1.02);
+}

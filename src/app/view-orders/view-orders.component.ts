@@ -13,28 +13,27 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./view-orders.component.css']
 })
 export class ViewOrdersComponent implements OnInit {
-  loggedInUser:User
-  loggedIn:boolean
-  today:Date
-  deliverDate:Date
-  orderId:string
-  order:Orders
+  loggedInUser: User
+  loggedIn: boolean
+  today: Date
+  deliverDate: Date
+  orderId: string
+  order: Orders
 
   constructor(
-    private service:ViewOrdersService, 
-    private auth:AuthenticatorService, 
-    private title:Title, 
-    private snackBar:MatSnackBar,
-    private router:Router,
-    private route:ActivatedRoute) { 
+    private service: ViewOrdersService,
+    private auth: AuthenticatorService,
+    private title: Title,
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private route: ActivatedRoute) {
     title.setTitle("View Order")
   }
 
   ngOnInit(): void {
     this.loggedIn = false
     this.today = new Date();
-    this.deliverDate = new Date();
-    
+
     this.route.queryParams.subscribe(
       params => {
         this.orderId = params['id']
@@ -47,7 +46,20 @@ export class ViewOrdersComponent implements OnInit {
         if (data.userName != null) {
           this.loggedIn = true
           this.service.getOrder(this.orderId).subscribe(
-            res => this.order = res
+            res => {
+              this.order = res
+              if (this.loggedInUser.userId !== this.order.user.userId) {
+                this.snackBar.open('Unauthorized', 'Okay', {
+                  duration: 5000,
+                  verticalPosition: 'bottom',
+                  panelClass: 'warn-snackbar'
+                });
+                this.router.navigate(['/home'])
+              }
+
+              this.deliverDate = new Date(this.order.timeOfOrder);
+              this.deliverDate.setDate(this.deliverDate.getDate() + 4)
+            }
           )
         }
       }
@@ -56,17 +68,6 @@ export class ViewOrdersComponent implements OnInit {
     if (!this.loggedIn) {
       this.router.navigate(['/login'])
     }
-
-    if (this.loggedInUser.userId !== this.order.user.userId) {
-      this.snackBar.open('Unauthorized', 'Okay', {
-        duration: 5000,
-        verticalPosition: 'bottom',
-        panelClass: 'warn-snackbar'
-      });
-      this.router.navigate(['/home'])
-    }
-
-    this.deliverDate.setDate(this.order.timeOfOrder.getDate()+4)
   }
 
 }

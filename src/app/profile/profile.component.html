@@ -177,16 +177,16 @@
                 <span class="h5">My Orders</span>
               </div>
               <mat-accordion *ngIf="orders && orders.length>0">
-                <mat-expansion-panel *ngFor="let order of orders; let j = index">
+                <mat-expansion-panel *ngFor="let order of orders; let j = index" [expanded]="j==0">
                   <mat-expansion-panel-header>
                     Order : {{order.orderId}}
                   </mat-expansion-panel-header>
-                  <div class="card">
+                  <div class="card"  style="max-height: 350px; overflow-y: scroll;">
                     <ul *ngFor="let p of order.products; let i = index" class="list-group">
-                      <li class="list-group-item">
+                      <li class="list-group-item hover-scale">
                         <div class="row mb-3">
                           <div class="col-md-3 text-center">
-                            <a [routerLink]="['/product',p.productId]"> <img class="img-thumbnail"
+                            <a class="stretched-link" [routerLink]="['/product',p.productId]"> <img class="img-thumbnail"
                                 [src]="p.images[0].linkImage" height="50"></a>
                           </div>
                           <div class="col-md-5">
