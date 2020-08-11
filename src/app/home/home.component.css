@@ -30,3 +30,8 @@ span[id]{
     padding-top: 60px;
     margin-top: -50px;
 }
+
+.text-overflow {
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }

@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-md-10">
                     <!-- <img class="img-rounded" [src]="displayImage.linkImage" [alt]="product.productName"> -->
-                    <lib-ngx-image-zoom class="img-rounded" [thumbImage]="displayImage.linkImage"
+                    <lib-ngx-image-zoom class="img-rounded img-main" [thumbImage]="displayImage.linkImage"
                         [fullImage]="displayImage.linkImage" [zoomMode]="'hover'" [magnification]="1.75"
                         [enableScrollZoom]="true"></lib-ngx-image-zoom>
                 </div>
@@ -87,7 +87,7 @@
                         <div class="card-header h6">
                             Ratings & Reviews
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" *ngIf="product.avgRating!='NaN'">
                             <h5 class="card-title">Total Ratings</h5>
                             <div class="row">
                                 <div class="col-md-9">
@@ -152,6 +152,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card-body text-center" *ngIf="product.avgRating=='NaN'">
+                            <h3>Not enough Ratings yet.</h3>
+                        </div>
                         <ul class="list-group list-group-flush" *ngFor="let r of reviews">
                             <li class="list-group-item">
                                 <div class="mb-3">
@@ -169,7 +172,8 @@
                             </li>
                         </ul>
                         <div class="card-body">
-                            <a [routerLink]="['/reviews',product.productId]" class="card-link">All Reviews</a>
+                            <a *ngIf="product.avgRating!='NaN'" [routerLink]="['/reviews',product.productId]" class="card-link">All Reviews</a>
+                            <a [routerLink]="['/reviews',product.productId]" class="card-link">Add a Reviews</a>
                         </div>
                     </div>
                 </div>

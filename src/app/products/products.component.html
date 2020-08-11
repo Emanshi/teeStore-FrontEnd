@@ -101,7 +101,7 @@
                                     <div>
                                         <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
                                                 [src]="p.images[0].linkImage" [alt]="p.productName"></a>
-                                        <div class="card-body">
+                                        <div class="card-body text-truncate">
                                             <h3 class="card-title text-capitalize"><a
                                                     [routerLink]="['/product',p.productId]">{{p.productName}}</a>&nbsp;
                                                     <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}% off</span>
