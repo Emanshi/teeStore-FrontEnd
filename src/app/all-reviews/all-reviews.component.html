@@ -6,19 +6,25 @@
                     <a [routerLink]="['/product',p.productId]"><img class="card-img-top" [src]="p.images[0].linkImage"
                             [alt]="p.productName"></a>
                     <div class="card-body">
-                        <h3 class="card-title h6 text-capitalize"><a [routerLink]="['/product',p.productId]">{{p.productName}}</a>
+                        <h3 class="card-title h6 text-capitalize"><a
+                                [routerLink]="['/product',p.productId]">{{p.productName}}</a>
                         </h3>
                         <p class="card-text">
-                            <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                            <span *ngIf="p.avgRating!=0" matTooltip="{{p.avgRating | ratingtooltip}}">
                                 <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                    <i class="fa fa-star" *ngIf="j<p.avgRating" style="color: orange;"></i>
+                                    <i class="fa fa-star" *ngIf="j<p.avgRating" [matTooltip]="p.avgRating"
+                                        style="color: orange;"></i>
                                 </span>
                                 <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
                                     <i class="fa fa-star" *ngIf="j>p.avgRating" style="color: grey;"></i>
                                 </span>
+                                &nbsp; {{p.avgRating}}
+                                &nbsp; ({{p.totalRaters}})
                             </span>
-                            &nbsp; {{p.avgRating}}
-                            &nbsp; ({{p.totalRaters}}) <br /><br />
+                            <span *ngIf="p.avgRating==0" class="text-secondary">
+                                Not enough ratings yet
+                            </span>
+                            <br /><br />
                             <b>&#x20B9; {{p.cost}}</b>
                         </p>
                     </div>
@@ -62,35 +68,40 @@
                                         <div class="progress-bar bg-success text-left" role="progressbar"
                                             [style.width.%]="reviewCounts.five/maxReviews*100" aria-valuenow="25"
                                             aria-valuemin="0" aria-valuemax="100">
-                                            <span class="ml-2" *ngIf="reviewCounts.five">{{reviewCounts.five}} reviews</span>
+                                            <span class="ml-2" *ngIf="reviewCounts.five">{{reviewCounts.five}}
+                                                reviews</span>
                                         </div>
                                     </div>
                                     <div class="progress mb-1">
                                         <div class="progress-bar bg-success text-left" role="progressbar"
                                             [style.width.%]="reviewCounts.four/maxReviews*100" aria-valuenow="50"
                                             aria-valuemin="0" aria-valuemax="100">
-                                            <span class="ml-2" *ngIf="reviewCounts.four">{{reviewCounts.four}} reviews</span>
+                                            <span class="ml-2" *ngIf="reviewCounts.four">{{reviewCounts.four}}
+                                                reviews</span>
                                         </div>
                                     </div>
                                     <div class="progress mb-1">
                                         <div class="progress-bar bg-warning text-left" role="progressbar"
                                             [style.width.%]="reviewCounts.three/maxReviews*100" aria-valuenow="75"
                                             aria-valuemin="0" aria-valuemax="100">
-                                            <span class="ml-2" *ngIf="reviewCounts.three">{{reviewCounts.three}} reviews</span>
+                                            <span class="ml-2" *ngIf="reviewCounts.three">{{reviewCounts.three}}
+                                                reviews</span>
                                         </div>
                                     </div>
                                     <div class="progress mb-1">
                                         <div class="progress-bar bg-warning text-left" role="progressbar"
                                             [style.width.%]="reviewCounts.two/maxReviews*100" aria-valuenow="75"
                                             aria-valuemin="0" aria-valuemax="100">
-                                            <span class="ml-2" *ngIf="reviewCounts.two">{{reviewCounts.two}} reviews</span>
+                                            <span class="ml-2" *ngIf="reviewCounts.two">{{reviewCounts.two}}
+                                                reviews</span>
                                         </div>
                                     </div>
                                     <div class="progress mb-1">
                                         <div class="progress-bar bg-danger text-left" role="progressbar"
                                             [style.width.%]="reviewCounts.one/maxReviews*100" aria-valuenow="100"
                                             aria-valuemin="0" aria-valuemax="100">
-                                            <span class="ml-2" *ngIf="reviewCounts.one">{{reviewCounts.one}} reviews</span>
+                                            <span class="ml-2" *ngIf="reviewCounts.one">{{reviewCounts.one}}
+                                                reviews</span>
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +129,8 @@
                     <li class="list-group-item">
                         <div class="mb-3">
                             <span class="h6">{{r.reviewTitle}}</span>
-                            <span class="float-right">{{ratingNumbers.indexOf(r.ratings)}} <i class="fa fa-star" aria-hidden="true"
+                            <span class="float-right">{{ratingNumbers.indexOf(r.ratings)}} <i class="fa fa-star"
+                                    aria-hidden="true"
                                     [ngStyle]="{'color': (r.ratings=='FIVE'||r.ratings=='FOUR') ? 'green' : ((r.ratings=='TWO'||r.ratings=='THREE') ? 'orange' : 'red')}"></i></span>
                         </div>
                         <p>{{r.reviewBody}}</p>

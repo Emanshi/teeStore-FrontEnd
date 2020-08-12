@@ -27,7 +27,8 @@
             <div>
                 <div class="card">
                     <div class="card-header">
-                        <a class="text-dark" id="jeans" [routerLink]="['/products']" [queryParams]="{filter: 'category',value:'JEANS'}"> Jeans</a>
+                        <a class="text-dark" id="jeans" [routerLink]="['/products']"
+                            [queryParams]="{filter: 'category',value:'JEANS'}"> Jeans</a>
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
@@ -41,24 +42,32 @@
                                             <div class="card-body text-truncate">
                                                 <h3 class="card-title text-overflow"><a
                                                         [routerLink]="['/product',p.productId]">{{p.productName}}</a>
-                                                        <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}% off</span>
+                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                        off</span>
                                                 </h3>
                                                 <p class="card-text">
-                                                    <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                    <span *ngIf="p.avgRating!=0"
+                                                        matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
                                                             <i class="fa fa-star" *ngIf="j<p.avgRating"
-                                                                style="color: orange;"></i>
+                                                                [matTooltip]="p.avgRating" style="color: orange;"></i>
                                                         </span>
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
                                                             <i class="fa fa-star" *ngIf="j>p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
+                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; ({{p.totalRaters}})
                                                     </span>
-                                                    &nbsp; {{p.avgRating}}
-                                                    &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <span *ngIf="p.avgRating==0" class="text-secondary">
+                                                        Not enough ratings yet
+                                                    </span>
+                                                    <br /><br />
                                                     <span *ngIf="!p.discount"><b>&#x20B9; {{p.cost}}</b></span>
-                                                    <span *ngIf="p.discount"><b>&#x20B9; {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
-                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9; {{p.cost}}</del></span>
+                                                    <span *ngIf="p.discount"><b>&#x20B9;
+                                                            {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
+                                                            {{p.cost}}</del></span>
                                                 </p>
                                             </div>
                                         </div>
@@ -71,7 +80,8 @@
                 <br>
                 <div class="card">
                     <div class="card-header">
-                        <a class="text-dark" id="shirts" [routerLink]="['/products']" [queryParams]="{filter: 'category',value:'SHIRT'}"> Shirts</a>
+                        <a class="text-dark" id="shirts" [routerLink]="['/products']"
+                            [queryParams]="{filter: 'category',value:'SHIRT'}"> Shirts</a>
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
@@ -81,14 +91,16 @@
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
                                             <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
-                                                [src]="p.images[0].linkImage" [alt]="p.productName"></a>
+                                                    [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                             <div class="card-body text-truncate">
                                                 <h3 class="card-title text-overflow"><a
                                                         [routerLink]="['/product',p.productId]">{{p.productName}}</a>&nbsp;
-                                                        <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}% off</span>
-                                                </h3>                                                
+                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                        off</span>
+                                                </h3>
                                                 <p class="card-text text-center">
-                                                    <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                    <span *ngIf="p.avgRating!=0"
+                                                        matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
                                                             <i class="fa fa-star" *ngIf="j<p.avgRating"
                                                                 [matTooltip]="p.avgRating" style="color: orange;"></i>
@@ -97,12 +109,18 @@
                                                             <i class="fa fa-star" *ngIf="j>p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
+                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; ({{p.totalRaters}})
                                                     </span>
-                                                    &nbsp; {{p.avgRating}}
-                                                    &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <span *ngIf="p.avgRating==0" class="text-secondary">
+                                                        Not enough ratings yet
+                                                    </span>
+                                                    <br /><br />
                                                     <span *ngIf="!p.discount"><b>&#x20B9; {{p.cost}}</b></span>
-                                                    <span *ngIf="p.discount"><b>&#x20B9; {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
-                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9; {{p.cost}}</del></span>
+                                                    <span *ngIf="p.discount"><b>&#x20B9;
+                                                            {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
+                                                            {{p.cost}}</del></span>
                                                 </p>
                                             </div>
                                         </div>
@@ -115,7 +133,8 @@
                 <br>
                 <div class="card">
                     <div class="card-header">
-                        <a class="text-dark" id="tshirts" [routerLink]="['/products']" [queryParams]="{filter: 'category',value:'TSHIRT'}"> T-Shirts</a>
+                        <a class="text-dark" id="tshirts" [routerLink]="['/products']"
+                            [queryParams]="{filter: 'category',value:'TSHIRT'}"> T-Shirts</a>
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
@@ -126,14 +145,16 @@
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
                                             <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
-                                                [src]="p.images[0].linkImage" [alt]="p.productName"></a>
+                                                    [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                             <div class="card-body text-truncate">
                                                 <h3 class="card-title"><a
                                                         [routerLink]="['/product',p.productId]">{{p.productName}}</a>
-                                                        <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}% off</span>
+                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                        off</span>
                                                 </h3>
                                                 <p class="card-text text-center">
-                                                    <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                    <span *ngIf="p.avgRating!=0"
+                                                        matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
                                                             <i class="fa fa-star" *ngIf="j<p.avgRating"
                                                                 [matTooltip]="p.avgRating" style="color: orange;"></i>
@@ -142,12 +163,18 @@
                                                             <i class="fa fa-star" *ngIf="j>p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
+                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; ({{p.totalRaters}})
                                                     </span>
-                                                    &nbsp; {{p.avgRating}}
-                                                    &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <span *ngIf="p.avgRating==0" class="text-secondary">
+                                                        Not enough ratings yet
+                                                    </span>
+                                                    <br /><br />
                                                     <span *ngIf="!p.discount"><b>&#x20B9; {{p.cost}}</b></span>
-                                                    <span *ngIf="p.discount"><b>&#x20B9; {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
-                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9; {{p.cost}}</del></span>
+                                                    <span *ngIf="p.discount"><b>&#x20B9;
+                                                            {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
+                                                            {{p.cost}}</del></span>
                                                 </p>
                                             </div>
                                         </div>
@@ -160,7 +187,8 @@
                 <br>
                 <div class="card">
                     <div class="card-header">
-                        <a class="text-dark" id="skirts" [routerLink]="['/products']" [queryParams]="{filter: 'category',value:'SKIRTS'}"> Skirts</a>
+                        <a class="text-dark" id="skirts" [routerLink]="['/products']"
+                            [queryParams]="{filter: 'category',value:'SKIRTS'}"> Skirts</a>
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
@@ -171,14 +199,16 @@
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
                                             <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
-                                                [src]="p.images[0].linkImage" [alt]="p.productName"></a>
+                                                    [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                             <div class="card-body text-truncate">
                                                 <h3 class="card-title text-overflow"><a
                                                         [routerLink]="['/product',p.productId]">{{p.productName}}</a>
-                                                        <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}% off</span>
+                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                        off</span>
                                                 </h3>
                                                 <p class="card-text text-center">
-                                                    <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                    <span *ngIf="p.avgRating!=0"
+                                                        matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
                                                             <i class="fa fa-star" *ngIf="j<p.avgRating"
                                                                 [matTooltip]="p.avgRating" style="color: orange;"></i>
@@ -187,12 +217,18 @@
                                                             <i class="fa fa-star" *ngIf="j>p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
+                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; ({{p.totalRaters}})
                                                     </span>
-                                                    &nbsp; {{p.avgRating}}
-                                                    &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <span *ngIf="p.avgRating==0" class="text-secondary">
+                                                        Not enough ratings yet
+                                                    </span>
+                                                    <br /><br />
                                                     <span *ngIf="!p.discount"><b>&#x20B9; {{p.cost}}</b></span>
-                                                    <span *ngIf="p.discount"><b>&#x20B9; {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
-                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9; {{p.cost}}</del></span>
+                                                    <span *ngIf="p.discount"><b>&#x20B9;
+                                                            {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
+                                                            {{p.cost}}</del></span>
                                                 </p>
                                             </div>
                                         </div>
@@ -205,7 +241,8 @@
                 <br>
                 <div class="card">
                     <div class="card-header">
-                        <a class="text-dark" id="tops" [routerLink]="['/products']" [queryParams]="{filter: 'category',value:'TOPS'}"> Tops</a>
+                        <a class="text-dark" id="tops" [routerLink]="['/products']"
+                            [queryParams]="{filter: 'category',value:'TOPS'}"> Tops</a>
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
@@ -215,14 +252,16 @@
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
                                             <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
-                                                [src]="p.images[0].linkImage" [alt]="p.productName"></a>
+                                                    [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                             <div class="card-body text-truncate">
                                                 <h3 class="card-title text-overflow"><a
                                                         [routerLink]="['/product',p.productId]">{{p.productName}}</a>
-                                                        <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}% off</span>
+                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                        off</span>
                                                 </h3>
                                                 <p class="card-text text-center">
-                                                    <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                    <span *ngIf="p.avgRating!=0"
+                                                        matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
                                                             <i class="fa fa-star" *ngIf="j<p.avgRating"
                                                                 [matTooltip]="p.avgRating" style="color: orange;"></i>
@@ -231,12 +270,18 @@
                                                             <i class="fa fa-star" *ngIf="j>p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
+                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; ({{p.totalRaters}})
                                                     </span>
-                                                    &nbsp; {{p.avgRating}}
-                                                    &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <span *ngIf="p.avgRating==0" class="text-secondary">
+                                                        Not enough ratings yet
+                                                    </span>
+                                                    <br /><br />
                                                     <span *ngIf="!p.discount"><b>&#x20B9; {{p.cost}}</b></span>
-                                                    <span *ngIf="p.discount"><b>&#x20B9; {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
-                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9; {{p.cost}}</del></span>
+                                                    <span *ngIf="p.discount"><b>&#x20B9;
+                                                            {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
+                                                            {{p.cost}}</del></span>
                                                 </p>
                                             </div>
                                         </div>
@@ -249,7 +294,8 @@
                 <br>
                 <div class="card">
                     <div class="card-header">
-                        <a class="text-dark" id="trousers" [routerLink]="['/products']" [queryParams]="{filter: 'category',value:'TROUSERS'}"> Trousers</a>
+                        <a class="text-dark" id="trousers" [routerLink]="['/products']"
+                            [queryParams]="{filter: 'category',value:'TROUSERS'}"> Trousers</a>
                     </div>
                     <div class="card-body">
                         <div class="card-deck">
@@ -260,14 +306,16 @@
                                         style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                         <div>
                                             <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
-                                                [src]="p.images[0].linkImage" [alt]="p.productName"></a>
+                                                    [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                             <div class="card-body text-truncate">
                                                 <h3 class="card-title text-overflow"><a
                                                         [routerLink]="['/product',p.productId]">{{p.productName}}</a>
-                                                        <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}% off</span>
+                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                        off</span>
                                                 </h3>
                                                 <p class="card-text text-center">
-                                                    <span matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                    <span *ngIf="p.avgRating!=0"
+                                                        matTooltip="{{p.avgRating | ratingtooltip}}">
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
                                                             <i class="fa fa-star" *ngIf="j<p.avgRating"
                                                                 [matTooltip]="p.avgRating" style="color: orange;"></i>
@@ -276,12 +324,18 @@
                                                             <i class="fa fa-star" *ngIf="j>p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
+                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; ({{p.totalRaters}})
                                                     </span>
-                                                    &nbsp; {{p.avgRating}}
-                                                    &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <span *ngIf="p.avgRating==0" class="text-secondary">
+                                                        Not enough ratings yet
+                                                    </span>
+                                                    <br /><br />
                                                     <span *ngIf="!p.discount"><b>&#x20B9; {{p.cost}}</b></span>
-                                                    <span *ngIf="p.discount"><b>&#x20B9; {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
-                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9; {{p.cost}}</del></span>
+                                                    <span *ngIf="p.discount"><b>&#x20B9;
+                                                            {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
+                                                            {{p.cost}}</del></span>
                                                 </p>
                                             </div>
                                         </div>

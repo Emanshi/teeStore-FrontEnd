@@ -107,18 +107,23 @@
                                                     <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}% off</span>
                                             </h3>
                                             <p class="card-text">
-                                                <span matTooltip="{{p.avgRating | ratingtooltip}}">
-                                                    <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                                        <i class="fa fa-star" *ngIf="j<p.avgRating"
-                                                            style="color: orange;"></i>
+                                                <span *ngIf="p.avgRating!=0"
+                                                        matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j<p.avgRating"
+                                                                [matTooltip]="p.avgRating" style="color: orange;"></i>
+                                                        </span>
+                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                                style="color: grey;"></i>
+                                                        </span>
+                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; ({{p.totalRaters}})
                                                     </span>
-                                                    <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                                        <i class="fa fa-star" *ngIf="j>p.avgRating"
-                                                            style="color: grey;"></i>
+                                                    <span *ngIf="p.avgRating==0" class="text-secondary">
+                                                        Not enough ratings yet
                                                     </span>
-                                                </span>
-                                                &nbsp; {{p.avgRating}}
-                                                &nbsp; ({{p.totalRaters}}) <br /><br />
+                                                    <br /><br />
                                                 <span *ngIf="!p.discount"><b>&#x20B9; {{p.cost}}</b></span>
                                                 <span *ngIf="p.discount"><b>&#x20B9; {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
                                                 <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9; {{p.cost}}</del></span>

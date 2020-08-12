@@ -40,6 +40,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { CartGuardService } from './cart/cart-guard.service';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
 import { ViewOrdersService } from './view-orders/view-orders.service';
+import { AddReviewComponent } from './add-review/add-review.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ViewOrdersService } from './view-orders/view-orders.service';
     AllReviewsComponent,
     CartComponent,
     CheckoutComponent,
-    ViewOrdersComponent
+    ViewOrdersComponent,
+    AddReviewComponent
   ],
   imports: [
     BrowserModule,
