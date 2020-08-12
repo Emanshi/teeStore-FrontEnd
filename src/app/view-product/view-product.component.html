@@ -173,7 +173,7 @@
                         </ul>
                         <div class="card-body">
                             <a *ngIf="product.avgRating!=0" [routerLink]="['/reviews',product.productId]" class="card-link">All Reviews</a>
-                            <a [routerLink]="['/reviews',product.productId]" class="card-link">Add a Reviews</a>
+                            <a [routerLink]="['/add-review',product.productId]" class="card-link">Add a Reviews</a>
                         </div>
                     </div>
                 </div>

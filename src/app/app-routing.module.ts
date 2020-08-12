@@ -11,6 +11,7 @@ import { CartComponent } from './cart/cart.component';
 import { CartGuardService } from './cart/cart-guard.service';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
+import { AddReviewComponent } from './add-review/add-review.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path : 'cart', component : CartComponent, canDeactivate:[CartGuardService]},
   { path : 'checkout', component : CheckoutComponent},
   { path : 'order', component : ViewOrdersComponent},
+  { path : 'add-review/:pId', component : AddReviewComponent },
   { path: '', component : HomeComponent },
   { path: "**", redirectTo : "", pathMatch : 'full' } 
 ];

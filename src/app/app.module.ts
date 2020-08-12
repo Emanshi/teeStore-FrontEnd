@@ -10,6 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSliderModule } from '@angular/material/slider'
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
 import { Ng5SliderModule } from 'ng5-slider'
 
 import { HttpClientModule } from '@angular/common/http';
@@ -41,6 +42,7 @@ import { CartGuardService } from './cart/cart-guard.service';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
 import { ViewOrdersService } from './view-orders/view-orders.service';
 import { AddReviewComponent } from './add-review/add-review.component';
+import { AddReviewService } from './add-review/add-review.service';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,7 @@ import { AddReviewComponent } from './add-review/add-review.component';
     MatExpansionModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatInputModule,
     MatSliderModule,
     MatButtonModule,
     Ng5SliderModule,
@@ -87,6 +90,7 @@ import { AddReviewComponent } from './add-review/add-review.component';
     ProfileService,
     ViewProductService,
     ViewOrdersService,
+    AddReviewService,
     AllReviewsService,
     CartGuardService,
     Title
