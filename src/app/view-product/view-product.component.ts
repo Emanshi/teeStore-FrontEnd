@@ -18,10 +18,13 @@ import { Cart } from '../models/cart';
   templateUrl: './view-product.component.html',
   styleUrls: ['./view-product.component.css']
 })
+
 export class ViewProductComponent implements OnInit {
   loggiedIn: boolean
   loggedInUser: User
   product: Product
+  similarProducts: Product[]
+  newArrivals: Product[]
   productId: string
   displayImage: Images
   cart: Cart
@@ -62,8 +65,19 @@ export class ViewProductComponent implements OnInit {
         this.product = response
         this.displayImage = response.images[0]
         this.title.setTitle(this.product.productName)
+        this.getSimilarProducts()
         this.loadTopReviews()
       }
+    )
+
+    this.service.getNewArrivals().subscribe(
+      res => this.newArrivals = res
+    )
+  }
+
+  getSimilarProducts() {
+    this.service.getSimilarProducts(this.product.category).subscribe(
+      res => this.similarProducts = res
     )
   }
 
@@ -157,5 +171,13 @@ export class ViewProductComponent implements OnInit {
         this.router.navigate(['/checkout'], { queryParams: { type: 'product', value: this.productId, size: this.selectedSize } });
       }
     }
+  }
+
+  reloadPage(productId) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    }
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/product', productId])
   }
 }

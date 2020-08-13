@@ -40,10 +40,11 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
+
 ::ng-deep .custom-slider .ng5-slider .ng5-slider-bubble {
    color: var(--colorTextLight)
 }
+
 ::ng-deep .custom-slider .ng5-slider .ng5-slider-pointer:after {
     display: none;
 }
-

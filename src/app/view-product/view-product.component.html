@@ -1,32 +1,36 @@
 <div class="container-fluid">
     <div class="row" style="margin-top: 6%;">
-        <div class="col-md-5 fixed">
-            <div class="row">
-                <div class="col-md-2">
-                    <div *ngFor="let image of product.images; let i = index">
-                        <img class="img-thumbnail" [src]="image.linkImage" [alt]="product.productName" width=70px
-                            height=80px (mouseenter)="loadImage(i)">
+        <div class="col-md-5">
+            <div class="product-image-box">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div *ngFor="let image of product.images; let i = index">
+                            <img class="img-thumbnail" [src]="image.linkImage" [alt]="product.productName" width=70px
+                                height=80px (mouseenter)="loadImage(i)">
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <!-- <img class="img-rounded" [src]="displayImage.linkImage" [alt]="product.productName"> -->
+                        <lib-ngx-image-zoom class="img-rounded img-main" [thumbImage]="displayImage.linkImage"
+                            [fullImage]="displayImage.linkImage" [zoomMode]="'hover'" [magnification]="1.75"
+                            [enableScrollZoom]="true"></lib-ngx-image-zoom>
                     </div>
                 </div>
-                <div class="col-md-10">
-                    <!-- <img class="img-rounded" [src]="displayImage.linkImage" [alt]="product.productName"> -->
-                    <lib-ngx-image-zoom class="img-rounded img-main" [thumbImage]="displayImage.linkImage"
-                        [fullImage]="displayImage.linkImage" [zoomMode]="'hover'" [magnification]="1.75"
-                        [enableScrollZoom]="true"></lib-ngx-image-zoom>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <button mat-raised-button color="primary" class="mt-5"
-                    style="width: 100%; height: 50px; display: block;" (click)="buyNow()">Buy Now</button>
-                </div>
-                <div class="col-md-6" *ngIf="!inCart">
-                    <button mat-raised-button color="accent" class="mt-5"
-                    style="width: 100%; height: 50px; display: block;" (click)="addToCart()">Add to Cart</button>
-                </div>
-                <div class="col-md-6" *ngIf="inCart">
-                    <button mat-raised-button color="accent" class="mt-5"
-                    style="width: 100%; height: 50px; display: block;" [routerLink]="['/cart']">Go to Cart</button>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button mat-raised-button color="primary" class="mt-5"
+                            style="width: 100%; height: 50px; display: block;" (click)="buyNow()">Buy Now</button>
+                    </div>
+                    <div class="col-md-6" *ngIf="!inCart">
+                        <button mat-raised-button color="accent" class="mt-5"
+                            style="width: 100%; height: 50px; display: block;" (click)="addToCart()">Add to
+                            Cart</button>
+                    </div>
+                    <div class="col-md-6" *ngIf="inCart">
+                        <button mat-raised-button color="accent" class="mt-5"
+                            style="width: 100%; height: 50px; display: block;" [routerLink]="['/cart']">Go to
+                            Cart</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -48,7 +52,7 @@
                             {{product.cost}}</del></span>&nbsp;
                     <span *ngIf="product.discount" class="badge badge-success">{{product.discount}}% off</span>
                 </div>
-            </div><br/>
+            </div><br />
             <div class="row">
                 <div class="col-md-3">
                     <label class="label">Category :&nbsp;</label>
@@ -57,7 +61,7 @@
                     <a mat-stroked-button [routerLink]="['/products']"
                         [queryParams]="{filter: 'category',value:product.category}">{{product.category}}</a>
                 </div>
-            </div><br/>
+            </div><br />
 
             <div class="row">
                 <div class="col-md-3">
@@ -65,12 +69,12 @@
                 </div>
                 <div class="col-md-9">
                     <span *ngFor="let key of objectKeys(product.sizeAndQuantity)">
-                        <button mat-mini-fab color="dark"
-                            [disabled]="product.sizeAndQuantity[key]==0" (click)="sizeSelection(key)">{{key}}</button>&nbsp;
+                        <button mat-mini-fab color="dark" [disabled]="product.sizeAndQuantity[key]==0"
+                            (click)="sizeSelection(key)">{{key}}</button>&nbsp;
                     </span>
 
                 </div>
-            </div><br/>
+            </div><br />
 
             <div class="row">
                 <div class="col-md-3">
@@ -159,7 +163,8 @@
                             <li class="list-group-item">
                                 <div class="mb-3">
                                     <span class="h6">{{r.reviewTitle}}</span>
-                                    <span class="float-right">{{ratingNumbers.indexOf(r.ratings)}} <i class="fa fa-star" aria-hidden="true"
+                                    <span class="float-right">{{ratingNumbers.indexOf(r.ratings)}} <i class="fa fa-star"
+                                            aria-hidden="true"
                                             [ngStyle]="{'color': (r.ratings=='FIVE'||r.ratings=='FOUR') ? 'green' : ((r.ratings=='TWO'||r.ratings=='THREE') ? 'orange' : 'red')}"></i></span>
                                 </div>
                                 <p>{{r.reviewBody}}</p>
@@ -172,8 +177,119 @@
                             </li>
                         </ul>
                         <div class="card-body">
-                            <a *ngIf="product.avgRating!=0" [routerLink]="['/reviews',product.productId]" class="card-link">All Reviews</a>
+                            <a *ngIf="product.avgRating!=0" [routerLink]="['/reviews',product.productId]"
+                                class="card-link">All Reviews</a>
                             <a [routerLink]="['/add-review',product.productId]" class="card-link">Add a Reviews</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5" *ngIf="similarProducts.length>0">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Similar Products
+                </div>
+                <div class="card-body">
+                    <div class="card-deck">
+                        <div class="col-md-2" *ngFor="let p of similarProducts; let i = index">
+                            <div class="row">
+                                <div class="card text-center" *ngIf="i<6"
+                                    style="margin-left: 5%; margin-right: 5%;width: 18rem">
+                                    <div>
+                                        <a [routerLink]="[]" (click)="reloadPage(p.productId)"><img class="card-img-top"
+                                                [src]="p.images[0].linkImage" [alt]="p.productName"></a>
+                                        <div class="card-body text-truncate">
+                                            <h3 class="card-title text-overflow"><a [routerLink]="[]"
+                                                    (click)="reloadPage(p.productId)">{{p.productName}}</a>
+                                                <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                    off</span>
+                                            </h3>
+                                            <p class="card-text text-center">
+                                                <span *ngIf="p.avgRating!=0"
+                                                    matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                    <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                        <i class="fa fa-star" *ngIf="j<p.avgRating"
+                                                            [matTooltip]="p.avgRating" style="color: orange;"></i>
+                                                    </span>
+                                                    <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                        <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                            style="color: grey;"></i>
+                                                    </span>
+                                                    &nbsp; {{p.avgRating}}
+                                                    &nbsp; ({{p.totalRaters}})
+                                                </span>
+                                                <span *ngIf="p.avgRating==0" class="text-secondary">
+                                                    Not enough ratings yet
+                                                </span>
+                                                <br /><br />
+                                                <span *ngIf="!p.discount"><b>&#x20B9; {{p.cost}}</b></span>
+                                                <span *ngIf="p.discount"><b>&#x20B9;
+                                                        {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
+                                                <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
+                                                        {{p.cost}}</del></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5" *ngIf="newArrivals.length>0">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    New Arrivals
+                </div>
+                <div class="card-body">
+                    <div class="card-deck">
+                        <div class="col-md-2" *ngFor="let p of newArrivals; let i = index">
+                            <div class="row">
+                                <div class="card text-center" *ngIf="i<6"
+                                    style="margin-left: 5%; margin-right: 5%;width: 18rem">
+                                    <div>
+                                        <a [routerLink]="[]" (click)="reloadPage(p.productId)"><img class="card-img-top"
+                                                [src]="p.images[0].linkImage" [alt]="p.productName"></a>
+                                        <div class="card-body text-truncate">
+                                            <h3 class="card-title text-overflow"><a [routerLink]="[]"
+                                                    (click)="reloadPage(p.productId)">{{p.productName}}</a>
+                                                <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                    off</span>
+                                            </h3>
+                                            <p class="card-text text-center">
+                                                <span *ngIf="p.avgRating!=0"
+                                                    matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                    <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                        <i class="fa fa-star" *ngIf="j<p.avgRating"
+                                                            [matTooltip]="p.avgRating" style="color: orange;"></i>
+                                                    </span>
+                                                    <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                        <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                            style="color: grey;"></i>
+                                                    </span>
+                                                    &nbsp; {{p.avgRating}}
+                                                    &nbsp; ({{p.totalRaters}})
+                                                </span>
+                                                <span *ngIf="p.avgRating==0" class="text-secondary">
+                                                    Not enough ratings yet
+                                                </span>
+                                                <br /><br />
+                                                <span *ngIf="!p.discount"><b>&#x20B9; {{p.cost}}</b></span>
+                                                <span *ngIf="p.discount"><b>&#x20B9;
+                                                        {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
+                                                <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
+                                                        {{p.cost}}</del></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

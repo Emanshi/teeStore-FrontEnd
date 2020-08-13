@@ -53,4 +53,12 @@ export class ViewProductService {
   addProductTocart(productId:string,userId:string,size:string):Observable<number>{
     return this.http.get<number>(environment.cartApi+"addProduct?userId="+userId+"&productId="+productId+"&size="+size)
   }
+
+  getSimilarProducts(catergory:string):Observable<Product[]>{
+    return this.http.get<Product[]>(environment.productApi+'getSimilarProducts/'+catergory)
+  }
+
+  getNewArrivals():Observable<Product[]>{
+    return this.http.get<Product[]>(environment.productApi+'getNewArrivals')
+  }
 }
