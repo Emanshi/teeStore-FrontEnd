@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 offset-md-2" style="margin-top: 2%;">
+        <div class="col-md-6 offset-md-3" style="margin-top: 2%;">
             <div class="card mt-5">
                 <div>
                     <div class="card-body">
@@ -13,9 +13,19 @@
                         <div *ngIf="hasBeenOrdered">
                             <form [formGroup]="addReviewForm" (ngSubmit)="submitReview()" class="form">
                                 <div class="form-group">
-                                    <mat-form-field appearance="outline">
+                                    <span class="star-rating star-5">
+                                        <input type="radio" name="rating" value="1" (change)="rating('ONE')"><i></i>
+                                        <input type="radio" name="rating" value="2" (change)="rating('TWO')"><i></i>
+                                        <input type="radio" name="rating" value="3" (change)="rating('THREE')"><i></i>
+                                        <input type="radio" name="rating" value="4" (change)="rating('FOUR')"><i></i>
+                                        <input type="radio" name="rating" value="5" (change)="rating('FIVE')"><i></i>
+                                    </span>
+                                </div>
+
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" style="width: 100%;">
                                         <mat-label>Title<span class="text-danger">*</span></mat-label>
-                                        <input matInput type="text" formControlName="reviewTitle" id="reviewTitle" class="block">
+                                        <input matInput type="text" formControlName="reviewTitle" id="reviewTitle">
                                         <mat-error
                                             *ngIf="addReviewForm.get('reviewTitle').invalid && addReviewForm.get('reviewTitle').touched"
                                             class="text-danger">Title should be provided and have less than 50
@@ -25,9 +35,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <mat-form-field appearance="outline">
+                                    <mat-form-field appearance="outline" style="width: 100%;">
                                         <mat-label>Description<span class="text-danger">*</span></mat-label>
-                                        <textarea matInput type="text" formControlName="description"
+                                        <textarea matInput type="text" formControlName="description" rows="5"
                                             id="description"></textarea>
                                         <mat-error
                                             *ngIf="addReviewForm.get('description').invalid && addReviewForm.get('description').touched"
@@ -45,7 +55,7 @@
                                 </div>
 
                                 <button mat-raised-button color="accent" type="submit"
-                                    [disabled]="addReviewForm.invalid" class="btn btn-lg btn-block">Submit</button>
+                                    [disabled]="addReviewForm.invalid || review.ratings=='ZERO'" class="btn btn-lg btn-block">Submit</button>
                             </form>
                         </div>
                     </div>

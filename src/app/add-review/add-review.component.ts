@@ -7,6 +7,9 @@ import { Title } from '@angular/platform-browser';
 import { Orders } from '../models/orders';
 import { User } from '../models/users';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Review } from '../models/review';
+import { Product } from '../models/product';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-review',
@@ -20,6 +23,7 @@ export class AddReviewComponent implements OnInit {
   addReviewForm:FormGroup
   productName:string
   productId:string
+  review:Review
   orders:Orders[]
   errorMessage:string
 
@@ -30,6 +34,7 @@ export class AddReviewComponent implements OnInit {
     private route:ActivatedRoute,
     private orderService:ProfileService,
     private router:Router,
+    private snackBar:MatSnackBar,
     private title:Title
     ) { 
       title.setTitle('Add a Review')
@@ -42,6 +47,8 @@ export class AddReviewComponent implements OnInit {
 
     this.hasBeenOrdered=false
     this.loggedIn=false
+    this.review=new Review()
+    this.review.ratings='ZERO'
     this.auth.sessionUser.subscribe(
       (data)=>{
         this.loggedInUser=data;
@@ -80,5 +87,27 @@ export class AddReviewComponent implements OnInit {
     }
   }
 
-  submitReview() {}
+  rating(rate) {
+    this.review.ratings=rate
+  }
+
+  submitReview() {
+    this.review.reviewTitle=this.addReviewForm.get('reviewTitle').value
+    this.review.reviewBody=this.addReviewForm.get('description').value
+    this.review.product=new Product()
+    this.review.product.productId=this.productId
+    this.review.user=this.loggedInUser
+    this.service.addReview(this.review).subscribe(
+      res=>{
+        console.log(res+' review id persisted')
+        this.snackBar.open('Review added successfully', 'Okay', {
+          duration: 5000,
+          verticalPosition: 'bottom',
+          panelClass: 'primary-snackbar'
+        });
+        this.router.navigate(['/product',this.productId])
+      }
+    )
+    
+  }
 }
