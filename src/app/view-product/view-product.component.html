@@ -148,7 +148,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 text-center">
-                                    <div class="h3 mt-auto">{{product.avgRating}} <i class="fa fa-star"
+                                    <div class="h3 mt-auto">{{product.avgRating | number: '1.1-1'}} <i class="fa fa-star"
                                             aria-hidden="true"></i></div>
                                     out of 5
                                     <br><small>({{reviewCounts.one+reviewCounts.two+reviewCounts.three+reviewCounts.four+reviewCounts.five}}

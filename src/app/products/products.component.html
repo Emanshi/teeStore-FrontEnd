@@ -117,7 +117,7 @@
                                                             <i class="fa fa-star" *ngIf="j>p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
-                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; {{p.avgRating | number: '1.1-1'}}
                                                         &nbsp; ({{p.totalRaters}})
                                                     </span>
                                                     <span *ngIf="p.avgRating==0" class="text-secondary">

@@ -53,10 +53,10 @@
                                                                 [matTooltip]="p.avgRating" style="color: orange;"></i>
                                                         </span>
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                            <i class="fa fa-star" *ngIf="j>=p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
-                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; {{p.avgRating | number: '1.1-1'}}
                                                         &nbsp; ({{p.totalRaters}})
                                                     </span>
                                                     <span *ngIf="p.avgRating==0" class="text-secondary">
@@ -106,10 +106,10 @@
                                                                 [matTooltip]="p.avgRating" style="color: orange;"></i>
                                                         </span>
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                            <i class="fa fa-star" *ngIf="j>=p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
-                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; {{p.avgRating | number: '1.1-1'}}
                                                         &nbsp; ({{p.totalRaters}})
                                                     </span>
                                                     <span *ngIf="p.avgRating==0" class="text-secondary">
@@ -160,10 +160,10 @@
                                                                 [matTooltip]="p.avgRating" style="color: orange;"></i>
                                                         </span>
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                            <i class="fa fa-star" *ngIf="j>=p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
-                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; {{p.avgRating | number: '1.1-1'}}
                                                         &nbsp; ({{p.totalRaters}})
                                                     </span>
                                                     <span *ngIf="p.avgRating==0" class="text-secondary">
@@ -214,10 +214,10 @@
                                                                 [matTooltip]="p.avgRating" style="color: orange;"></i>
                                                         </span>
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                            <i class="fa fa-star" *ngIf="j>=p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
-                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; {{p.avgRating | number: '1.1-1'}}
                                                         &nbsp; ({{p.totalRaters}})
                                                     </span>
                                                     <span *ngIf="p.avgRating==0" class="text-secondary">
@@ -267,10 +267,10 @@
                                                                 [matTooltip]="p.avgRating" style="color: orange;"></i>
                                                         </span>
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                            <i class="fa fa-star" *ngIf="j>=p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
-                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; {{p.avgRating | number: '1.1-1'}}
                                                         &nbsp; ({{p.totalRaters}})
                                                     </span>
                                                     <span *ngIf="p.avgRating==0" class="text-secondary">
@@ -321,10 +321,10 @@
                                                                 [matTooltip]="p.avgRating" style="color: orange;"></i>
                                                         </span>
                                                         <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                            <i class="fa fa-star" *ngIf="j>=p.avgRating"
                                                                 style="color: grey;"></i>
                                                         </span>
-                                                        &nbsp; {{p.avgRating}}
+                                                        &nbsp; {{p.avgRating | number: '1.1-1'}}
                                                         &nbsp; ({{p.totalRaters}})
                                                     </span>
                                                     <span *ngIf="p.avgRating==0" class="text-secondary">
