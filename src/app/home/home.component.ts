@@ -3,6 +3,7 @@ import { ViewProductService } from '../view-product/view-product.service';
 import { Product } from '../models/product';
 import {MatTooltip} from '@angular/material/tooltip';
 import { Title } from '@angular/platform-browser';
+import { Carousel } from '../models/carousel';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
   skirtsProductList:Product[];
   topsProductList:Product[];
   trousersProductList:Product[];
+  carouselList:Carousel[];
 
   constructor(private productService:ViewProductService, private title:Title) { 
     title.setTitle("TeeStore")
@@ -28,6 +30,10 @@ export class HomeComponent implements OnInit {
     this.getTopsByDiscount();
     this.getTshirtByDiscount();
     this.getTrousersByDiscount();
+
+    this.productService.getAllCarousel().subscribe(
+      response=> this.carouselList=response
+    )
   }
 
   sortProducts(productList:Product[]) {

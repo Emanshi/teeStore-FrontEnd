@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Images } from '../models/images';
 import { Review } from '../models/review';
 import { ReviewCounts } from '../models/review-counts';
+import { Carousel } from '../models/carousel';
 
 @Injectable({
   providedIn: 'root'
@@ -61,4 +62,9 @@ export class ViewProductService {
   getNewArrivals():Observable<Product[]>{
     return this.http.get<Product[]>(environment.productApi+'getNewArrivals')
   }
+
+  getAllCarousel():Observable<Carousel[]>{
+    return this.http.get<Carousel[]>(environment.carouselApi+'getAllCarousel')
+  }
+
 }
