@@ -11,6 +11,7 @@ import { MatSliderModule } from '@angular/material/slider'
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon'
 import { Ng5SliderModule } from 'ng5-slider'
 
 import { HttpClientModule } from '@angular/common/http';
@@ -74,6 +75,7 @@ import { AddReviewService } from './add-review/add-review.service';
     MatFormFieldModule,
     MatSelectModule,
     MatExpansionModule,
+    MatIconModule,
     MatCheckboxModule,
     MatRadioModule,
     MatInputModule,

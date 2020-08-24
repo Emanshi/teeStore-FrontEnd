@@ -30,11 +30,16 @@ export class CheckoutComponent implements OnInit {
   cartTotal: number
   deliveryFee: number
   viewUser: User
-  selectedSize:string
+  selectedSize: string
   addressAccordian: boolean
   cartAccordian: boolean
   payAccordian: boolean
   addressSelected: Address
+  payMode: string
+  upiVpa: string
+  validVPA: boolean
+  vpaColor: string
+  payValid: boolean
 
   constructor(
     private route: ActivatedRoute,
@@ -43,7 +48,7 @@ export class CheckoutComponent implements OnInit {
     private dialog: MatDialog,
     private cartService: CartService,
     private profileService: ProfileService,
-    private productService:ViewProductService,
+    private productService: ViewProductService,
     private snackBar: MatSnackBar,
     private service: CheckoutService,
     private title: Title
@@ -85,11 +90,18 @@ export class CheckoutComponent implements OnInit {
         }
       )
     } else {
-      let p:Product
+      let p: Product
       this.productService.getProductById(this.value).subscribe(
-        res=>{this.cart={cartId:'',totalCost:res.cost,products:[res],user:this.loggedInUser,sizes:[this.selectedSize],quantities:[1]}}
+        res => {
+          this.cart = { cartId: '', totalCost: res.cost, products: [res], user: this.loggedInUser, sizes: [this.selectedSize], quantities: [1] }
+          this.calculateCost()
+        }
       )
     }
+
+    this.vpaColor = 'primary'
+
+    this.payValid = false
 
     this.deliveryDate = new Date()
     this.deliveryDate.setDate(this.deliveryDate.getDate() + 4)
@@ -168,7 +180,7 @@ export class CheckoutComponent implements OnInit {
     if (!this.addressSelected) {
       alert('Please select an address')
     } else {
-      if (this.cartService.changed == true && this.type=='cart') {
+      if (this.cartService.changed == true && this.type == 'cart') {
         this.cartService.updateCart(this.cart.cartId).subscribe(
           res => console.log('Cart saved with res : ' + res),
           err => alert(JSON.stringify(err))
@@ -180,8 +192,20 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  placeOrder() { 
-    this.service.placeOrder(this.cart, this.addressSelected.addressId, 'Card').subscribe(
+  validateVPA() {
+    let reg: RegExp = /^[a-zA-z0-9]+[A-Za-z0-9_.-]+[A-Za-z0-9]+@[a-zA-Z]+$/
+    this.validVPA = reg.test(this.upiVpa)
+    if (!this.validVPA) {
+      this.vpaColor = 'warn'
+      this.payValid = false
+    } else {
+      this.vpaColor = 'accent'
+      this.payValid = true
+    }
+  }
+
+  placeOrder() {
+    this.service.placeOrder(this.cart, this.addressSelected.addressId, this.payMode).subscribe(
       res => {
         this.snackBar.open('Congrats! Order has been placed', 'Thanks', {
           duration: 5000,

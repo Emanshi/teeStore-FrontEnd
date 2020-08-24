@@ -157,10 +157,10 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="card-footer">
-                            <button mat-raised-button color="accent"
+                            <div class="card-footer">
+                                <button mat-raised-button color="accent"
                                     (click)="proceedCartConfirmed()">Continue</button>
+                            </div>
                         </div>
                     </mat-expansion-panel>
                     <mat-expansion-panel [expanded]="payAccordian">
@@ -169,20 +169,40 @@
                         </mat-expansion-panel-header>
                         <div class="card">
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    <mat-radio-button>Card Pay</mat-radio-button>
-                                </li>
-                                <li class="list-group-item">
-                                    <mat-radio-button>UPI Pay</mat-radio-button>
-                                </li>
-                                <li class="list-group-item">
-                                    <mat-radio-button>Cash On Delivery</mat-radio-button>
-                                </li>
+                                <mat-radio-group [(ngModel)]="payMode">
+                                    <li class="list-group-item">
+                                        <mat-radio-button value="card" (change)="payValid=false">Card Pay</mat-radio-button>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <mat-radio-button value="upi" (change)="payValid=false">UPI Pay</mat-radio-button>
+                                        <div *ngIf="payMode=='upi'" class="ml-4 mt-2">
+                                            <mat-form-field [color]="vpaColor">
+                                                <mat-label>UPI VPA</mat-label>
+                                                <input matInput type="text" [(ngModel)]="upiVpa" style="width: 100px;">
+                                                <button mat-button *ngIf="value" matSuffix mat-icon-button
+                                                    aria-label="Clear" (click)="validateVPA()">
+                                                    <mat-icon *ngIf="validVPA==null">search</mat-icon>
+                                                    <mat-icon *ngIf="validVPA==false">error</mat-icon>
+                                                    <mat-icon *ngIf="validVPA">verified_user</mat-icon>
+                                                </button>
+                                            </mat-form-field>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <mat-radio-button value="cash" (change)="payValid=true">Cash On Delivery</mat-radio-button>
+                                        <div *ngIf="payMode=='cash'" class="alert alert-success ml-4 mt-2">
+                                            Please provide the bill amount &#x20B9; {{cart.totalCost | number:'.0-2'}}
+                                            in cash to the delivery person.
+                                        </div>
+                                    </li>
+                                </mat-radio-group>
                             </ul>
-                        </div>
-                        <div class="card-footer">
-                            <button mat-raised-button color="accent"
-                                    (click)="placeOrder()">Confirm and Place Order</button>
+                            <div class="card-footer">
+                                <button mat-raised-button color="accent" (click)="placeOrder()"
+                                    [disabled]="!payValid">Confirm and Place
+                                    Order
+                                </button>
+                            </div>
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
