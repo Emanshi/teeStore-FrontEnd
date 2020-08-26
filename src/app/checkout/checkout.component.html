@@ -39,77 +39,81 @@
                             Delivery Address
                         </mat-expansion-panel-header>
                         <div class="card">
-
-                            <div *ngIf="viewUser.addresses && viewUser.addresses.length>0" class="card-body">
-                                <div *ngFor="let a of viewUser.addresses; let i = index">
-                                    <mat-radio-button (change)="setAddress(i)">
-                                        <div class="ml-3">
-                                            <mat-label class="h5">Address {{i+1}}</mat-label>
-                                            <div>{{a.street}}</div>
-                                            <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>
+                            <ul class="list-group">
+                                <mat-radio-group [(ngModel)]="addressSelector">
+                                    <li class="list-group-item" *ngFor="let a of viewUser.addresses; let i = index">
+                                        <mat-radio-button [value]="a.street" (change)="setAddress(i)">
+                                            <div class="ml-3">
+                                                <mat-label class="h5">Address {{i+1}}</mat-label>
+                                                <div>{{a.street}}</div>
+                                                <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>
+                                            </div>
+                                        </mat-radio-button>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <mat-radio-button value="new" (change)="addressFormInit()">
+                                            <span class="ml-3">Add New Address</span>
+                                        </mat-radio-button>
+                                        <div *ngIf="addressSelector=='new'" class="ml-4 mt-2 col-md-9">
+                                            <form [formGroup]="newAddressForm" class="form">
+                                                <div class="form-group">
+                                                    <mat-form-field appearance="outline" style="width: 100%;">
+                                                        <mat-label>Street Name<span class="text-danger">*</span>
+                                                        </mat-label>
+                                                        <input matInput type="text" formControlName="street"
+                                                            id="street">
+                                                        <mat-error
+                                                            *ngIf="newAddressForm.get('street').invalid && newAddressForm.get('street').touched"
+                                                            class="text-danger">Street name should be provided and have
+                                                            less than 100
+                                                            characters
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="form-group">
+                                                    <mat-form-field appearance="outline" style="width: 25%;">
+                                                        <mat-label>City<span class="text-danger">*</span></mat-label>
+                                                        <input matInput type="text" formControlName="city" id="city">
+                                                        <mat-error
+                                                            *ngIf="newAddressForm.get('city').invalid && newAddressForm.get('city').touched"
+                                                            class="text-danger">City name should be provided and have
+                                                            less than 50
+                                                            characters
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                    <mat-form-field appearance="outline" style="width: 48%; margin-left: 1%; margin-right: 1%;">
+                                                        <mat-label>State<span class="text-danger">*</span></mat-label>
+                                                        <input matInput type="text" formControlName="state" id="state">
+                                                        <mat-error
+                                                            *ngIf="newAddressForm.get('state').invalid && newAddressForm.get('state').touched"
+                                                            class="text-danger">State name should be provided and have
+                                                            less than 50
+                                                            characters
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                    <mat-form-field appearance="outline" style="width: 25%;">
+                                                        <mat-label>Pin Code<span class="text-danger">*</span>
+                                                        </mat-label>
+                                                        <input matInput type="text" formControlName="pinCode"
+                                                            id="pinCode">
+                                                        <mat-error
+                                                            *ngIf="newAddressForm.get('pinCode').invalid && newAddressForm.get('pinCode').touched"
+                                                            class="text-danger">Pin Code should be provided and have 6
+                                                            digits
+                                                            characters
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </mat-radio-button>
-                                </div>
-                            </div>
+                                    </li>
+                                </mat-radio-group>
+                            </ul>
                             <div class="card-footer">
                                 <button mat-raised-button color="accent"
                                     (click)="proceedAddressSelected()">Continue</button>
                             </div>
-
                         </div>
-
-                        <!--<div *ngFor="let a of viewUser.addresses; let i = index">
-                            <h3>Address {{i+1}}</h3>
-                            <div class="row"
-                                style="margin-top: 2%; margin-bottom: 3%; border-bottom: 2px; border-color: black;">
-                                <mat-radio-button><div class="col-md-8">
-                                    <div>{{a.street}}</div>
-                                    <div>{{a.city}}, {{a.state}} - {{a.pinCode}}</div>
-                                </div>
-                            </mat-radio-button>
-                            </div>
-                        </div>
-                        <div>
-                            <div *ngIf="addAddressSwitch">
-                                <form [formGroup]="addressForm" (ngSubmit)="addAddress()" class="form">
-                                    <div class="form-group">
-                                        <label>Street Address</label>
-                                        <input type="text" class="form-control" formControlName="street"
-                                            placeholder="Floor, Apartment, Street">
-                                        <span class="error-message"
-                                            *ngIf="addressForm.get('street').invalid && addressForm.get('street').touched"
-                                            class="text-danger">Enter valid street address</span>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label>City</label>
-                                            <input type="text" formControlName="city" class="form-control">
-                                            <span class="error-message"
-                                                *ngIf="addressForm.get('city').invalid && addressForm.get('city').touched"
-                                                class="text-danger">Enter a valid city name</span>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label>State</label>
-                                            <input type="text" formControlName="state" class="form-control">
-                                            <span class="error-message"
-                                                *ngIf="addressForm.get('state').invalid && addressForm.get('state').touched"
-                                                class="text-danger">Enter valid state</span>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <label>Pin Code</label>
-                                            <input type="number" formControlName="pinCode" class="form-control">
-                                            <span class="error-message"
-                                                *ngIf="addressForm.get('pinCode').invalid && addressForm.get('pinCode').touched"
-                                                class="text-danger">Enter valid pin code</span>
-                                        </div>
-                                    </div>
-                                    <button mat-raised-button color="accent" type="submit">Register Address</button>
-                                </form>
-                            </div>
-                            <button *ngIf="!addAddressSwitch" mat-raised-button color="accent"
-                                (click)="addAddressSwitcher()" type="button">Add
-                                Address</button>
-                        </div>-->
                     </mat-expansion-panel>
                     <mat-expansion-panel [expanded]="cartAccordian">
                         <mat-expansion-panel-header>
@@ -171,25 +175,74 @@
                             <ul class="list-group">
                                 <mat-radio-group [(ngModel)]="payMode">
                                     <li class="list-group-item">
-                                        <mat-radio-button value="card" (change)="payValid=false">Card Pay</mat-radio-button>
+                                        <mat-radio-button value="card" (change)="payValid=true">Card Pay
+                                        </mat-radio-button>
+                                        <div *ngIf="payMode=='card'" class="ml-4 mt-2 col-md-8">
+                                            <form [formGroup]="newCardForm" class="form">
+                                                <div class="form-group">
+                                                    <mat-form-field appearance="outline" style="width: 100%;">
+                                                        <mat-label>Name on Card<span class="text-danger">*</span>
+                                                        </mat-label>
+                                                        <input matInput type="text" formControlName="cardName"
+                                                            id="street">
+                                                        <mat-error
+                                                            *ngIf="newCardForm.get('cardName').invalid && newCardForm.get('cardName').touched"
+                                                            class="text-danger">Name on Card should be provided as is
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="form-group">
+                                                    <mat-form-field appearance="outline" style="width: 100%;">
+                                                        <mat-label>Card Number<span class="text-danger">*</span>
+                                                        </mat-label>
+                                                        <input matInput type="number" formControlName="cardNo"
+                                                            id="street">
+                                                        <mat-error
+                                                            *ngIf="newCardForm.get('cardNo').invalid && newCardForm.get('cardNo').touched"
+                                                            class="text-danger">Card number should be of 16 digits
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="form-group">
+                                                    <mat-form-field appearance="outline" style="width: 49%;">
+                                                        <mat-label>CVV<span class="text-danger">*</span></mat-label>
+                                                        <input matInput type="number" formControlName="cvv" id="cvv">
+                                                        <mat-error
+                                                            *ngIf="newCardForm.get('cvv').invalid && newCardForm.get('cvv').touched"
+                                                            class="text-danger">CVV should be of 3 digits
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                    <mat-form-field appearance="outline" style="width: 49%; margin-left: 2%;">
+                                                        <mat-label>Expiry<span class="text-danger">*</span></mat-label>
+                                                        <input matInput type="text" formControlName="expiry" id="expiry">
+                                                        <mat-error
+                                                            *ngIf="newCardForm.get('expiry').invalid && newCardForm.get('expiry').touched"
+                                                            class="text-danger">Expiry should be a future date
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </li>
                                     <li class="list-group-item">
-                                        <mat-radio-button value="upi" (change)="payValid=false">UPI Pay</mat-radio-button>
+                                        <mat-radio-button value="upi" (change)="payValid=false">UPI Pay
+                                        </mat-radio-button>
                                         <div *ngIf="payMode=='upi'" class="ml-4 mt-2">
-                                            <mat-form-field [color]="vpaColor">
+                                            <mat-form-field appearance="outline" [color]="vpaColor">
                                                 <mat-label>UPI VPA</mat-label>
                                                 <input matInput type="text" [(ngModel)]="upiVpa" style="width: 100px;">
                                                 <button mat-button *ngIf="value" matSuffix mat-icon-button
                                                     aria-label="Clear" (click)="validateVPA()">
                                                     <mat-icon *ngIf="validVPA==null">search</mat-icon>
-                                                    <mat-icon *ngIf="validVPA==false">error</mat-icon>
-                                                    <mat-icon *ngIf="validVPA">verified_user</mat-icon>
+                                                    <mat-icon *ngIf="validVPA==false" style="color: red;">error</mat-icon>
+                                                    <mat-icon *ngIf="validVPA" style="color: green;">verified_user</mat-icon>
                                                 </button>
                                             </mat-form-field>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
-                                        <mat-radio-button value="cash" (change)="payValid=true">Cash On Delivery</mat-radio-button>
+                                        <mat-radio-button value="cash" (change)="payValid=true">Cash On Delivery
+                                        </mat-radio-button>
                                         <div *ngIf="payMode=='cash'" class="alert alert-success ml-4 mt-2">
                                             Please provide the bill amount &#x20B9; {{cart.totalCost | number:'.0-2'}}
                                             in cash to the delivery person.

@@ -2,6 +2,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatSelectModule } from '@angular/material/select'
@@ -15,7 +16,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { Ng5SliderModule } from 'ng5-slider'
 
 import { HttpClientModule } from '@angular/common/http';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserLoginComponent } from './user-login/user-login.component';
@@ -74,6 +75,7 @@ import { AddReviewService } from './add-review/add-review.service';
     MatTooltipModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatListModule,
     MatExpansionModule,
     MatIconModule,
     MatCheckboxModule,

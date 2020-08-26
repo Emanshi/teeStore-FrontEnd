@@ -11,29 +11,29 @@ import { Orders } from '../models/orders';
 })
 export class ProfileService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getUser(user:User):Observable<User>{
-    return this.http.get<User>(environment.userApi+"getUser/"+user.userId);
+  getUser(user: User): Observable<User> {
+    return this.http.get<User>(environment.userApi + "getUser/" + user.userId);
   }
 
-  updateProfileDetails(userId:string, user:User):Observable<string>{
-    return this.http.post<string>(environment.userApi+"editUserProfile/"+userId, user)
+  updateProfileDetails(userId: string, user: User) {
+    return this.http.post(environment.userApi + "editUserProfile/" + userId, user, { responseType: 'text' })
   }
 
-  addAddress(address:Address, userId:string):Observable<string>{
-    return this.http.post<string>(environment.userApi+"addAddress/"+userId, address)
+  addAddress(address: Address, userId: string) {
+    return this.http.post(environment.userApi + "addAddress/" + userId, address, { responseType: 'text' })
   }
 
-  editAddress(address:Address, addressId:string):Observable<string>{
-    return this.http.put<string>(environment.userApi+"editAddress/"+addressId, address)
+  editAddress(address: Address, addressId: string) {
+    return this.http.put(environment.userApi + "editAddress/" + addressId, address, { responseType: 'text' })
   }
 
-  deleteAddress(userId:string, addressId:string):Observable<string>{
-    return this.http.delete<string>(environment.userApi+"deleteAddress?userId="+userId+"&addressId="+addressId)
+  deleteAddress(userId: string, addressId: string) {
+    return this.http.delete(environment.userApi + "deleteAddress?userId=" + userId + "&addressId=" + addressId, { responseType: 'text' })
   }
 
-  getOrderByUserId(userId:string):Observable<Orders[]>{
-    return this.http.get<Orders[]>(environment.orderApi+"getOrderByUserId?userId="+userId)
+  getOrderByUserId(userId: string): Observable<Orders[]> {
+    return this.http.get<Orders[]>(environment.orderApi + "getOrderByUserId?userId=" + userId)
   }
 }

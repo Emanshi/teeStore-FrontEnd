@@ -13,6 +13,7 @@ import { Address } from '../models/address';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Product } from '../models/product';
 import { ViewProductService } from '../view-product/view-product.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
@@ -40,8 +41,12 @@ export class CheckoutComponent implements OnInit {
   validVPA: boolean
   vpaColor: string
   payValid: boolean
+  newAddressForm: FormGroup
+  newCardForm: FormGroup
+  addressSelector: string
 
   constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private auth: AuthenticatorService,
@@ -103,8 +108,24 @@ export class CheckoutComponent implements OnInit {
 
     this.payValid = false
 
+    this.newCardForm = this.fb.group({
+      cardNo: ['', [Validators.required, Validators.pattern("^[0-9]{16}$")]],
+      cardName: ['', [Validators.required, Validators.maxLength(50)]],
+      cvv: ['', [Validators.required, Validators.pattern("^[0-9]{3}$")]],
+      expiry: ['', [Validators.required, Validators.pattern("^[0-1][0-9]{3}$")]]
+    })
+
     this.deliveryDate = new Date()
     this.deliveryDate.setDate(this.deliveryDate.getDate() + 4)
+  }
+
+  addressFormInit() {
+    this.newAddressForm = this.fb.group({
+      street: ['', [Validators.required, Validators.maxLength(100)]],
+      city: ['', [Validators.required, Validators.maxLength(50)]],
+      state: ['', [Validators.required, Validators.maxLength(50)]],
+      pinCode: ['', [Validators.required, Validators.pattern("^[1-9][0-9]{5}$")]]
+    })
   }
 
   addQty(i: number) {
@@ -164,13 +185,30 @@ export class CheckoutComponent implements OnInit {
   }
 
   proceedAddressSelected() {
-    if (!this.addressSelected) {
+    if (!this.addressSelected && this.addressSelector != 'new') {
       this.snackBar.open('Please select an address', 'Okay', {
         duration: 50000,
         verticalPosition: 'bottom',
         panelClass: 'warn-snackbar'
       });
-    } else {
+    } else if (this.addressSelector == 'new') {
+      if (this.newAddressForm.invalid) {
+        this.snackBar.open('Please enter appropiate address', 'Okay', {
+          duration: 50000,
+          verticalPosition: 'bottom',
+          panelClass: 'warn-snackbar'
+        });
+      } else {
+        this.addressSelected = this.newAddressForm.value
+        this.profileService.addAddress(this.addressSelected, this.viewUser.userId).subscribe(
+          res => this.addressSelected.addressId = res,
+          err => alert("Address could not be added. " + JSON.stringify(err))
+        )
+        this.addressAccordian = false
+        this.cartAccordian = true
+      }
+    }
+    else {
       this.addressAccordian = false
       this.cartAccordian = true
     }
@@ -205,16 +243,24 @@ export class CheckoutComponent implements OnInit {
   }
 
   placeOrder() {
-    this.service.placeOrder(this.cart, this.addressSelected.addressId, this.payMode).subscribe(
-      res => {
-        this.snackBar.open('Congrats! Order has been placed', 'Thanks', {
-          duration: 5000,
-          verticalPosition: 'bottom',
-          panelClass: 'primary-snackbar'
-        });
-        this.router.navigate(['/order'], { queryParams: { id: res } });
-      },
-      err => alert(JSON.stringify(err))
-    )
+    if (this.payMode == 'card' && this.newCardForm.invalid) {
+      this.snackBar.open('Please enter valid card details', 'Okay', {
+        duration: 50000,
+        verticalPosition: 'bottom',
+        panelClass: 'warn-snackbar'
+      });
+    } else {
+      this.service.placeOrder(this.cart, this.addressSelected.addressId, this.payMode).subscribe(
+        res => {
+          this.snackBar.open('Congrats! Order has been placed', 'Thanks', {
+            duration: 5000,
+            verticalPosition: 'bottom',
+            panelClass: 'primary-snackbar'
+          });
+          this.router.navigate(['/order'], { queryParams: { id: res } });
+        },
+        err => alert(JSON.stringify(err))
+      )
+    }
   }
 }
