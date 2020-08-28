@@ -13,7 +13,8 @@ import { Address } from '../models/address';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Product } from '../models/product';
 import { ViewProductService } from '../view-product/view-product.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Card } from '../models/card';
 
 @Component({
   selector: 'app-checkout',
@@ -36,6 +37,7 @@ export class CheckoutComponent implements OnInit {
   cartAccordian: boolean
   payAccordian: boolean
   addressSelected: Address
+  cardSelected: Card
   payMode: string
   upiVpa: string
   validVPA: boolean
@@ -44,6 +46,9 @@ export class CheckoutComponent implements OnInit {
   newAddressForm: FormGroup
   newCardForm: FormGroup
   addressSelector: string
+  cardSelector: string
+  cardList: Card[]
+  saveCard: boolean = true
 
   constructor(
     private fb: FormBuilder,
@@ -79,6 +84,7 @@ export class CheckoutComponent implements OnInit {
     if (!this.loggiedIn) {
       this.router.navigate(['/login'])
     }
+
     this.route.queryParams.subscribe(
       params => {
         this.type = params['type']
@@ -108,13 +114,6 @@ export class CheckoutComponent implements OnInit {
 
     this.payValid = false
 
-    this.newCardForm = this.fb.group({
-      cardNo: ['', [Validators.required, Validators.pattern("^[0-9]{16}$")]],
-      cardName: ['', [Validators.required, Validators.maxLength(50)]],
-      cvv: ['', [Validators.required, Validators.pattern("^[0-9]{3}$")]],
-      expiry: ['', [Validators.required, Validators.pattern("^[0-1][0-9]{3}$")]]
-    })
-
     this.deliveryDate = new Date()
     this.deliveryDate.setDate(this.deliveryDate.getDate() + 4)
   }
@@ -125,6 +124,15 @@ export class CheckoutComponent implements OnInit {
       city: ['', [Validators.required, Validators.maxLength(50)]],
       state: ['', [Validators.required, Validators.maxLength(50)]],
       pinCode: ['', [Validators.required, Validators.pattern("^[1-9][0-9]{5}$")]]
+    })
+  }
+
+  cardFormInit() {
+    this.newCardForm = this.fb.group({
+      cardNumber: ['', [Validators.required, Validators.pattern("^[0-9]{16}$")]],
+      cardHolderName: ['', [Validators.required, Validators.maxLength(50)]],
+      cvv: ['', [Validators.required, Validators.pattern("^[0-9]{3}$")]],
+      expiryMonthYear: ['', [Validators.required, this.validateExpiry]]
     })
   }
 
@@ -184,6 +192,10 @@ export class CheckoutComponent implements OnInit {
     this.addressSelected = this.viewUser.addresses[index]
   }
 
+  setCard(i) {
+    this.cardSelected = this.cardList[i]
+  }
+
   proceedAddressSelected() {
     if (!this.addressSelected && this.addressSelector != 'new') {
       this.snackBar.open('Please select an address', 'Okay', {
@@ -225,6 +237,12 @@ export class CheckoutComponent implements OnInit {
         )
         this.cartService.changed = false
       }
+
+      this.service.getAllCards(this.viewUser.userId).subscribe(
+        res => this.cardList = res,
+        err => console.log('Card retrieval error : ' + JSON.stringify(err))
+
+      )
       this.cartAccordian = false
       this.payAccordian = true
     }
@@ -250,6 +268,12 @@ export class CheckoutComponent implements OnInit {
         panelClass: 'warn-snackbar'
       });
     } else {
+      if (this.saveCard) {
+        this.service.addCard(this.newCardForm.value, this.viewUser.userId).subscribe(
+          res => console.log('Card persisted with id : ' + res),
+          err => alert(JSON.stringify(err))
+        )
+      }
       this.service.placeOrder(this.cart, this.addressSelected.addressId, this.payMode).subscribe(
         res => {
           this.snackBar.open('Congrats! Order has been placed', 'Thanks', {
@@ -262,5 +286,19 @@ export class CheckoutComponent implements OnInit {
         err => alert(JSON.stringify(err))
       )
     }
+  }
+
+  validateExpiry(control: AbstractControl): { [key: string]: any } | null {
+    let expiry: string = control.value;
+    let parts = expiry.split('-')
+    if (Number(parts[0]) < 0 || Number(parts[0]) > 12 || Number(parts[1]) > 99) {
+      return { 'expiryInvalid': true };
+    }
+    let today = new Date()
+    let expire = new Date(2000 + Number(parts[1]), Number(parts[0]))
+    if (today > expire || expire.getFullYear() - today.getFullYear() > 6) {
+      return { 'expiryInvalid': true };
+    }
+    return null;
   }
 }

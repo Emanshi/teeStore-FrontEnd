@@ -81,7 +81,8 @@
                                                             characters
                                                         </mat-error>
                                                     </mat-form-field>
-                                                    <mat-form-field appearance="outline" style="width: 48%; margin-left: 1%; margin-right: 1%;">
+                                                    <mat-form-field appearance="outline"
+                                                        style="width: 48%; margin-left: 1%; margin-right: 1%;">
                                                         <mat-label>State<span class="text-danger">*</span></mat-label>
                                                         <input matInput type="text" formControlName="state" id="state">
                                                         <mat-error
@@ -178,15 +179,88 @@
                                         <mat-radio-button value="card" (change)="payValid=true">Card Pay
                                         </mat-radio-button>
                                         <div *ngIf="payMode=='card'" class="ml-4 mt-2 col-md-8">
-                                            <form [formGroup]="newCardForm" class="form">
+                                            <div class="card">
+                                                <ul class="list-group">
+                                                    <mat-radio-group [(ngModel)]="cardSelector">
+                                                        <li class="list-group-item"
+                                                            *ngFor="let a of cardList; let i = index">
+                                                            <mat-radio-button [value]="a.street"
+                                                                (change)="setCard(i)">
+                                                                <div class="ml-3">
+                                                                    <mat-label class="h5">Card {{i+1}}</mat-label>
+                                                                    <div>{{a.cardHolderName}}</div>
+                                                                    <div>{{a.cardNumber | cardPipe}}</div>
+                                                                    <div>, {{a.cvv}} - {{a.expiryMonthYear}}</div>
+                                                                </div>
+                                                            </mat-radio-button>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <mat-radio-button value="new" (change)="cardFormInit()">
+                                                                <span class="ml-3">Add New Card</span>
+                                                            </mat-radio-button>
+                                                            <div *ngIf="cardSelector=='new'"
+                                                                class="ml-4 mt-2 col-md-9">
+                                                                <form [formGroup]="newCardForm" class="form">
+                                                                    <div class="form-group">
+                                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                                            <mat-label>Name on Card<span class="text-danger">*</span>
+                                                                            </mat-label>
+                                                                            <input matInput type="text" formControlName="cardHolderName"
+                                                                                id="cardHolderName">
+                                                                            <mat-error
+                                                                                *ngIf="newCardForm.get('cardHolderName').invalid && newCardForm.get('cardHolderName').touched"
+                                                                                class="text-danger">Name on Card should be provided as is
+                                                                            </mat-error>
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <mat-form-field appearance="outline" style="width: 100%;">
+                                                                            <mat-label>Card Number<span class="text-danger">*</span>
+                                                                            </mat-label>
+                                                                            <input matInput type="number" formControlName="cardNumber"
+                                                                                id="cardNumber">
+                                                                            <mat-error
+                                                                                *ngIf="newCardForm.get('cardNumber').invalid && newCardForm.get('cardNumber').touched"
+                                                                                class="text-danger">Card number should be of 16 digits
+                                                                            </mat-error>
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <mat-form-field appearance="outline" style="width: 49%;">
+                                                                            <mat-label>CVV<span class="text-danger">*</span></mat-label>
+                                                                            <input matInput type="number" formControlName="cvv" id="cvv">
+                                                                            <mat-error
+                                                                                *ngIf="newCardForm.get('cvv').invalid && newCardForm.get('cvv').touched"
+                                                                                class="text-danger">CVV should be of 3 digits
+                                                                            </mat-error>
+                                                                        </mat-form-field>
+                                                                        <mat-form-field appearance="outline"
+                                                                            style="width: 49%; margin-left: 2%;">
+                                                                            <mat-label>Expiry<span class="text-danger">*</span></mat-label>
+                                                                            <input matInput type="text" formControlName="expiryMonthYear"
+                                                                                id="expiryMonthYear">
+                                                                            <mat-error
+                                                                                *ngIf="newCardForm.get('expiryMonthYear').invalid && newCardForm.get('expiryMonthYear').touched"
+                                                                                class="text-danger">Expiry should be a future date
+                                                                            </mat-error>
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                </form>
+                                                                <mat-checkbox [(ngModel)]="saveCard" checked="true">Save this card</mat-checkbox>
+                                                            </div>
+                                                        </li>
+                                                    </mat-radio-group>
+                                                </ul>
+                                            </div>
+                                            <!-- <form [formGroup]="newCardForm" class="form">
                                                 <div class="form-group">
                                                     <mat-form-field appearance="outline" style="width: 100%;">
                                                         <mat-label>Name on Card<span class="text-danger">*</span>
                                                         </mat-label>
-                                                        <input matInput type="text" formControlName="cardName"
-                                                            id="street">
+                                                        <input matInput type="text" formControlName="cardHolderName"
+                                                            id="cardHolderName">
                                                         <mat-error
-                                                            *ngIf="newCardForm.get('cardName').invalid && newCardForm.get('cardName').touched"
+                                                            *ngIf="newCardForm.get('cardHolderName').invalid && newCardForm.get('cardHolderName').touched"
                                                             class="text-danger">Name on Card should be provided as is
                                                         </mat-error>
                                                     </mat-form-field>
@@ -195,10 +269,10 @@
                                                     <mat-form-field appearance="outline" style="width: 100%;">
                                                         <mat-label>Card Number<span class="text-danger">*</span>
                                                         </mat-label>
-                                                        <input matInput type="number" formControlName="cardNo"
-                                                            id="street">
+                                                        <input matInput type="number" formControlName="cardNumber"
+                                                            id="cardNumber">
                                                         <mat-error
-                                                            *ngIf="newCardForm.get('cardNo').invalid && newCardForm.get('cardNo').touched"
+                                                            *ngIf="newCardForm.get('cardNumber').invalid && newCardForm.get('cardNumber').touched"
                                                             class="text-danger">Card number should be of 16 digits
                                                         </mat-error>
                                                     </mat-form-field>
@@ -212,16 +286,20 @@
                                                             class="text-danger">CVV should be of 3 digits
                                                         </mat-error>
                                                     </mat-form-field>
-                                                    <mat-form-field appearance="outline" style="width: 49%; margin-left: 2%;">
+                                                    <mat-form-field appearance="outline"
+                                                        style="width: 49%; margin-left: 2%;">
                                                         <mat-label>Expiry<span class="text-danger">*</span></mat-label>
-                                                        <input matInput type="text" formControlName="expiry" id="expiry">
+                                                        <input matInput type="text" formControlName="expiryMonthYear"
+                                                            id="expiryMonthYear">
                                                         <mat-error
-                                                            *ngIf="newCardForm.get('expiry').invalid && newCardForm.get('expiry').touched"
+                                                            *ngIf="newCardForm.get('expiryMonthYear').invalid && newCardForm.get('expiryMonthYear').touched"
                                                             class="text-danger">Expiry should be a future date
                                                         </mat-error>
                                                     </mat-form-field>
                                                 </div>
-                                            </form>
+                                            </form> -->
+                                            <!-- <mat-checkbox [(ngModel)]="saveCard" checked="true">Save this card -->
+                                            <!-- </mat-checkbox> -->
                                         </div>
                                     </li>
                                     <li class="list-group-item">
@@ -234,8 +312,10 @@
                                                 <button mat-button *ngIf="value" matSuffix mat-icon-button
                                                     aria-label="Clear" (click)="validateVPA()">
                                                     <mat-icon *ngIf="validVPA==null">search</mat-icon>
-                                                    <mat-icon *ngIf="validVPA==false" style="color: red;">error</mat-icon>
-                                                    <mat-icon *ngIf="validVPA" style="color: green;">verified_user</mat-icon>
+                                                    <mat-icon *ngIf="validVPA==false" style="color: red;">error
+                                                    </mat-icon>
+                                                    <mat-icon *ngIf="validVPA" style="color: green;">verified_user
+                                                    </mat-icon>
                                                 </button>
                                             </mat-form-field>
                                         </div>

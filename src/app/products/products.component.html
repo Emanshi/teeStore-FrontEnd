@@ -35,7 +35,8 @@
                             Price
                         </mat-expansion-panel-header>
                         <div class="custom-slider">
-                            <ng5-slider [(value)]="filters.lowPrice" [(highValue)]="filters.highPrice" [options]="options" (valueChange)="filtering()"></ng5-slider>
+                            <ng5-slider [(value)]="filters.lowPrice" [(highValue)]="filters.highPrice"
+                                [options]="options" (valueChange)="filtering()"></ng5-slider>
                             <span style="float: left"> {{filters.lowPrice | currency:'INR'}}</span>
                             <span style="float: right"> {{filters.highPrice | currency:'INR'}}</span>
                         </div>
@@ -44,20 +45,28 @@
                         <mat-expansion-panel-header>
                             Discount
                         </mat-expansion-panel-header>
-                        <mat-checkbox [(ngModel)]="filters.percent25" (change)="filtering()">25% or more</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.percent20" (change)="filtering()">20% to 25&</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.percent15" (change)="filtering()">15% to 20%</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.percent10" (change)="filtering()">10% to 15%</mat-checkbox> <br />
+                        <mat-checkbox [(ngModel)]="filters.percent25" (change)="filtering()">25% or more</mat-checkbox>
+                        <br />
+                        <mat-checkbox [(ngModel)]="filters.percent20" (change)="filtering()">20% to 25&</mat-checkbox>
+                        <br />
+                        <mat-checkbox [(ngModel)]="filters.percent15" (change)="filtering()">15% to 20%</mat-checkbox>
+                        <br />
+                        <mat-checkbox [(ngModel)]="filters.percent10" (change)="filtering()">10% to 15%</mat-checkbox>
+                        <br />
                         <mat-checkbox [(ngModel)]="filters.percent5" (change)="filtering()">10% and below</mat-checkbox>
                     </mat-expansion-panel>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             Ratings
                         </mat-expansion-panel-header>
-                        <mat-checkbox [(ngModel)]="filters.ratings4" (change)="filtering()">4+ ratings</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.ratings3" (change)="filtering()">3+ ratings</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.ratings2" (change)="filtering()">2+ ratings</mat-checkbox> <br />
-                        <mat-checkbox [(ngModel)]="filters.ratings1" (change)="filtering()">Most disliked</mat-checkbox> <br />
+                        <mat-checkbox [(ngModel)]="filters.ratings4" (change)="filtering()">4+ ratings</mat-checkbox>
+                        <br />
+                        <mat-checkbox [(ngModel)]="filters.ratings3" (change)="filtering()">3+ ratings</mat-checkbox>
+                        <br />
+                        <mat-checkbox [(ngModel)]="filters.ratings2" (change)="filtering()">2+ ratings</mat-checkbox>
+                        <br />
+                        <mat-checkbox [(ngModel)]="filters.ratings1" (change)="filtering()">Most disliked</mat-checkbox>
+                        <br />
                     </mat-expansion-panel>
 
                 </mat-accordion>
@@ -95,7 +104,7 @@
                     <div class="h1 text-center" *ngIf="products==null || products.length==0">Nothing to show</div>
                     <div class="card-deck">
                         <div class="col-md-3 mb-2" *ngFor="let p of products; let i = index">
-                            <div class="row">                
+                            <div class="row">
                                 <div class="card text-center hover-scale mb-3"
                                     style="margin-left: 5%; margin-right: 5%;width: 18rem">
                                     <div>
@@ -104,29 +113,32 @@
                                         <div class="card-body text-truncate">
                                             <h3 class="card-title text-capitalize"><a
                                                     [routerLink]="['/product',p.productId]">{{p.productName}}</a>&nbsp;
-                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}% off</span>
+                                                <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                    off</span>
                                             </h3>
                                             <p class="card-text">
                                                 <span *ngIf="p.avgRating!=0"
-                                                        matTooltip="{{p.avgRating | ratingtooltip}}">
-                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                                            <i class="fa fa-star" *ngIf="j<p.avgRating"
-                                                                [matTooltip]="p.avgRating" style="color: orange;"></i>
-                                                        </span>
-                                                        <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                                            <i class="fa fa-star" *ngIf="j>p.avgRating"
-                                                                style="color: grey;"></i>
-                                                        </span>
-                                                        &nbsp; {{p.avgRating | number: '1.1-1'}}
-                                                        &nbsp; ({{p.totalRaters}})
+                                                    matTooltip="{{p.avgRating | ratingtooltip}}">
+                                                    <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                        <i class="fa fa-star" *ngIf="j<p.avgRating"
+                                                            [matTooltip]="p.avgRating" style="color: orange;"></i>
                                                     </span>
-                                                    <span *ngIf="p.avgRating==0" class="text-secondary">
-                                                        Not enough ratings yet
+                                                    <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
+                                                        <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                            style="color: grey;"></i>
                                                     </span>
-                                                    <br /><br />
+                                                    &nbsp; {{p.avgRating | number: '1.1-1'}}
+                                                    &nbsp; ({{p.totalRaters}})
+                                                </span>
+                                                <span *ngIf="p.avgRating==0" class="text-secondary">
+                                                    Not enough ratings yet
+                                                </span>
+                                                <br /><br />
                                                 <span *ngIf="!p.discount"><b>&#x20B9; {{p.cost}}</b></span>
-                                                <span *ngIf="p.discount"><b>&#x20B9; {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
-                                                <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9; {{p.cost}}</del></span>
+                                                <span *ngIf="p.discount"><b>&#x20B9;
+                                                        {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
+                                                <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
+                                                        {{p.cost}}</del></span>
                                             </p>
                                         </div>
                                     </div>

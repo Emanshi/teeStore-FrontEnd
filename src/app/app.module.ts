@@ -45,6 +45,7 @@ import { ViewOrdersComponent } from './view-orders/view-orders.component';
 import { ViewOrdersService } from './view-orders/view-orders.service';
 import { AddReviewComponent } from './add-review/add-review.component';
 import { AddReviewService } from './add-review/add-review.service';
+import { CardPipe } from './checkout/card.pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { AddReviewService } from './add-review/add-review.service';
     CartComponent,
     CheckoutComponent,
     ViewOrdersComponent,
-    AddReviewComponent
+    AddReviewComponent,
+    CardPipe
   ],
   imports: [
     BrowserModule,
