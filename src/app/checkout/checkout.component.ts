@@ -15,6 +15,7 @@ import { Product } from '../models/product';
 import { ViewProductService } from '../view-product/view-product.service';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Card } from '../models/card';
+import { DeleteCardDialog } from './delete.card.dialog';
 
 @Component({
   selector: 'app-checkout',
@@ -226,6 +227,42 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  deleteCardConfirmer(aId) {
+    const dialogRef = this.dialog.open(DeleteCardDialog, {
+      width: '250px',
+      data: aId
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.deleteCard(result)
+    });
+  }
+
+  deleteCard(data) {
+    if (data != null) {
+      this.service.deleteCard(data).subscribe(
+        res => {
+          console.log('Card no ' + res + ' deleted');
+          this.snackBar.open('Card deleted', 'Okay', {
+            duration: 5000,
+            verticalPosition: 'bottom',
+            panelClass: 'primary-snackbar'
+          });
+          this.getAllCards()
+        },
+        err => {
+          console.log(JSON.stringify(err));
+          this.snackBar.open('Unable to delete Card', 'Okay', {
+            duration: 50000,
+            verticalPosition: 'bottom',
+            panelClass: 'warn-snackbar'
+          });
+          this.cardList=[]
+        }
+      )
+    }
+  }
+
   proceedCartConfirmed() {
     if (!this.addressSelected) {
       alert('Please select an address')
@@ -238,14 +275,18 @@ export class CheckoutComponent implements OnInit {
         this.cartService.changed = false
       }
 
-      this.service.getAllCards(this.viewUser.userId).subscribe(
-        res => this.cardList = res,
-        err => console.log('Card retrieval error : ' + JSON.stringify(err))
+      this.getAllCards()
 
-      )
       this.cartAccordian = false
       this.payAccordian = true
     }
+  }
+
+  getAllCards() {
+    this.service.getAllCards(this.viewUser.userId).subscribe(
+      res => this.cardList = res,
+      err => console.log('Card retrieval error : ' + JSON.stringify(err))
+    )
   }
 
   validateVPA() {

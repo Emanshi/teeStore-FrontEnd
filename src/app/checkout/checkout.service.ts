@@ -23,4 +23,8 @@ export class CheckoutService {
   getAllCards(userId: string): Observable<Card[]> {
     return this.http.get<Card[]>(environment.userApi + "getAllCards/" + userId)
   }
+
+  deleteCard(cardId: string): Observable<string> {
+    return this.http.delete(environment.userApi + 'deleteCard/' + cardId, { responseType: 'text' });
+  }
 }

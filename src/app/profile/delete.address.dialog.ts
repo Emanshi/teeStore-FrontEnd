@@ -3,7 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { ProfileService } from './profile.service';
 
 @Component({
-    selector: 'dialog-overview-example-dialog',
+    selector: 'dialog-overview-address-dialog',
     templateUrl: 'delete.address.dialog.html',
   })
   export class DeleteAddressDialog {
