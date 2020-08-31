@@ -14,7 +14,6 @@ export const environment = {
   cartApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/CartAPI/",
   orderApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/OrdersAPI/",
   carouselApi:"http://tee-storebackend-server.herokuapp.com/TeeStore_backend/CarouselAPI/"
-
 };
 
 /*
