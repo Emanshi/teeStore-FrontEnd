@@ -28,3 +28,7 @@ button[disabled]{
     color:#454545;
 }
 
+.text-overflow {
+    overflow:hidden;
+    text-overflow:ellipsis;
+}

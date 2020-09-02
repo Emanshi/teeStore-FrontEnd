@@ -12,7 +12,8 @@ import { MatSliderModule } from '@angular/material/slider'
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
 import { Ng5SliderModule } from 'ng5-slider'
 
 import { HttpClientModule } from '@angular/common/http';
@@ -80,6 +81,7 @@ import { CardPipe } from './checkout/card.pipe.pipe';
     MatListModule,
     MatExpansionModule,
     MatIconModule,
+    MatBadgeModule,
     MatCheckboxModule,
     MatRadioModule,
     MatInputModule,

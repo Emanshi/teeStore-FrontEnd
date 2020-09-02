@@ -48,3 +48,8 @@
 ::ng-deep .custom-slider .ng5-slider .ng5-slider-pointer:after {
     display: none;
 }
+
+.text-overflow {
+    overflow:hidden;
+    text-overflow:ellipsis;
+}

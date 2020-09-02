@@ -33,9 +33,9 @@
 
                 <div class="carousel-item" *ngFor="let c of carouselList, let i=index;let isFirst = first"
                     [ngClass]="{active:isFirst}">
-                    <a class="text-dark"  [routerLink]="['/products']"
-                            [queryParams]="{filter: c.filter,value:c.value}"> 
-                    <img [src]="c.linkImage" [alt]="c.value" class="d-block w-100 rounded" style="height:430px;width:100%"></a>
+                    <a class="text-dark" [routerLink]="['/products']" [queryParams]="{filter: c.filter,value:c.value}">
+                        <img [src]="c.linkImage" [alt]="c.value" class="d-block w-100 rounded"
+                            style="height:430px;width:100%"></a>
                 </div>
 
             </div>
@@ -70,8 +70,6 @@
                                             <div class="card-body text-truncate">
                                                 <h3 class="card-title text-overflow"><a
                                                         [routerLink]="['/product',p.productId]">{{p.productName}}</a>
-                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
-                                                        off</span>
                                                 </h3>
                                                 <p class="card-text">
                                                     <span *ngIf="p.avgRating!=0"
@@ -95,7 +93,9 @@
                                                     <span *ngIf="p.discount"><b>&#x20B9;
                                                             {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
                                                     <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
-                                                            {{p.cost}}</del></span>
+                                                            {{p.cost}}</del></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                        off</span>
                                                 </p>
                                             </div>
                                         </div>
@@ -123,8 +123,6 @@
                                             <div class="card-body text-truncate">
                                                 <h3 class="card-title text-overflow"><a
                                                         [routerLink]="['/product',p.productId]">{{p.productName}}</a>&nbsp;
-                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
-                                                        off</span>
                                                 </h3>
                                                 <p class="card-text text-center">
                                                     <span *ngIf="p.avgRating!=0"
@@ -148,7 +146,9 @@
                                                     <span *ngIf="p.discount"><b>&#x20B9;
                                                             {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
                                                     <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
-                                                            {{p.cost}}</del></span>
+                                                            {{p.cost}}</del></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                        off</span>
                                                 </p>
                                             </div>
                                         </div>
@@ -175,10 +175,8 @@
                                             <a [routerLink]="['/product',p.productId]"><img class="card-img-top"
                                                     [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                             <div class="card-body text-truncate">
-                                                <h3 class="card-title"><a
+                                                <h3 class="card-title text-overflow"><a
                                                         [routerLink]="['/product',p.productId]">{{p.productName}}</a>
-                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
-                                                        off</span>
                                                 </h3>
                                                 <p class="card-text text-center">
                                                     <span *ngIf="p.avgRating!=0"
@@ -202,7 +200,9 @@
                                                     <span *ngIf="p.discount"><b>&#x20B9;
                                                             {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
                                                     <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
-                                                            {{p.cost}}</del></span>
+                                                            {{p.cost}}</del></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                        off</span>
                                                 </p>
                                             </div>
                                         </div>
@@ -231,8 +231,6 @@
                                             <div class="card-body text-truncate">
                                                 <h3 class="card-title text-overflow"><a
                                                         [routerLink]="['/product',p.productId]">{{p.productName}}</a>
-                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
-                                                        off</span>
                                                 </h3>
                                                 <p class="card-text text-center">
                                                     <span *ngIf="p.avgRating!=0"
@@ -256,7 +254,9 @@
                                                     <span *ngIf="p.discount"><b>&#x20B9;
                                                             {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
                                                     <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
-                                                            {{p.cost}}</del></span>
+                                                            {{p.cost}}</del></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                        off</span>
                                                 </p>
                                             </div>
                                         </div>
@@ -284,8 +284,6 @@
                                             <div class="card-body text-truncate">
                                                 <h3 class="card-title text-overflow"><a
                                                         [routerLink]="['/product',p.productId]">{{p.productName}}</a>
-                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
-                                                        off</span>
                                                 </h3>
                                                 <p class="card-text text-center">
                                                     <span *ngIf="p.avgRating!=0"
@@ -309,7 +307,9 @@
                                                     <span *ngIf="p.discount"><b>&#x20B9;
                                                             {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
                                                     <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
-                                                            {{p.cost}}</del></span>
+                                                            {{p.cost}}</del></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                        off</span>
                                                 </p>
                                             </div>
                                         </div>
@@ -338,8 +338,6 @@
                                             <div class="card-body text-truncate">
                                                 <h3 class="card-title text-overflow"><a
                                                         [routerLink]="['/product',p.productId]">{{p.productName}}</a>
-                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
-                                                        off</span>
                                                 </h3>
                                                 <p class="card-text text-center">
                                                     <span *ngIf="p.avgRating!=0"
@@ -363,7 +361,9 @@
                                                     <span *ngIf="p.discount"><b>&#x20B9;
                                                             {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
                                                     <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
-                                                            {{p.cost}}</del></span>
+                                                            {{p.cost}}</del></span>&nbsp;
+                                                    <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                        off</span>
                                                 </p>
                                             </div>
                                         </div>

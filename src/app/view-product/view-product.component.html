@@ -148,8 +148,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 text-center">
-                                    <div class="h3 mt-auto">{{product.avgRating | number: '1.1-1'}} <i class="fa fa-star"
-                                            aria-hidden="true"></i></div>
+                                    <div class="h3 mt-auto">{{product.avgRating | number: '1.1-1'}} <i
+                                            class="fa fa-star" aria-hidden="true"></i></div>
                                     out of 5
                                     <br><small>({{reviewCounts.one+reviewCounts.two+reviewCounts.three+reviewCounts.four+reviewCounts.five}}
                                         ratings)</small>
@@ -202,10 +202,8 @@
                                         <a [routerLink]="[]" (click)="reloadPage(p.productId)"><img class="card-img-top"
                                                 [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                         <div class="card-body text-truncate">
-                                            <h3 class="card-title text-overflow"><a [routerLink]="[]"
-                                                    (click)="reloadPage(p.productId)">{{p.productName}}</a>
-                                                <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
-                                                    off</span>
+                                            <h3 class="card-title text-overflow text-capitalize" style="font-weight: 500;"><a
+                                                    [routerLink]="['/product',p.productId]">{{p.productName}}</a>
                                             </h3>
                                             <p class="card-text text-center">
                                                 <span *ngIf="p.avgRating!=0"
@@ -215,10 +213,10 @@
                                                             [matTooltip]="p.avgRating" style="color: orange;"></i>
                                                     </span>
                                                     <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                                        <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                        <i class="fa fa-star" *ngIf="j>=p.avgRating"
                                                             style="color: grey;"></i>
                                                     </span>
-                                                    &nbsp; {{p.avgRating}}
+                                                    &nbsp; {{p.avgRating | number: '1.1-1'}}
                                                     &nbsp; ({{p.totalRaters}})
                                                 </span>
                                                 <span *ngIf="p.avgRating==0" class="text-secondary">
@@ -229,7 +227,9 @@
                                                 <span *ngIf="p.discount"><b>&#x20B9;
                                                         {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
                                                 <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
-                                                        {{p.cost}}</del></span>
+                                                        {{p.cost}}</del></span>&nbsp;
+                                                <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                    off</span>
                                             </p>
                                         </div>
                                     </div>
@@ -257,10 +257,8 @@
                                         <a [routerLink]="[]" (click)="reloadPage(p.productId)"><img class="card-img-top"
                                                 [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                         <div class="card-body text-truncate">
-                                            <h3 class="card-title text-overflow"><a [routerLink]="[]"
-                                                    (click)="reloadPage(p.productId)">{{p.productName}}</a>
-                                                <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
-                                                    off</span>
+                                            <h3 class="card-title text-overflow text-capitalize" style="font-weight: 500;"><a
+                                                    [routerLink]="['/product',p.productId]">{{p.productName}}</a>
                                             </h3>
                                             <p class="card-text text-center">
                                                 <span *ngIf="p.avgRating!=0"
@@ -270,10 +268,10 @@
                                                             [matTooltip]="p.avgRating" style="color: orange;"></i>
                                                     </span>
                                                     <span *ngFor="let i of [1,2,3,4,5] ;let j = index">
-                                                        <i class="fa fa-star" *ngIf="j>p.avgRating"
+                                                        <i class="fa fa-star" *ngIf="j>=p.avgRating"
                                                             style="color: grey;"></i>
                                                     </span>
-                                                    &nbsp; {{p.avgRating}}
+                                                    &nbsp; {{p.avgRating | number: '1.1-1'}}
                                                     &nbsp; ({{p.totalRaters}})
                                                 </span>
                                                 <span *ngIf="p.avgRating==0" class="text-secondary">
@@ -284,7 +282,9 @@
                                                 <span *ngIf="p.discount"><b>&#x20B9;
                                                         {{(p.cost*(1-p.discount/100)) | number:'.0-2'}}</b></span>&nbsp;
                                                 <span *ngIf="p.discount" class="text-secondary"><del>&#x20B9;
-                                                        {{p.cost}}</del></span>
+                                                        {{p.cost}}</del></span>&nbsp;
+                                                <span *ngIf="p.discount" class="badge badge-success">{{p.discount}}%
+                                                    off</span>
                                             </p>
                                         </div>
                                     </div>
