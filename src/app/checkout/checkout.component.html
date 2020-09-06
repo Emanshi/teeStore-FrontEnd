@@ -215,7 +215,7 @@
                                                                     <div class="form-group">
                                                                         <mat-form-field appearance="outline"
                                                                             style="width: 100%;">
-                                                                            <mat-label>Name on Card<span
+                                                                            <mat-label>Name on Card {{saveCard}}<span
                                                                                     class="text-danger">*</span>
                                                                             </mat-label>
                                                                             <input matInput type="text"
@@ -235,7 +235,7 @@
                                                                                     class="text-danger">*</span>
                                                                             </mat-label>
                                                                             <input matInput type="number"
-                                                                                formControlName="cardNumber"
+                                                                                formControlName="cardNumber" maxlength="16"
                                                                                 id="cardNumber">
                                                                             <mat-error
                                                                                 *ngIf="newCardForm.get('cardNumber').invalid && newCardForm.get('cardNumber').touched"
@@ -250,7 +250,7 @@
                                                                             <mat-label>CVV<span
                                                                                     class="text-danger">*</span>
                                                                             </mat-label>
-                                                                            <input matInput type="number"
+                                                                            <input matInput type="password" maxlength="3"
                                                                                 formControlName="cvv" id="cvv">
                                                                             <mat-error
                                                                                 *ngIf="newCardForm.get('cvv').invalid && newCardForm.get('cvv').touched"
@@ -263,7 +263,7 @@
                                                                             <mat-label>Expiry<span
                                                                                     class="text-danger">*</span>
                                                                             </mat-label>
-                                                                            <input matInput type="text"
+                                                                            <input matInput type="text" maxlength="5"
                                                                                 formControlName="expiryMonthYear"
                                                                                 id="expiryMonthYear">
                                                                             <mat-error

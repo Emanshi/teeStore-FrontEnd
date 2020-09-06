@@ -141,6 +141,28 @@ export class ViewProductComponent implements OnInit {
 
   }
 
+  reviewHelpful(index: number) {
+    if (!this.loggiedIn) {
+      this.router.navigate(['/login'])
+      this.snackBar.open('Please login to mark review as helpful', 'Okay', {
+        duration: 5000,
+        verticalPosition: 'bottom',
+        panelClass: 'warn-snackbar'
+      });
+    } else if (this.reviews[index].user.userId == this.loggedInUser.userId) {
+      this.snackBar.open('Cannot mark your review as helpful', 'Okay', {
+        duration: 5000,
+        verticalPosition: 'bottom',
+        panelClass: 'warn-snackbar'
+      });
+    } else {
+      this.service.reviewHelpful(this.reviews[index].reviewId, this.loggedInUser.userId).subscribe(
+        res => this.reviews[index].ratingHelpful = res,
+        err => console.log('Error Occured : ' + JSON.stringify(err))
+      )
+    }
+  }
+
   sizeSelection(key) {
     this.inCart = false
     this.selectedSize = key

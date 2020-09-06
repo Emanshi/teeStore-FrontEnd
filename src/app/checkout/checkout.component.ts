@@ -49,7 +49,7 @@ export class CheckoutComponent implements OnInit {
   addressSelector: string
   cardSelector: string
   cardList: Card[]
-  saveCard: boolean = true
+  saveCard: boolean
 
   constructor(
     private fb: FormBuilder,
@@ -129,6 +129,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   cardFormInit() {
+    this.saveCard = true
     this.newCardForm = this.fb.group({
       cardNumber: ['', [Validators.required, Validators.pattern("^[0-9]{16}$")]],
       cardHolderName: ['', [Validators.required, Validators.maxLength(50)]],
