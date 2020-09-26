@@ -1,27 +1,21 @@
-# TeeStoreFrontEnd
+# TeeStore Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
+> This is the frontend application of the TeeStore project.
 
-## Development server
+> Allows Users to register/login, make changes to profile and add or remove addresses.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+> Allows Users to view products, add them to cart, purchase and review them, and view previous orders.
 
-## Code scaffolding
+- Structurally complete
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Has almost 50 products enrolled. Feel free to add more products <a 
+href="http://tee-storebackend-server.herokuapp.com/TeeStore_backend/swagger-ui.html#!/product45api/addNewProductUsingPOST">here</a>. 
+Please remember to add images for respective product added otherwise the app will fail.
 
-## Build
+- Images for products can be added <a href="http://tee-storebackend-server.herokuapp.com/TeeStore_backend/swagger-ui.html#!/image45api/addImagesUsingPOST">here</a>.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- Project is based on Angular 10 along with Angular Material.
 
-## Running unit tests
+<h4>Access the project <a href="http://teestoreapp.herokuapp.com/">here</a>.</h4>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+<h4>Access the project end point swagger <a href="http://tee-storebackend-server.herokuapp.com/TeeStore_backend/swagger-ui.html#/">here</a>.</h4/>
