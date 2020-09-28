@@ -96,7 +96,7 @@ export class ViewProductComponent implements OnInit {
   }
 
   loadTopReviews() {
-    this.service.getReviews(this.productId).subscribe(
+    this.service.getReviews(this.productId, this.loggedInUser.userId).subscribe(
       res => this.reviews = res
     )
     this.service.getReviewCounts(this.productId).subscribe(

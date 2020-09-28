@@ -163,17 +163,34 @@
                             <li class="list-group-item">
                                 <div class="mb-3">
                                     <span class="h6">{{r.reviewTitle}}</span>
-                                    <span class="float-right">{{ratingNumbers.indexOf(r.ratings)}} <i class="fa fa-star"
-                                            aria-hidden="true"
-                                            [ngStyle]="{'color': (r.ratings=='FIVE'||r.ratings=='FOUR') ? 'green' : ((r.ratings=='TWO'||r.ratings=='THREE') ? 'orange' : 'red')}"></i></span>
+                                    <span class="badge badge-secondary"
+                                        *ngIf="loggiedIn && r.user.userName == loggedInUser.userName">Your Review</span>
+                                    <span class="float-right">
+                                        <div class="float-right">
+                                            {{ratingNumbers.indexOf(r.ratings)}} <i class="fa fa-star"
+                                                aria-hidden="true"
+                                                [ngStyle]="{'color': (r.ratings=='FIVE'||r.ratings=='FOUR') ? 'green' : ((r.ratings=='TWO'||r.ratings=='THREE') ? 'orange' : 'red')}"></i>
+                                        </div>
+                                        <div *ngIf="loggiedIn && r.user.userName == loggedInUser.userName">
+                                            <button mat-icon-button color="primary"
+                                                aria-label="Example icon button with a vertical three dot icon">
+                                                <mat-icon>create</mat-icon>
+                                            </button>
+                                            <button mat-icon-button color="warn"
+                                                aria-label="Example icon button with a home icon">
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </div>
+                                    </span>
                                 </div>
                                 <p>{{r.reviewBody}}</p>
                                 <span class="col-md-4 text-center"><i class="fa fa-user text-secondary"
                                         aria-hidden="true"></i>&nbsp; {{r.user.userName}}</span>&nbsp;&#x25cf;&nbsp;
                                 <span class="col-md-4 text-center"><i class="fa fa-calendar text-secondary"
                                         aria-hidden="true"></i>&nbsp; {{r.reviewDate | date}}</span>&nbsp;&#x25cf;&nbsp;
-                                <span class="col-md-4 text-center"><a [routerLink]="[]" (click)="reviewHelpful(i)"><i class="fa fa-thumbs-up text-secondary"
-                                        aria-hidden="true"></i></a>&nbsp; {{r.ratingHelpful}}</span>
+                                <span class="col-md-4 text-center"><a [routerLink]="[]" (click)="reviewHelpful(i)"><i
+                                            class="fa fa-thumbs-up text-secondary" aria-hidden="true"></i></a>&nbsp;
+                                    {{r.ratingHelpful}}</span>
                             </li>
                         </ul>
                         <div class="card-body">
@@ -202,7 +219,8 @@
                                         <a [routerLink]="[]" (click)="reloadPage(p.productId)"><img class="card-img-top"
                                                 [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                         <div class="card-body text-truncate">
-                                            <h3 class="card-title text-overflow text-capitalize" style="font-weight: 500;"><a
+                                            <h3 class="card-title text-overflow text-capitalize"
+                                                style="font-weight: 500;"><a
                                                     [routerLink]="['/product',p.productId]">{{p.productName}}</a>
                                             </h3>
                                             <p class="card-text text-center">
@@ -257,7 +275,8 @@
                                         <a [routerLink]="[]" (click)="reloadPage(p.productId)"><img class="card-img-top"
                                                 [src]="p.images[0].linkImage" [alt]="p.productName"></a>
                                         <div class="card-body text-truncate">
-                                            <h3 class="card-title text-overflow text-capitalize" style="font-weight: 500;"><a
+                                            <h3 class="card-title text-overflow text-capitalize"
+                                                style="font-weight: 500;"><a
                                                     [routerLink]="['/product',p.productId]">{{p.productName}}</a>
                                             </h3>
                                             <p class="card-text text-center">

@@ -44,8 +44,12 @@ export class ViewProductService {
     return this.http.get<Images>(environment.imageApi + 'getImage/' + id);
   }
 
-  getReviews(productId: string): Observable<Review[]> {
-    return this.http.get<Review[]>(environment.reviewApi + 'getTopReviews/' + productId)
+  getReviews(productId: string, userId: string): Observable<Review[]> {
+    let url = environment.reviewApi + 'getTopReviews?productId=' + productId
+    if(userId) {
+      url = url + '&userId=' + userId
+    }
+    return this.http.get<Review[]>(url)
   }
 
   getReviewCounts(productId: string): Observable<ReviewCounts> {
