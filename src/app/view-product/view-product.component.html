@@ -162,7 +162,7 @@
                         <ul class="list-group list-group-flush" *ngFor="let r of reviews; let i = index">
                             <li class="list-group-item">
                                 <div class="mb-3">
-                                    <span class="h6">{{r.reviewTitle}}</span>
+                                    <span class="h6">{{r.reviewTitle}}</span>&nbsp;
                                     <span class="badge badge-secondary"
                                         *ngIf="loggiedIn && r.user.userName == loggedInUser.userName">Your Review</span>
                                     <span class="float-right">
@@ -173,11 +173,11 @@
                                         </div>
                                         <div *ngIf="loggiedIn && r.user.userName == loggedInUser.userName">
                                             <button mat-icon-button color="primary"
-                                                aria-label="Example icon button with a vertical three dot icon">
+                                                (click)="editReviewDialog(i)">
                                                 <mat-icon>create</mat-icon>
                                             </button>
                                             <button mat-icon-button color="warn"
-                                                aria-label="Example icon button with a home icon">
+                                                (click)="deleteReviewConfirmer(r.reviewId)">
                                                 <mat-icon>delete</mat-icon>
                                             </button>
                                         </div>

@@ -46,7 +46,7 @@ export class ViewProductService {
 
   getReviews(productId: string, userId: string): Observable<Review[]> {
     let url = environment.reviewApi + 'getTopReviews?productId=' + productId
-    if(userId) {
+    if (userId) {
       url = url + '&userId=' + userId
     }
     return this.http.get<Review[]>(url)
@@ -76,5 +76,13 @@ export class ViewProductService {
     let u = new User()
     u.userId = uId
     return this.http.put<number>(environment.reviewApi + 'reviewHelpful/' + rId, u)
+  }
+
+  deleteReview(rId: string) {
+    return this.http.delete(environment.reviewApi + 'deleteReview/' + rId, { responseType: 'text' })
+  }
+
+  editReview(rId: string, review: Review) {
+    return this.http.put(environment.reviewApi + 'editReview/' + rId, review, { responseType: 'text' })
   }
 }

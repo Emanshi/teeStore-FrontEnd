@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Edit Review</h1>
+<div mat-dialog-content>
+    <p>What's your favorite animal?</p>
+    <mat-form-field style="width: 100%;">
+        <mat-label>Edit Title</mat-label>
+        <input matInput [(ngModel)]="review.reviewTitle" [value]="review.reviewTitle">
+    </mat-form-field>
+    <mat-form-field style="width: 100%;">
+        <mat-label>Edit Body</mat-label>
+        <textarea matInput [(ngModel)]="review.reviewBody" [value]="review.reviewBody" rows="5"></textarea>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="onYesClick()" color="accent" cdkFocusInitial>Save</button>
+</div>

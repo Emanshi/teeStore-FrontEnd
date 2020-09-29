@@ -12,6 +12,9 @@ import { User } from '../models/users';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CartService } from '../cart/cart.service';
 import { Cart } from '../models/cart';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteReviewDialog } from './delete.review.dialog';
+import { EditReviewDialog } from './edit.review.dialog';
 
 @Component({
   selector: 'app-view-product',
@@ -37,7 +40,16 @@ export class ViewProductComponent implements OnInit {
   inCart: boolean
   objectKeys = Object.keys;
 
-  constructor(private service: ViewProductService, private cartService: CartService, private snackBar: MatSnackBar, private auth: AuthenticatorService, private router: Router, private route: ActivatedRoute, private title: Title) { }
+  constructor(
+    private service: ViewProductService,
+    private cartService: CartService,
+    private snackBar: MatSnackBar,
+    private auth: AuthenticatorService,
+    private dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute,
+    private title: Title
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -201,5 +213,76 @@ export class ViewProductComponent implements OnInit {
     }
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/product', productId])
+  }
+
+  deleteReviewConfirmer(aId) {
+    const dialogRef = this.dialog.open(DeleteReviewDialog, {
+      width: '300px',
+      data: aId
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.deleteReview(result)
+    });
+  }
+
+  deleteReview(data) {
+    if (data != null) {
+      this.service.deleteReview(data).subscribe(
+        res => {
+          console.log('Review no ' + res + ' deleted');
+          this.snackBar.open('Review deleted', 'Okay', {
+            duration: 5000,
+            verticalPosition: 'bottom',
+            panelClass: 'primary-snackbar'
+          });
+          this.loadTopReviews()
+        },
+        err => {
+          console.log(JSON.stringify(err));
+          this.snackBar.open('Unable to delete Review', 'Okay', {
+            duration: 50000,
+            verticalPosition: 'bottom',
+            panelClass: 'warn-snackbar'
+          });
+        }
+      )
+    }
+  }
+
+  editReviewDialog(index: number) {
+    const dialogRef = this.dialog.open(EditReviewDialog, {
+      width: '400px',
+      data: this.reviews[index]
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.editReview(index, result)
+    });
+  }
+
+
+  editReview(i: number, data: Review) {
+    if (data != null) {
+      this.service.editReview(this.reviews[i].reviewId, data).subscribe(
+        res => {
+          console.log('Review no ' + res + ' deleted');
+          this.snackBar.open('Review deleted', 'Okay', {
+            duration: 5000,
+            verticalPosition: 'bottom',
+            panelClass: 'primary-snackbar'
+          });
+          this.loadTopReviews()
+        },
+        err => {
+          console.log(JSON.stringify(err));
+          this.snackBar.open('Unable to delete Review', 'Okay', {
+            duration: 50000,
+            verticalPosition: 'bottom',
+            panelClass: 'warn-snackbar'
+          });
+        }
+      )
+    }
   }
 }

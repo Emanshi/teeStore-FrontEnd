@@ -47,6 +47,12 @@ import { ViewOrdersService } from './view-orders/view-orders.service';
 import { AddReviewComponent } from './add-review/add-review.component';
 import { AddReviewService } from './add-review/add-review.service';
 import { CardPipe } from './checkout/card.pipe.pipe';
+import { EditReviewDialog } from './view-product/edit.review.dialog';
+import { DeleteReviewDialog } from './view-product/delete.review.dialog';
+import { RemoveProductDialog } from './cart/remove.product.dialog';
+import { DeleteAddressDialog } from './profile/delete.address.dialog';
+import { DeleteCardDialog } from './checkout/delete.card.dialog';
+import { ClearCartDialog } from './cart/clear.cart.dialog';
 
 @NgModule({
   declarations: [
@@ -62,6 +68,12 @@ import { CardPipe } from './checkout/card.pipe.pipe';
     ProductsComponent,
     AllReviewsComponent,
     CartComponent,
+    DeleteReviewDialog,
+    RemoveProductDialog,
+    ClearCartDialog,
+    DeleteAddressDialog,
+    DeleteCardDialog,
+    EditReviewDialog,
     CheckoutComponent,
     ViewOrdersComponent,
     AddReviewComponent,
