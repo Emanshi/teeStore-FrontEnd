@@ -13,8 +13,9 @@
                                     <li class="list-group-item">
                                         <div class="row mb-3">
                                             <div class="col-md-3 text-center">
-                                                <a [routerLink]="['/product',p.productId]" class="stretched-link"> <img class="img-thumbnail"
-                                                        [src]="p.images[0].linkImage" height="50"></a>
+                                                <a [routerLink]="['/product',p.productId]" class="stretched-link"> <img
+                                                        class="img-thumbnail" [src]="p.images[0].linkImage"
+                                                        height="50"></a>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="h6 text-capitalize"><a
@@ -28,27 +29,29 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <span class="text-secondary" *ngIf="today<=deliverDate">In
-                                                    Transit<br>Expect delivery by {{deliverDate | date:'EEEE, MMM d'}}</span>
+                                                    Transit<br>Expect delivery by
+                                                    {{deliverDate | date:'EEEE, MMM d'}}</span>
                                                 <span class="text-secondary" *ngIf="today>deliverDate">
-                                                    Delivered on {{deliverDate | date:'EEEE, MMM d'}}</span>                                
+                                                    Delivered on {{deliverDate | date:'EEEE, MMM d'}}</span>
                                             </div>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="h3">Delivery Address :</div> <br>
+                        <div class="col-md-4 text-capitalize">
+                            <div class="h6">Delivery Address :</div>
                             {{order.deliveryAddress.street}},<br>
                             {{order.deliveryAddress.city}},<br>
                             {{order.deliveryAddress.state}} - {{order.deliveryAddress.pinCode}}<br>
 
-                            <div class="h3 mt-5">Payment Method :</div>
+                            <div class="h6 mt-3">Payment Method :</div>
                             {{order.paymentType}}<br>
-                            <button mat-stroked-button color="accent" class="mt-3 btn btn-lg btn-block"
-                                 (click)="viewInvoiceDialog(order)">View
+                            <button mat-raised-button color="accent" class="mt-3 btn btn-block"
+                                style="height: 50px; display: block; margin-left: auto; margin-right: auto;"
+                                (click)="viewInvoiceDialog(order)">View
                                 Invoice</button>
-                            
+
                         </div>
                     </div>
                 </div>
