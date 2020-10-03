@@ -30,7 +30,7 @@
                                                 <span class="text-secondary" *ngIf="today<=deliverDate">In
                                                     Transit<br>Expect delivery by {{deliverDate | date:'EEEE, MMM d'}}</span>
                                                 <span class="text-secondary" *ngIf="today>deliverDate">
-                                                    Delivered on {{deliverDate | date:'EEEE, MMM d'}}</span>
+                                                    Delivered on {{deliverDate | date:'EEEE, MMM d'}}</span>                                
                                             </div>
                                         </div>
                                     </li>
@@ -44,7 +44,11 @@
                             {{order.deliveryAddress.state}} - {{order.deliveryAddress.pinCode}}<br>
 
                             <div class="h3 mt-5">Payment Method :</div>
-                            {{order.paymentType}}
+                            {{order.paymentType}}<br>
+                            <button mat-stroked-button color="accent" class="mt-3 btn btn-lg btn-block"
+                                 (click)="viewInvoiceDialog(order)">View
+                                Invoice</button>
+                            
                         </div>
                     </div>
                 </div>

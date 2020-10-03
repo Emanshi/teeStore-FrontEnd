@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Orders } from '../models/orders';
 import { ViewOrdersService } from './view-orders.service';
 import { Title } from '@angular/platform-browser';
@@ -6,6 +6,9 @@ import { AuthenticatorService } from '../auth/authenticator.service';
 import { User } from '../models/users';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewInvoiceDialog } from './view.invoice.dialog';
+
 
 @Component({
   selector: 'app-view-orders',
@@ -26,6 +29,7 @@ export class ViewOrdersComponent implements OnInit {
     private title: Title,
     private snackBar: MatSnackBar,
     private router: Router,
+    private dialog: MatDialog,
     private route: ActivatedRoute) {
     title.setTitle("View Order")
   }
@@ -68,6 +72,17 @@ export class ViewOrdersComponent implements OnInit {
     if (!this.loggedIn) {
       this.router.navigate(['/login'])
     }
+  }
+
+  viewInvoiceDialog(order:Orders) {
+    const dialogRef = this.dialog.open(ViewInvoiceDialog, {
+      width: '500px',
+      data: this.order
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }

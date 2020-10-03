@@ -53,6 +53,8 @@ import { RemoveProductDialog } from './cart/remove.product.dialog';
 import { DeleteAddressDialog } from './profile/delete.address.dialog';
 import { DeleteCardDialog } from './checkout/delete.card.dialog';
 import { ClearCartDialog } from './cart/clear.cart.dialog';
+import { ViewInvoiceDialog } from './view-orders/view.invoice.dialog';
+
 
 @NgModule({
   declarations: [
@@ -74,6 +76,7 @@ import { ClearCartDialog } from './cart/clear.cart.dialog';
     DeleteAddressDialog,
     DeleteCardDialog,
     EditReviewDialog,
+    ViewInvoiceDialog,
     CheckoutComponent,
     ViewOrdersComponent,
     AddReviewComponent,

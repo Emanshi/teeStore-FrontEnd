@@ -1,0 +1,55 @@
+<h2 mat-dialog-title class="text-center">Invoice</h2>
+<mat-dialog-content class="mat-typography content" #content>
+  <div class="text-center"> 
+    <img src="assets/TeeStoreLogo.png" alt="Tee-Store Logo" >
+  </div>
+  <h3 class="text-center">Thank You For Your Order!</h3>
+  <table>
+    <tr>
+      <td colspan="5"><b>Invoice Id :</b></td>
+      <td colspan="4">{{order.orderId}}</td>
+    </tr>
+    <tr>
+      <td colspan="5"><b>Order Date :</b></td>
+      <td colspan="4">{{order.timeOfOrder | date:'EEEE, MMM d'}}</td>
+    </tr>
+    <tr>
+      <td colspan="5"><b>Customer :</b></td>
+      <td colspan="4">{{order.user.userName}}</td>
+    </tr>
+    <tr>
+      <td colspan="5"><b>Payment Option :</b></td>
+      <td colspan="4">{{order.paymentType}}</td>
+    </tr>
+    <tr>
+      <th colspan="4">Product Name</th>
+      <th colspan="1">Qty.</th>
+      <th colspan="2">MRP.</th>
+      <th colspan="2">Price</th>
+    </tr>
+    <tr *ngFor="let p of order.products; let i = index">
+      <td colspan="4"><b>{{p.productName}}</b></td>
+      <td colspan="1">{{order.quantities[i]}}</td>
+      <td colspan="2">₹ {{order.prices[i]}}</td>
+      <td colspan="2">₹ {{order.prices[i]*order.quantities[i]}}</td>
+    </tr>
+    <tr>
+      <td colspan="6"><b>Total :</b></td>
+      <td colspan="3"><b>
+          ₹ {{order.totalCost}}</b></td>
+    </tr>
+    <tr>
+      <td colspan="6"><b>Delivery Address :</b></td>
+      <td colspan="3">
+        {{order.deliveryAddress.street}},<br>
+        {{order.deliveryAddress.city}},<br>
+        {{order.deliveryAddress.state}} - {{order.deliveryAddress.pinCode}}
+      </td>
+    </tr>
+  </table>
+</mat-dialog-content>
+<br/>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="onNoClick()">Close</button>
+    <button mat-button (click)="onYesClick()" color="accent" cdkFocusInitial>Download Invoice</button>
+</mat-dialog-actions>

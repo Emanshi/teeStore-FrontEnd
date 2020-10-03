@@ -1,0 +1,16 @@
+table{
+    width:400px;
+    text-align:left;
+}
+
+table ,td,th{     
+    border-collapse:collapse;
+    padding: 6px;
+    margin:auto;
+    border: 1px solid black;
+}
+
+.content {
+    background: #fff;
+}
+  
